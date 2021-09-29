@@ -31,6 +31,19 @@ public class SvcExceptionHandlerAdvice {
 
     private static Logger logger = LoggerFactory.getLogger(SvcExceptionHandlerAdvice.class);
 
+
+    /**
+     * 404
+     *
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public SvcResponse exceptionHandler(NoHandlerFoundException exception) {
+        return SvcResponse.error(ResponseConstant.NOT_FOUND_CODE, "无效资源");
+    }
+
     /**
      * 系统异常处理
      *

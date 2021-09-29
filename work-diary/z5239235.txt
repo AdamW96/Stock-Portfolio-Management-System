@@ -1,0 +1,6 @@
+Week1
+
+There wasn't much work in the first week. I discussed with the team about the frameworks and technologies to be used.  I also learned some tutorials on using Jira.
+
+Week2
+I create a new sprint on Jira and create a new task. I discussed my front-end technologies with my team and begin to learn some new UI design tools.

@@ -1,0 +1,8 @@
+Week 1
+As some classmates asked me to swap the tutorial section for her, only temporal group is formed. The Scrum Master created the Jira account for the project and all teammates are added. We chose the project 4, a stock portfolio management system, as the topic of our project. After all group members are confirmed, we will discuss more on the project and divide the jobs.
+
+Week 2
+Group and project topic is confirmed. We divided the jobs and the role for each one. We referred to the website with similar system. 8 main functionalities is defined during the meeting. A draft of the proposal will be finished by week 3. Proposed flow chart for the system will be discussed next week. We will discuss more detail on the user stories which are the main part of the proposal.
+
+Week 
+Github Classroom is formed and all teammates joined. The draft of proposal is finished. During the tutorial time, the tutor give some suggestion on the proposal. More details are needed in the proposal. We divided the part of proposal and decided to work in google drive first instead of working in Jira. We handed in the proposal. We will start working in Sprint 1 next week.

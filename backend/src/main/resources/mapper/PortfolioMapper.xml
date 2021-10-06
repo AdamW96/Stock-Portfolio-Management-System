@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="unsw_9900.nobugs.mapper.PortfolioMapper">
+  <resultMap id="BaseResultMap" type="unsw_9900.nobugs.po.Portfolio">
+    <!--@mbg.generated-->
+    <!--@Table portfolio-->
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    pid, "uid", p_name, description
+  </sql>
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="unsw_9900.nobugs.po.Portfolio" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into portfolio ("uid", p_name, description
+      )
+    values (#{uid,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+</mapper>

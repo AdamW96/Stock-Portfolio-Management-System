@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="unsw_9900.nobugs.mapper.MarketHistoryMapper">
+  <resultMap id="BaseResultMap" type="unsw_9900.nobugs.po.MarketHistory">
+    <!--@mbg.generated-->
+    <!--@Table market_history-->
+    <id column="hid" jdbcType="INTEGER" property="hid" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="open_price" jdbcType="FLOAT" property="openPrice" />
+    <result column="highest_price" jdbcType="FLOAT" property="highestPrice" />
+    <result column="lowest_price" jdbcType="FLOAT" property="lowestPrice" />
+    <result column="closed_price" jdbcType="FLOAT" property="closedPrice" />
+    <result column="turnover_vol" jdbcType="FLOAT" property="turnoverVol" />
+    <result column="trade_date" jdbcType="DATE" property="tradeDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    hid, sid, open_price, highest_price, lowest_price, closed_price, turnover_vol, trade_date
+  </sql>
+  <insert id="insert" keyColumn="hid" keyProperty="hid" parameterType="unsw_9900.nobugs.po.MarketHistory" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into market_history (sid, open_price, highest_price, 
+      lowest_price, closed_price, turnover_vol, 
+      trade_date)
+    values (#{sid,jdbcType=INTEGER}, #{openPrice,jdbcType=FLOAT}, #{highestPrice,jdbcType=FLOAT}, 
+      #{lowestPrice,jdbcType=FLOAT}, #{closedPrice,jdbcType=FLOAT}, #{turnoverVol,jdbcType=FLOAT}, 
+      #{tradeDate,jdbcType=DATE})
+  </insert>
+</mapper>

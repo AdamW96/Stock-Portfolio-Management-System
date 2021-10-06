@@ -3,5 +3,5 @@
 echo "\$mvn package"
 mvn package
 
-echo "\$docker build -t 9900-project ."
-docker build -t 9900-project .
+echo "\$docker build -t registry.cn-qingdao.aliyuncs.com/unsw/9090-project ."
+docker build -t registry.cn-qingdao.aliyuncs.com/unsw/9090-project .

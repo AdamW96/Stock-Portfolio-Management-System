@@ -22,7 +22,7 @@ export default function Home() {
       <Navigation />
 
       <Grid container className={classes.container}>
-          <Grid item sm={3} >
+          <Grid item sm={2} >
             <Left />
           </Grid>
 
@@ -30,7 +30,7 @@ export default function Home() {
             <Feed />
           </Grid>
 
-          <Grid item sm={2} >
+          <Grid item sm={3} >
             <Right />
           </Grid>
       </Grid>

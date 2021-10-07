@@ -1,5 +1,5 @@
 import React from 'react'
-import { alpha, AppBar, Avatar, Button, Badge, IconButton, InputBase, makeStyles, Menu, MenuItem, MenuList, Toolbar, Typography } from '@material-ui/core'
+import { alpha, AppBar, Avatar, Button, Badge, IconButton, InputBase, makeStyles, Menu, MenuItem, MenuList, Toolbar, Typography, Box } from '@material-ui/core'
 import { Chat, Mail, Notifications, Search } from '@material-ui/icons'
 import { useState } from 'react';
 
@@ -42,9 +42,10 @@ export default function Navigation() {
 
         <div className={classes.items}>
           <IconButton className={classes.iconbuttons}>
-            <Badge badgeContent={4} color="secondary" size='small'>
-              <Mail />
+            <Badge badgeContent={4} color='error' >
+              <Mail fontSize='medium'/>
             </Badge>
+            
           </IconButton>
 
           <IconButton className={classes.iconbuttons} onClick={menuClick} >

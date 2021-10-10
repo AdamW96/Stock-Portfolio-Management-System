@@ -1,4 +1,4 @@
-import {  Card, Container, IconButton, InputBase, makeStyles, Menu, MenuItem, MenuList, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar, Typography } from '@material-ui/core'
+import {  Card, CardContent, Collapse, Container, Divider, IconButton, InputBase, makeStyles, Menu, MenuItem, MenuList, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar, Typography } from '@material-ui/core'
 import { Add  } from '@material-ui/icons'
 import { useState } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
@@ -12,20 +12,27 @@ const useStyles = makeStyles(theme => ({
     borderRight:'1px solid #ece7e7',
     height:'100vh'
   },
-  search:{
-    width:'650px',
-    display:'flex',
-    alignItems:'center',
+  searchbar:{
+    width:'80%',
+
     padding:theme.spacing(2),
     borderRadius:theme.spacing(5),
     marginBottom:theme.spacing(3),
   },
+  input:{
+    display:'flex',
+    alignItems:'center',
+  },
+
   icon:{
     marginRight:theme.spacing(5),
     marginLeft:theme.spacing(5)
   },
+  searchResults:{
+    marginLeft:theme.spacing(3)
+  },
   tops:{
-    marginBottom:theme.spacing(5),
+    marginBottom:theme.spacing(3),
   },
   text:{
     fontFamily: 'Bungee',
@@ -54,16 +61,27 @@ const losers = [
 export default function Feed() {
   const classes = useStyles();
   const [userMenu, setUserMenu] = useState(false);
-
+  const [expanded, setExpanded] = useState(true);
   return (
     <Container className={classes.container}>
-      <Paper  elevation={5} className={classes.search}>
+      <Card  elevation={5} className={classes.searchbar}>
+        <div className={classes.input}>
         <SearchIcon className={classes.icon}/>
         <InputBase
           className={classes.input}
           placeholder="Search  for  stocks"
         />
-      </Paper>
+        </div>
+        <Collapse in={expanded} className={classes.searchResults}>
+            <CardContent>
+              <Divider />
+              <Typography paragraph>
+                Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
+                minutes.
+              </Typography>
+            </CardContent>
+        </Collapse>
+      </Card>
       
 
 

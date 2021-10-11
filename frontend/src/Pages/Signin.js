@@ -30,7 +30,7 @@ const usestyles = makeStyles((theme) => ({
   },
   loginWarpper: {
     // backgroundColor:"#555",
-    height: "70%",
+    height: "90%",
     display: "flex",
     alignItems: "center",
   },
@@ -72,6 +72,9 @@ const usestyles = makeStyles((theme) => ({
     fontSize: "17px",
     backgroundColor: theme.palette.success.main,
     marginTop: theme.spacing(2),
+    '&:hover':{
+      backgroundColor:theme.palette.success.dark,
+    }
   },
 }));
 
@@ -110,7 +113,7 @@ export default function Login() {
         <Grid item sm={6} xs={6}>
           <Container className={classes.welcome}>
             <Typography variant="h1" className={classes.welcomeText}>
-              Nbfinance
+              NBfinance
             </Typography>
             <Typography variant="body2">
               Everyone can become a stock portfolio expert on NBfinance.

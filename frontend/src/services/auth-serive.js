@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/user"; //backend API address
+const API_URL = "https://nodejs-9900-backend.herokuapp.com/api/user"; //backend API address
 
 class AuthService {
   signin(email, password) {

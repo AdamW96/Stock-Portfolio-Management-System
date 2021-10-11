@@ -119,7 +119,7 @@ export default function Register() {
         <Grid item sm={6} xs={6}>
           <Container className={classes.welcome}>
             <Typography variant="h1" className={classes.welcomeText}>
-              Nbfinance
+              NBfinance
             </Typography>
             <Typography variant="body2">
               Everyone can become a stock portfolio expert on NBfinance.

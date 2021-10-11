@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft:theme.spacing(3)
   },
   tops:{
-    marginBottom:theme.spacing(3),
+    marginBottom:theme.spacing(5),
   },
   text:{
     fontFamily: 'Bungee',
@@ -61,7 +61,7 @@ const losers = [
 export default function Feed() {
   const classes = useStyles();
   const [userMenu, setUserMenu] = useState(false);
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   return (
     <Container className={classes.container}>
       <Card  elevation={5} className={classes.searchbar}>

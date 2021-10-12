@@ -16,7 +16,8 @@ const styles = makeStyles((theme) => ({
 
 export default function Home(props) {
   const classes = styles();
-  let { currentUser, setCurrentUser } = props;
+  let [currentUser, setCurrentUser] = useState(AuthSerive.getCurrentUser());
+  console.log("coming to home.js", currentUser);
   return (
     <div>
       <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />

@@ -71,9 +71,9 @@ const usestyles = makeStyles((theme) => ({
     fontSize: "17px",
     backgroundColor: theme.palette.success.main,
     marginTop: theme.spacing(2),
-    '&:hover':{
-      backgroundColor:theme.palette.success.dark,
-    }
+    "&:hover": {
+      backgroundColor: theme.palette.success.dark,
+    },
   },
 }));
 
@@ -182,7 +182,7 @@ export default function Register() {
               <Button
                 variant="contained"
                 color="primary"
-                href=""
+                href="/signin"
                 className={classes.registerButton}
               >
                 Sign in

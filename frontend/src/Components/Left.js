@@ -1,4 +1,4 @@
-import { Container, Typography } from "@material-ui/core";
+import { Button, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Home,
@@ -49,6 +49,23 @@ const useStyles = makeStyles((theme) => ({
   text: {
     fontWeight: "700",
   },
+  buttons:{
+
+  },
+  signButton:{
+    borderRadius: theme.spacing(1),
+    marginTop: theme.spacing(35),
+    width:'100%',
+  },
+  registerButton:{
+    width:'100%',
+    borderRadius: theme.spacing(1),
+    color: theme.palette.success.main,
+    marginTop: theme.spacing(2),
+    "&:hover": {
+      color: theme.palette.success.dark,
+    },
+  }
 }));
 
 function Leftbar(props) {
@@ -81,23 +98,25 @@ function Leftbar(props) {
         Market
       </div>
       {!currentUser && (
-        <div>
-          <div
-            onClick={() => {
-              history.push("/register");
-            }}
-            className={classes.item}
-          >
-            Sign Up
-          </div>
-          <div
-            onClick={() => {
-              history.push("/signin");
-            }}
-            className={classes.item}
-          >
-            Sign In
-          </div>
+        <div className={classes.buttons}>
+            <Button  
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                history.push("/register");
+              }}
+              className={classes.signButton}
+              >Sign Up</Button>
+
+            <Button  
+              variant="outlined"
+              color="secondry"
+              onClick={() => {
+                history.push("/signin");
+              }}
+              className={classes.registerButton}
+            >Sign in</Button>
+
         </div>
       )}
       {currentUser && (

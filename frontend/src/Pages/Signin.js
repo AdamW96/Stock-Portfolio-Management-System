@@ -72,9 +72,9 @@ const usestyles = makeStyles((theme) => ({
     fontSize: "17px",
     backgroundColor: theme.palette.success.main,
     marginTop: theme.spacing(2),
-    '&:hover':{
-      backgroundColor:theme.palette.success.dark,
-    }
+    "&:hover": {
+      backgroundColor: theme.palette.success.dark,
+    },
   },
 }));
 
@@ -96,7 +96,7 @@ export default function Login() {
     console.log(email, password);
     AuthService.signin(email, password)
       .then((response) => {
-        console.log(response.data);
+        console.log("signin.js", response.data);
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }

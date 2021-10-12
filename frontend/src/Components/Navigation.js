@@ -1,8 +1,8 @@
 import React from 'react'
-import { alpha, AppBar, Avatar, Button, Badge, IconButton, InputBase, makeStyles, Menu, MenuItem, MenuList, Toolbar, Typography, Box } from '@material-ui/core'
+import { alpha, AppBar, Avatar, Button, Badge, IconButton, InputBase, makeStyles, Menu, MenuItem, MenuList, Toolbar, Typography, Box, Tooltip } from '@material-ui/core'
 import { Chat, Mail, Notifications, Search } from '@material-ui/icons'
 import { useState } from 'react';
-
+import Popover from '@material-ui/core/Popover';
 
 const styles = makeStyles(theme => ({
   nav:{
@@ -21,9 +21,12 @@ const styles = makeStyles(theme => ({
 export default function Navigation() {
   const classes = styles()
   const [userMenu, setUserMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const menuClick = (e) => {
     setUserMenu(e.currentTarget);
   }
+
   const menuClose  = (r) => {
     if (r === 'clickaway') {
       return;
@@ -41,12 +44,16 @@ export default function Navigation() {
         </div>
 
         <div className={classes.items}>
-          <IconButton className={classes.iconbuttons}>
-            <Badge badgeContent={4} color='error' >
-              <Mail fontSize='medium'/>
-            </Badge>
-            
-          </IconButton>
+          <Tooltip title="Message" >
+            <IconButton className={classes.iconbuttons} >
+                <Badge badgeContent={1} color='error' >
+                  <Mail fontSize='medium'/>
+                </Badge>
+              </IconButton>
+          </Tooltip>
+
+
+
 
           <IconButton className={classes.iconbuttons} onClick={menuClick} >
             <Avatar src='./images/person/1.jpeg' style={{ height: 45, width: 45 }} />

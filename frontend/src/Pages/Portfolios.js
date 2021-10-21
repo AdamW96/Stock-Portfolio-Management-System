@@ -25,13 +25,13 @@ export default function Home(props) {
           <Left currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
 
-        <Grid item sm={7}>
+        <Grid item sm={10}>
           <Feed portfolio />
         </Grid>
 
-        <Grid item sm={3}>
+        {/* <Grid item sm={3}>
           <Right portfolio currentUser={currentUser} setCurrentUser={setCurrentUser} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

@@ -26,11 +26,11 @@ export default function Home(props) {
         </Grid>
 
         <Grid item sm={7}>
-          <Feed homepage/>
+          <Feed portfolio />
         </Grid>
 
         <Grid item sm={3}>
-          <Right currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <Right portfolio currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
       </Grid>
     </div>

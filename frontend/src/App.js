@@ -1,6 +1,7 @@
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
 import Signin from "./Pages/Signin";
+import Portfolios from "./Pages/Portfolios";
 import { Switch, Route } from "react-router-dom";
 import AuthSerive from "./services/auth-serive";
 import React, { useState } from "react";
@@ -10,19 +11,16 @@ function App() {
     <div>
       <Switch>
         <Route path="/" exact>
-          <div className="App">
-            <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
-          </div>
+          <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
         <Route path="/register" exact>
-          <div className="App">
-            <Register />
-          </div>
+          <Register />
         </Route>
         <Route path="/signin" exact>
-          <div className="App">
-            <Signin />
-          </div>
+          <Signin />
+        </Route>
+        <Route path="/portfolios" exact>
+          <Portfolios />
         </Route>
       </Switch>
     </div>

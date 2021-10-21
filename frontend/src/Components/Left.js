@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme) => ({
   item: {
     display: "flex",
     alignItems: "center",
-    fontSize: "120%",
+    fontSize: "110%",
     fontWeight: "500",
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     marginBottom: theme.spacing(3),
     "&:hover": {
       backgroundColor: "#f1f0ed",
-      transition: "color 0.5s ease-out",
+      transition: "color 0.3s ease-out",
       color: "#FF954A",
       cursor: "pointer",
       borderRadius: "20px",
@@ -54,12 +54,13 @@ const useStyles = makeStyles((theme) => ({
   },
   signButton:{
     borderRadius: theme.spacing(1),
-    marginTop: theme.spacing(35),
+    marginTop: theme.spacing(50),
     width:'100%',
   },
   registerButton:{
     width:'100%',
     borderRadius: theme.spacing(1),
+    borderColor:theme.palette.success.light,
     color: theme.palette.success.main,
     marginTop: theme.spacing(2),
     "&:hover": {
@@ -81,14 +82,21 @@ function Leftbar(props) {
   };
   return (
     <Container className={classes.container}>
-      <div className={classes.item}>
-        <Home className={classes.icon} />
-        Home
-      </div>
-      <div className={classes.item}>
-        <List className={classes.icon} />
-        Portfolios
-      </div>
+
+      <Link to='/' style={{textDecoration:'none',color:'#555'}}>
+        <div className={classes.item}>
+          <Home className={classes.icon} />
+          Home
+        </div>
+      </Link>
+
+      <Link to='/portfolios' style={{textDecoration:'none',color:'#555'}}>
+        <div className={classes.item}>
+            <List className={classes.icon} />
+            Portfolios
+        </div>
+      </Link>
+
       <div className={classes.item}>
         <Bookmark className={classes.icon} />
         Collections
@@ -110,7 +118,6 @@ function Leftbar(props) {
 
             <Button  
               variant="outlined"
-              color="secondry"
               onClick={() => {
                 history.push("/signin");
               }}

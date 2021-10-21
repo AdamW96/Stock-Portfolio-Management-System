@@ -3,6 +3,7 @@ import { alpha, AppBar, Avatar, Button, Badge, IconButton, InputBase, makeStyles
 import { Chat, Mail, Notifications, Search } from '@material-ui/icons'
 import { useState } from 'react';
 import Popover from '@material-ui/core/Popover';
+import { Link } from 'react-router-dom';
 
 const styles = makeStyles(theme => ({
   nav:{
@@ -38,9 +39,9 @@ export default function Navigation() {
     <AppBar className={classes.nav} >
       <Toolbar className={classes.tool}>
         <div className="logo">
-          <Button>
-            <img src="images/final-logo.png" alt=""  style={{width:'130px'}}/>
-          </Button>
+          <Link to='/' >
+          <img src="images/final-logo.png" alt=""  style={{width:'130px'}}/>
+          </Link>
         </div>
 
         <div className={classes.items}>

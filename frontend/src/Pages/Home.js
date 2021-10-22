@@ -30,7 +30,7 @@ export default function Home(props) {
         </Grid>
 
         <Grid item sm={3}>
-          <Right currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <Right homepage currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
       </Grid>
     </div>

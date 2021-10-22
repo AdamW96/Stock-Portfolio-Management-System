@@ -18,18 +18,20 @@ import AuthService from "../services/auth-serive";
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
-    paddingTop: theme.spacing(12),
+    paddingTop: theme.spacing(13),
     position: "sticky",
     top: 0,
     color: "#555",
-    borderRight: "1px solid #f1f0ed",
+    
+    // borderRight: "1px solid #f1f0ed",
   },
 
   item: {
     display: "flex",
     alignItems: "center",
-    fontSize: "110%",
+    fontSize: "100%",
     fontWeight: "500",
+    fontFamily: 'Bungee',
     padding: theme.spacing(2),
     marginBottom: theme.spacing(3),
     "&:hover": {
@@ -43,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
   icon: {
     marginRight: theme.spacing(1),
-    fontSize: "20px",
+    fontSize: "25px",
   },
 
   text: {

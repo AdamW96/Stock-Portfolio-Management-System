@@ -24,24 +24,28 @@ const losers = [
 const useStyles = makeStyles(theme => ({
   container:{
     paddingTop:theme.spacing(12),
-    borderRight:'1px solid #ece7e7',
+    // borderRight:'1px solid #ece7e7',
     height:'100vh',
   },
   search:{
     position:'relative',
-    height:'12%'
+    height:'8%'
   },
-  text:{
-    fontFamily: 'Bungee',
-    fontSize:theme.spacing(5),
-    color:'#FF954A',
-    marginLeft:theme.spacing(1),
+  headText: {
+    fontFamily: "Bungee",
+    fontSize: theme.spacing(4),
+    color: "#FF954A",
+    marginLeft: theme.spacing(1),
+  },
+  text: {
+    fontFamily: "Bungee",
+    // fontSize: theme.spacing(1),
+    marginLeft: theme.spacing(2),
   },
 }))
 
 const FeedHomepage =({})=>{
   const classes = useStyles();
-  const [userMenu, setUserMenu] = useState(false);
   return (
     <>
     <Container className={classes.container}>
@@ -63,15 +67,15 @@ const FeedProtofolios = () => {
   return (
     <>
     <Container className={classes.container}>
-      <Paper className={classes.papers}>
-        <h1 className={classes.text}>Total Gain/Loss</h1>
-        <Typography variant='h4' gutterBottom>+$63.2</Typography>
-      </Paper>
+      <Container className={classes.papers}>
+        <Typography className={classes.headText} gutterBottom>Total Gain/Loss</Typography>
+        <Typography variant='h5' className={classes.text} gutterBottom>+$63.2</Typography>
+      </Container>
 
-      <Paper className={classes.papers}>
-        <h1 className={classes.text}>My Portfolios</h1>
-        <Typography variant='h4' gutterBottom>+$63.2</Typography>
-      </Paper>
+      <Container className={classes.papers}>
+        <Typography className={classes.headText} gutterBottom>My Portfolios</Typography>
+        <Typography variant='h5' className={classes.text} gutterBottom>+$63.2</Typography>
+      </Container>
 
     </Container>
     </>

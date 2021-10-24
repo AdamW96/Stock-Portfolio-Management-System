@@ -15,7 +15,7 @@ import { useState } from "react";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-
+import RecomendCard from "./RecomendCard";
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(13),
@@ -34,40 +34,12 @@ const useStyles = makeStyles((theme) => ({
   recomends: {
     display: 'flex',
     flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(14),
-      height: theme.spacing(17),
-    },
-  },
-  recomendCard: {
-    padding: theme.spacing(1),
-    borderRadius: theme.spacing(2),
-    '&:hover': {
-      boxShadow: theme.shadows[2],
-    }
-  },
-  color: {
-    backgroundColor: props => props.gainers ? '#e1f2e7' : '#fee5e3',
-    padding: '3px 5px',
-    borderRadius: theme.spacing(1),
-    display: 'flex',
-    alignContent: 'center',
-    color: props => props.gainers ? 'green' : '#a50e0e',
-    maxWidth: 'fit-content'
-  },
-  buttonRow: {
-    display: 'flex',
-    alignItems: 'center',
-
-  },
-  Addicon: {
-    marginLeft: 'auto',
-    "&:hover": {
-      color: '#FF954A',
-      transition: "all 0.3s ease-out",
-      cursor: 'pointer'
-    }
+    justifyContent:'space-around'
+    // '& > *': {
+    //   margin: theme.spacing(1),
+    //   width: theme.spacing(14),
+    //   height: theme.spacing(17),
+    // },
   }
 }));
 
@@ -88,31 +60,25 @@ const RightHomepage = ({ currentUser, setCurrentUser }) => {
 const RightPortfolios = () => {
   const classes = useStyles();
   return (
+  <>
     <Container className={classes.container}>
       {/* <Paper variant='outlined'> */}
       <Typography className={classes.headText}>Discover more</Typography>
       <Typography className={classes.text}>You may be interested in</Typography>
+    </Container>
 
-      <div className={classes.recomends}>
-        <Paper className={classes.recomendCard} variant='outlined'>
-          <Typography variant='subtitle2'>BABA</Typography>
-          <Typography variant='caption' >Alibabasssssssssssssssssss Group Holding Ltd</Typography>
-          <Typography variant='subtitle2' >$177.42</Typography>
 
-          <Typography variant='subtitle2' className={classes.buttonRow}>
-            <div className={classes.color}>
-              <ArrowUpwardIcon fontSize='small' />0.14%
-            </div>
-            <Tooltip title='Add To Portifolio'>
-              <AddCircleOutlineIcon className={classes.Addicon} />
-            </Tooltip>
-          </Typography>
-
-        </Paper>
+    <div className={classes.recomends}>
+        <RecomendCard/>
+        <RecomendCard/>
+        <RecomendCard/>
+        <RecomendCard/>
+        <RecomendCard/>
+        <RecomendCard/>
 
       </div>
-      {/* </Paper> */}
-    </Container>
+
+  </>
   );
 }
 

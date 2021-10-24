@@ -1,7 +1,7 @@
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
 import Signin from "./Pages/Signin";
-import Portfolios from "./Pages/Portfolios";
+import MyPortfolios from "./Pages/MyPortfolios";
 import { Switch, Route } from "react-router-dom";
 import AuthSerive from "./services/auth-serive";
 import React, { useState } from "react";
@@ -20,7 +20,7 @@ function App() {
           <Signin />
         </Route>
         <Route path="/portfolios" exact>
-          <Portfolios />
+          <MyPortfolios />
         </Route>
       </Switch>
     </div>

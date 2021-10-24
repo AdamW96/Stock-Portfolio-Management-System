@@ -1,6 +1,7 @@
 import {
   Card,
   Container,
+  Icon,
   IconButton,
   InputBase,
   makeStyles,
@@ -12,13 +13,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useState } from "react";
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 import RecomendCard from "./RecomendCard";
+import {randoms,randoms2} from './Fakedata';
+
+
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: theme.spacing(13),
+    paddingTop: theme.spacing(12),
   },
   headText: {
     fontFamily: "Bungee",
@@ -28,19 +30,19 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontFamily: "Bungee",
-    fontSize: theme.spacing(1),
     marginLeft: theme.spacing(1),
+  },
+  subtitle:{
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'space-around',
   },
   recomends: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent:'space-around'
-    // '& > *': {
-    //   margin: theme.spacing(1),
-    //   width: theme.spacing(14),
-    //   height: theme.spacing(17),
-    // },
-  }
+    justifyContent:'space-between',
+    marginTop:theme.spacing(4)
+  },
 }));
 
 
@@ -59,24 +61,30 @@ const RightHomepage = ({ currentUser, setCurrentUser }) => {
 
 const RightPortfolios = () => {
   const classes = useStyles();
+  const [random, setRandom] = useState(false);
+  let recomendsData = random? randoms : randoms2;
   return (
   <>
     <Container className={classes.container}>
       {/* <Paper variant='outlined'> */}
-      <Typography className={classes.headText}>Discover more</Typography>
-      <Typography className={classes.text}>You may be interested in</Typography>
-    </Container>
+      <Typography className={classes.headText} >Discover more</Typography>
 
-
-    <div className={classes.recomends}>
-        <RecomendCard/>
-        <RecomendCard/>
-        <RecomendCard/>
-        <RecomendCard/>
-        <RecomendCard/>
-        <RecomendCard/>
+      <div className={classes.subtitle}>
+        <Typography variant='caption' className={classes.text}>You may be interested in</Typography>
+        <IconButton color='primary' onClick={()=>setRandom(!random)}>
+          <AutorenewIcon fontSize='small' />
+        </IconButton>
 
       </div>
+      
+
+      <div className={classes.recomends}>
+          {recomendsData.map((stock) => (
+            <RecomendCard key={stock.symbol} data={stock} />
+          ))}
+      </div>
+
+    </Container>
 
   </>
   );

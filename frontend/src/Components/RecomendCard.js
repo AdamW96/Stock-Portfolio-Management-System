@@ -12,25 +12,32 @@ const useStyles = makeStyles(theme => ({
     width:theme.spacing(16),
     height:theme.spacing(18),
     '&:hover': {
-      boxShadow: theme.shadows[2],
+      boxShadow: theme.shadows[3],
     },
     display:'flex',
     flexDirection:'column',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    marginBottom:theme.spacing(1.2),
+  },
+  symbol:{
+    width:'fit-content',
+    padding:'0 6px',
+
+    border:'1.3px solid ',
+    borderRadius: '5px'
   },
   color: {
-    backgroundColor: props => props.gainers ? '#e1f2e7' : '#fee5e3',
+    backgroundColor: '#e1f2e7',
     padding: '4px 10px',
     borderRadius: theme.spacing(1),
     display: 'flex',
     alignItems: 'center',
-    color: props => props.gainers ? 'green' : '#a50e0e',
+    color: 'green' ,
     maxWidth: 'fit-content'
   },
   buttonRow: {
     display: 'flex',
     alignItems: 'center',
-
   },
   Addicon: {
     marginLeft: 'auto',
@@ -44,21 +51,21 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function RecomendCard({data,gainers}) {
-  const classes = useStyles({gainers});
+export default function RecomendCard({data}) {
+  const classes = useStyles({});
 
   return (
     <>
       {/* <Container> */}
       <Paper className={classes.recomendCard} variant='outlined'>
-          <Typography variant='subtitle2'>BABA</Typography>
-          <Typography variant='caption' >Alibabas ssssssssssssssssss Group Holding Ltd</Typography>
-          <Typography variant='subtitle2' >$177.42</Typography>
+          <Typography variant='subtitle2' className={classes.symbol}>{data.symbol}</Typography>
+          <Typography variant='caption' >{data.company}</Typography>
+          <Typography variant='subtitle2' >{data.price}</Typography>
 
           <Typography variant='subtitle2' className={classes.buttonRow}>
             <div className={classes.color}>
               <ArrowUpwardIcon fontSize='small' />
-              <Typography variant='subtitle2' >0.14%</Typography>
+              <Typography variant='subtitle2' >{data.changePercentage}</Typography>
             </div>
             <Tooltip title='Add To Portifolio'>
               <AddCircleOutlineIcon className={classes.Addicon} />

@@ -1,25 +1,16 @@
-import {  Container, makeStyles, Paper, Typography } from '@material-ui/core'
+import {  Button, Container, IconButton, makeStyles, Paper, Tooltip, Typography } from '@material-ui/core'
 import { useState } from 'react';
 import SearchBar from './SearchBar';
 import Performance from './Performance';
+import {gainers,losers} from './Fakedata';
 
-const createData = (symbol, company, price, change, changePercentage) => {
-  return { symbol, company, price, change, changePercentage };
-}
-const gainers = [
-  createData('A26','Sinarmas Land Ltd', '$0.27', '5.88', '5.88%'),
-  createData('UD3','Japfa Ltd', '$13.47', '+2.12', '4.68%'),
-  createData('A27','Sinarmas Land Ltd', '$0.27', '5.88', '5.88%'),
-  createData('UD2','Japfa Ltd', '$13.47', '+2.12', '4.68%'),
-  createData('C09','City Developments Limited Fully Paid Ord. Shrs', '$9.72', '+5.88', '4.26%'),
-];
-const losers = [
-  createData('NS8U','Hutchison Port Hldg Trust', '$0.27', '-8.43', '3.13%'),
-  createData('J91U','ESR-REIT', '$13.47', '-2.12', '2.68%'),
-  createData('NS9U','Hutchison Port Hldg Trust', '$0.27', '-8.43', '3.13%'),
-  createData('J92U','ESR-REIT', '$13.47', '-2.12', '2.68%'),
-  createData('E5H','Golden Agri-Resources Ltd', '$9.72', '-0.87', '1.89%'),
-];
+import ListRoundedIcon from '@material-ui/icons/ListRounded';
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   container:{
@@ -39,9 +30,60 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     fontFamily: "Bungee",
-    // fontSize: theme.spacing(1),
     marginLeft: theme.spacing(2),
+    // color:"#555"
   },
+  portList:{
+    display:'flex',
+    marginBottom:theme.spacing(5),
+
+    // justifyContent:'space-between',
+    // borderBottom:'6px solid #555',
+
+  },
+  portButton:{
+    //up right down left
+    padding:'0px 5px 0px 5px',
+    width:'fit-content',
+    borderBottom:'3px solid #555',
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'space-between',
+    // borderBottom:'6px solid #555',
+    borderRadius:'4px',
+    marginLeft: theme.spacing(2),
+    '&:hover': {
+      boxShadow: theme.shadows[3],
+      cursor: 'pointer'
+    },
+
+  },
+  portText:{
+    fontFamily: "Bungee",
+    marginLeft: theme.spacing(0.5),
+    fontSize:theme.spacing(1),
+  },
+
+  icon:{
+    backgroundColor:'#eef1f2',
+    padding:'0 3px 0px 0px',
+    borderRadius:'4px',
+  },
+  addButton:{
+    marginLeft: 'auto',
+
+  },
+  portContent:{
+    padding: theme.spacing(2),
+    width:'100%'
+  },
+  portContentInfo:{
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center',
+    padding: theme.spacing(2),
+  }
 }))
 
 const FeedHomepage =({})=>{
@@ -64,17 +106,87 @@ const FeedHomepage =({})=>{
 
 const FeedProtofolios = () => {
   const classes = useStyles();
+  const [portNum, setPortNum] = useState(1);
+  let isEmpty = true;
   return (
     <>
     <Container className={classes.container}>
-      <Container className={classes.papers}>
+      <Container >
         <Typography className={classes.headText} gutterBottom>Total Gain/Loss</Typography>
         <Typography variant='h5' className={classes.text} gutterBottom>+$63.2</Typography>
       </Container>
 
-      <Container className={classes.papers}>
+      <Container >
         <Typography className={classes.headText} gutterBottom>My Portfolios</Typography>
-        <Typography variant='h5' className={classes.text} gutterBottom>+$63.2</Typography>
+
+        <div className={classes.portList}>
+          <Paper className={classes.portButton} variant='outlined'>
+        
+            <ListRoundedIcon className={classes.icon} fontSize='small' />
+            <Typography className={classes.portText}>Portfolio1</Typography>
+
+          </Paper>
+
+          <Paper className={classes.portButton} variant='outlined'>
+          
+            <ListRoundedIcon className={classes.icon} fontSize='small' />
+            <Typography className={classes.portText}>Portfolio2</Typography>
+
+          </Paper>
+          <Paper className={classes.portButton} variant='outlined'>
+            
+            <ListRoundedIcon className={classes.icon} fontSize='small' />
+            <Typography className={classes.portText}>Portfolio3</Typography>
+
+          </Paper>
+
+
+
+           <Button className={classes.addButton} color='primary' >
+              <AddRoundedIcon fontSize='small'/>
+              <Typography className={classes.portText}>New</Typography>
+          </Button>
+
+      </div>
+
+
+      <Paper variant='outlined' className={classes.portContent}>
+        <Typography className="portContentHeader" variant='subtitle2'>
+          Portfolio1
+          <Tooltip title='Rename'>
+              <CreateOutlinedIcon className={classes.addButton} />
+          </Tooltip>
+          <Tooltip title='Delete'>
+              <DeleteOutlinedIcon className={classes.addButton} />
+          </Tooltip>
+
+          <Tooltip title='Add To Portifolio'>
+              <AutorenewIcon className={classes.addButton} />
+          </Tooltip>
+
+
+        </Typography>
+        <Container className={classes.portContentInfo} >
+          <img src='images/empty.png' alt='' style={{width:'27%'}}/>
+          <Typography variant='subtitle2'>Nothing in this portfolio</Typography>
+          <Button  color='primary' >
+              <AddRoundedIcon fontSize='small'/>
+              <Typography className={classes.portText}>Add investments</Typography>
+          </Button>
+        </Container>
+      </Paper>
+
+
+
+
+
+
+
+
+        {/* <img src='images/empty.png' alt='' /> */}
+
+
+
       </Container>
 
     </Container>

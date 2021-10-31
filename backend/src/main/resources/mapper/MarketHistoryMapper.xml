@@ -34,4 +34,6 @@
     from market_history
     where sid=#{sid,jdbcType=INTEGER}
   </select>
+
+
 </mapper>

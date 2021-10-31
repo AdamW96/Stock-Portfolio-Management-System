@@ -2,10 +2,7 @@ package unsw_9900.nobugs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import unsw_9900.nobugs.controller.response.SvcResponse;
 import unsw_9900.nobugs.dto.userDto;
 import unsw_9900.nobugs.mapper.CommentsMapper;
@@ -119,5 +116,14 @@ public class HelloController {
         cookie_email.setMaxAge(30 * 24 * 60 * 60);
         response.addCookie(cookie_email);
         return SvcResponse.success(user1);
+    }
+
+    @RequestMapping(value = "/stock/{sid}", method = RequestMethod.GET)
+    public SvcResponse getPrice(@PathVariable int sid){
+        List<MarketHistory> history = marketHistoryMapper.selectBySid(sid);
+        if (history == null){
+            return SvcResponse.error(400, "找不到对应股票");
+        }
+        return SvcResponse.success(history);
     }
 }

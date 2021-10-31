@@ -15,4 +15,5 @@ public interface MarketHistoryMapper {
     int insert(MarketHistory record);
 
     List<MarketHistory> selectBySid(@Param("sid") Integer sid);
+
 }

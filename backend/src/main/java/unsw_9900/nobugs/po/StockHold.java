@@ -1,12 +1,13 @@
 package unsw_9900.nobugs.po;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
  * <p>
+ *
  * @author: Rui
- * @date: 2021/10/6
+ * @date: 2021/10/31
  */
 public class StockHold {
     private Integer pid;
@@ -17,7 +18,7 @@ public class StockHold {
 
     private Double price;
 
-    private LocalDate tradeDate;
+    private Date tradeDate;
 
     public Integer getPid() {
         return pid;
@@ -51,11 +52,11 @@ public class StockHold {
         this.price = price;
     }
 
-    public LocalDate getTradeDate() {
+    public Date getTradeDate() {
         return tradeDate;
     }
 
-    public void setTradeDate(LocalDate tradeDate) {
+    public void setTradeDate(Date tradeDate) {
         this.tradeDate = tradeDate;
     }
 }

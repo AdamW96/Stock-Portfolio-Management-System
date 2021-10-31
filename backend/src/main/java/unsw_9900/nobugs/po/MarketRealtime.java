@@ -1,19 +1,20 @@
 package unsw_9900.nobugs.po;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
  * <p>
+ *
  * @author: Rui
- * @date: 2021/10/6
+ * @date: 2021/10/31
  */
 public class MarketRealtime {
     private Integer hrid;
 
     private Integer sid;
 
-    private LocalDateTime tradeTime;
+    private Date tradeTime;
 
     private Double price;
 
@@ -33,11 +34,11 @@ public class MarketRealtime {
         this.sid = sid;
     }
 
-    public LocalDateTime getTradeTime() {
+    public Date getTradeTime() {
         return tradeTime;
     }
 
-    public void setTradeTime(LocalDateTime tradeTime) {
+    public void setTradeTime(Date tradeTime) {
         this.tradeTime = tradeTime;
     }
 

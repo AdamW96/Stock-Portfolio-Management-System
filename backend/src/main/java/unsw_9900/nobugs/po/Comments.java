@@ -1,12 +1,13 @@
 package unsw_9900.nobugs.po;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
  * <p>
+ *
  * @author: Rui
- * @date: 2021/10/6
+ * @date: 2021/10/31
  */
 public class Comments {
     private Integer mid;
@@ -17,9 +18,9 @@ public class Comments {
 
     private String msg;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     public Integer getMid() {
         return mid;
@@ -53,19 +54,19 @@ public class Comments {
         this.msg = msg;
     }
 
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public LocalDateTime getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 }

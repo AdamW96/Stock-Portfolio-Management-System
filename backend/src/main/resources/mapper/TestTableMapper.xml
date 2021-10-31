@@ -9,8 +9,13 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, name
+    id, "name"
   </sql>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="unsw_9900.nobugs.po.TestTable" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into test_table ("name")
+    values (#{name,jdbcType=VARCHAR})
+  </insert>
 
     <select id="findAll" resultMap="BaseResultMap">
         select

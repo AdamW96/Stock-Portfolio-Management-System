@@ -5,7 +5,7 @@ spring:
   application:
     name: 9900-project-test
   datasource:
-    url: jdbc:sqlite:9900-test-db.sqlite
+    url: jdbc:sqlite:9900-test-db.sqlite?date_string_format=yyyy-MM-dd
     username:
     password:
     driver-class-name: org.sqlite.JDBC

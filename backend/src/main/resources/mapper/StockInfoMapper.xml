@@ -5,15 +5,31 @@
     <!--@mbg.generated-->
     <!--@Table stock_info-->
     <id column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="fullname" jdbcType="VARCHAR" property="fullname" />
+    <result column="enname" jdbcType="VARCHAR" property="enname" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="exchange" jdbcType="VARCHAR" property="exchange" />
+    <result column="list_date" jdbcType="DATE" property="listDate" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    sid, stock_name
+    sid, ts_code, symbol, "name", area, industry, fullname, enname, market, exchange, 
+    list_date
   </sql>
   <insert id="insert" keyColumn="sid" keyProperty="sid" parameterType="unsw_9900.nobugs.po.StockInfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into stock_info (stock_name)
-    values (#{stockName,jdbcType=VARCHAR})
+    insert into stock_info (ts_code, symbol, "name", 
+      area, industry, fullname, 
+      enname, market, exchange, 
+      list_date)
+    values (#{tsCode,jdbcType=VARCHAR}, #{symbol,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, 
+      #{enname,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{exchange,jdbcType=VARCHAR}, 
+      #{listDate,jdbcType=DATE})
   </insert>
 </mapper>

@@ -3,8 +3,9 @@ package unsw_9900.nobugs.po;
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
  * <p>
+ *
  * @author: Rui
- * @date: 2021/10/6
+ * @date: 2021/10/31
  */
 public class UserInfo {
     private Integer uid;

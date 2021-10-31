@@ -5,14 +5,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 import unsw_9900.nobugs.controller.response.SvcResponse;
 import unsw_9900.nobugs.dto.userDto;
-import unsw_9900.nobugs.mapper.CommentsMapper;
-import unsw_9900.nobugs.mapper.MarketHistoryMapper;
-import unsw_9900.nobugs.mapper.TestTableMapper;
-import unsw_9900.nobugs.mapper.UserInfoMapper;
-import unsw_9900.nobugs.po.Comments;
-import unsw_9900.nobugs.po.MarketHistory;
-import unsw_9900.nobugs.po.TestTable;
-import unsw_9900.nobugs.po.UserInfo;
+import unsw_9900.nobugs.mapper.*;
+import unsw_9900.nobugs.po.*;
 import unsw_9900.nobugs.service.TestTableService;
 
 import javax.annotation.Resource;
@@ -46,6 +40,9 @@ public class HelloController {
 
     @Autowired
     private UserInfoMapper usersMapper;
+
+    @Autowired
+    private StockInfoMapper stockInfo;
 
     @RequestMapping(value = "health", method = RequestMethod.GET)
     public String health() {
@@ -125,5 +122,14 @@ public class HelloController {
             return SvcResponse.error(400, "找不到对应股票");
         }
         return SvcResponse.success(history);
+    }
+
+    @RequestMapping(value = "/stock/all", method = RequestMethod.GET)
+    public SvcResponse getStocks(){
+        List<StockInfo> stock = stockInfo.findAll();
+        if (stock == null){
+            return SvcResponse.error(400, "找不到对应股票");
+        }
+        return SvcResponse.success(stock);
     }
 }

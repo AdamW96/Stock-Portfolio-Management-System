@@ -1,7 +1,11 @@
 package unsw_9900.nobugs.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;import unsw_9900.nobugs.po.MarketHistory;import java.util.List;
+import org.apache.ibatis.annotations.Param;import unsw_9900.nobugs.po.MarketHistory;
+import unsw_9900.nobugs.po.StockHold;
+import unsw_9900.nobugs.po.StockInfo;
+
+import java.util.List;
 
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
@@ -16,4 +20,5 @@ public interface MarketHistoryMapper {
 
     List<MarketHistory> selectBySid(@Param("sid") Integer sid);
 
+    List<StockInfo> findAll();
 }

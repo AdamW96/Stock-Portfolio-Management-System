@@ -32,4 +32,9 @@
       #{enname,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{exchange,jdbcType=VARCHAR}, 
       #{listDate,jdbcType=DATE})
   </insert>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_info
+  </select>
 </mapper>

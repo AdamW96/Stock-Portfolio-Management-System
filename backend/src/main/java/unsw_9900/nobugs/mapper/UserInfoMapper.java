@@ -3,6 +3,8 @@ package unsw_9900.nobugs.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import unsw_9900.nobugs.po.UserInfo;
 
+import java.util.List;
+
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
  * <p>
@@ -13,4 +15,10 @@ import unsw_9900.nobugs.po.UserInfo;
 @Mapper
 public interface UserInfoMapper {
     int insert(UserInfo record);
+
+    UserInfo findEmail(String email);
+
+    List<UserInfo> findAll();
+
+    UserInfo getUserByUsernameAndPassword(String email, String pwdMd5);
 }

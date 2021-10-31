@@ -22,4 +22,21 @@
     values (#{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{pwdMd5,jdbcType=VARCHAR})
   </insert>
+  <select id="findEmail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where email =#{email,jdbcType=VARCHAR}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+  </select>
+  <select id="getUserByUsernameAndPassword" parameterType= "string" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where email =#{email,jdbcType=VARCHAR} and pwd_md5 = #{pwdMd5,jdbcType=VARCHAR}
+  </select>
 </mapper>

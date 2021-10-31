@@ -1,21 +1,24 @@
 import {
   Card,
   Container,
+  Divider,
   Icon,
   IconButton,
   InputBase,
   makeStyles,
-
   Paper,
-
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
   Tooltip,
-
   Typography,
 } from "@material-ui/core";
 import { useState } from "react";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import RecomendCard from "./RecomendCard";
-import {randoms,randoms2} from './Fakedata';
+import {randoms,randoms2,about} from './Fakedata';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +46,22 @@ const useStyles = makeStyles((theme) => ({
     justifyContent:'space-between',
     marginTop:theme.spacing(4)
   },
+  backgroundText:{
+    padding:'0 7px',
+    paddingBottom:'16px',
+    fontSize:'.1rem',
+    fontWeight:300,
+  },
+  infoLines:{
+    padding:'0 2%'
+  }
+  ,
+  infoLine:{
+    display:'flex',
+    justifyContent:'space-between',
+    // width:'90%',
+    padding:'8px 3px'
+  }
 }));
 
 
@@ -90,6 +109,53 @@ const RightPortfolios = () => {
   );
 }
 
+const RightStock = () => {
+  const classes = useStyles();
+  return (
+  <>
+    <Container className={classes.container}>
+      
+      <Paper variant='outlined'>
+      <Typography className={classes.headText} >About</Typography>
+
+      <div  >
+        <Typography className={classes.backgroundText}  >{about.ABOUT}</Typography>
+      </div>
+
+      <div className={classes.infoLines}>
+        <Divider />
+        <div className={classes.infoLine}>
+          <Typography variant='subtitle2'>CEO</Typography>
+          <Typography variant='body2'>{about.CEO}</Typography>
+        </div>
+        <Divider />
+        <div className={classes.infoLine}>
+          <Typography variant='subtitle2'>FOUNDED</Typography>
+          <Typography variant='body2'>{about.FOUNDED}</Typography>
+        </div>
+        <Divider />
+        <div className={classes.infoLine}>
+          <Typography variant='subtitle2'>HEADQUARTERS</Typography>
+          <Typography variant='body2'>{about.HEADQUARTERS}</Typography>
+        </div>
+        <Divider />
+        <div className={classes.infoLine}>
+          <Typography variant='subtitle2'> WEBSITE</Typography>
+          <Typography variant='body2'>{about.WEBSITE}</Typography>
+        </div>
+        <Divider />
+        <div className={classes.infoLine}>
+          <Typography variant='subtitle2'>EMPLOYEES</Typography>
+          <Typography variant='body2'>{about.EMPLOYEES}</Typography>
+        </div>
+      </div>
+      </Paper>
+    </Container>
+
+  </>
+  );
+}
+
 export default function Right({
   currentUser, setCurrentUser, stock, portfolio, homepage }) {
 
@@ -97,6 +163,7 @@ export default function Right({
     <>
       {homepage ? <RightHomepage currentUser={currentUser} setCurrentUser={setCurrentUser} /> : ''}
       {portfolio ? <RightPortfolios /> : ''}
+      {stock ? <RightStock /> : ''}
     </>
   );
 }

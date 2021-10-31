@@ -8,16 +8,15 @@ import {
   Paper,
   TextField,
   Typography,
-  CssBaseline,
-  Avatar,
-  Checkbox,
-  FormControlLabel,
-  Box,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import AuthService from "../services/auth-serive";
-// import { useState } from 'react';
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from 'redux'
+import { actionCreators } from "../Redux/index"
+
 
 const usestyles = makeStyles((theme) => ({
   login: {
@@ -84,12 +83,17 @@ export default function Login() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [message, setMessage] = useState("");
+  const loginState = useSelector(state=>state.loginState);
+  const dispatch = useDispatch();
+  const {login} = bindActionCreators(actionCreators,dispatch)
+
+
   const handleChangeEmail = (e) => {
-    console.log(email);
+    // console.log(email);
     setEmail(e.target.value);
   };
   const handleChangePassword = (e) => {
-    console.log(password);
+    // console.log(password);
     setPassword(e.target.value);
   };
   const handleSignin = () => {
@@ -97,16 +101,18 @@ export default function Login() {
     AuthService.signin(email, password)
       .then((response) => {
         console.log(response.data);
+        login();
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
         history.push("/");
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         setMessage(err.response.data);
       });
   };
+  // console.log(loginState);
   return (
     <div className={classes.login}>
       <Grid container className={classes.loginWarpper}>

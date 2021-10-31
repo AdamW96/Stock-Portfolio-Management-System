@@ -15,6 +15,11 @@ import {
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import AuthService from "../services/auth-serive";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { actionCreators } from "../Redux/index";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
@@ -56,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
   signButton:{
     borderRadius: theme.spacing(1),
-    marginTop: theme.spacing(50),
+    marginTop: theme.spacing(30),
     width:'100%',
   },
   registerButton:{
@@ -71,15 +76,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Leftbar(props) {
+function Leftbar() {
   const classes = useStyles();
   const history = useHistory();
-  let { currentUser, setCurrentUser } = props;
+  const loginState = useSelector(state=>state.loginState);
+   const dispatch = useDispatch();
+  const {logout} = bindActionCreators(actionCreators,dispatch);
+
   const handleLogout = () => {
     console.log("you are coming to handlelogout");
+    logout();
     // localStorage.removeItem("user");
     AuthService.logout();
-    setCurrentUser(null);
     history.push("/");
   };
   return (
@@ -98,6 +106,12 @@ function Leftbar(props) {
             Portfolios
         </div>
       </Link>
+      <Link to='/stock' style={{textDecoration:'none',color:'#555'}}>
+        <div className={classes.item}>
+            <List className={classes.icon} />
+            Stock Test
+        </div>
+      </Link>
 
       <div className={classes.item}>
         <Bookmark className={classes.icon} />
@@ -107,7 +121,9 @@ function Leftbar(props) {
         <Storefront className={classes.icon} />
         Market
       </div>
-      {!currentUser && (
+
+
+      {!loginState && (
         <div className={classes.buttons}>
             <Button  
               variant="outlined"
@@ -128,7 +144,7 @@ function Leftbar(props) {
 
         </div>
       )}
-      {currentUser && (
+      {loginState && (
         <div>
           <div className={classes.item}>
             <Person className={classes.icon} />

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SearchBar from './SearchBar';
 import Performance from './Performance';
 import {gainers,losers} from './Fakedata';
+import LineChart from './LineChart';
 
 import ListRoundedIcon from '@material-ui/icons/ListRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -194,17 +195,30 @@ const FeedProtofolios = () => {
   )
 
 }
+
+
 const FeedStock = () => {
   const classes = useStyles();
   return (
     <>
     <Container className={classes.container}>
-      FeedStock
+      <div className="header">
+       <Typography className={classes.headText} gutterBottom>OCBA</Typography>
+      <Typography className={classes.text} gutterBottom>Oversea-Chinese Banking Corp. Limited</Typography>
+      </div>
+
+      <LineChart />
+
+      <div className={classes.commentsBlcok} style={{marginTop:'2rem'}}>
+      <Typography className={classes.headText} gutterBottom>Comments</Typography>
+      </div>
+
     </Container>
     </>
   )
 
 }
+
 
 
 export default function Feed({stock,portfolio,homepage}) {

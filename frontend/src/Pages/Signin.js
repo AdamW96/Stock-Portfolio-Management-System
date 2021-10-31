@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../services/auth-serive";
+import AuthService from "../services/auth-service";
 // import { useState } from 'react';
 
 const usestyles = makeStyles((theme) => ({
@@ -72,9 +72,9 @@ const usestyles = makeStyles((theme) => ({
     fontSize: "17px",
     backgroundColor: theme.palette.success.main,
     marginTop: theme.spacing(2),
-    '&:hover':{
-      backgroundColor:theme.palette.success.dark,
-    }
+    "&:hover": {
+      backgroundColor: theme.palette.success.dark,
+    },
   },
 }));
 

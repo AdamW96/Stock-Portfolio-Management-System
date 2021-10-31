@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../services/auth-serive";
+import AuthService from "../services/auth-service";
 // import { useState } from 'react';
 
 const usestyles = makeStyles((theme) => ({

@@ -14,7 +14,7 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import AuthService from "../services/auth-serive";
+import AuthService from "../services/auth-service";
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     top: 0,
     color: "#555",
-    
+
     // borderRight: "1px solid #f1f0ed",
   },
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     fontSize: "100%",
     fontWeight: "500",
-    fontFamily: 'Bungee',
+    fontFamily: "Bungee",
     padding: theme.spacing(2),
     marginBottom: theme.spacing(3),
     "&:hover": {
@@ -51,24 +51,22 @@ const useStyles = makeStyles((theme) => ({
   text: {
     fontWeight: "700",
   },
-  buttons:{
-
-  },
-  signButton:{
+  buttons: {},
+  signButton: {
     borderRadius: theme.spacing(1),
     marginTop: theme.spacing(50),
-    width:'100%',
+    width: "100%",
   },
-  registerButton:{
-    width:'100%',
+  registerButton: {
+    width: "100%",
     borderRadius: theme.spacing(1),
-    borderColor:theme.palette.success.light,
+    borderColor: theme.palette.success.light,
     color: theme.palette.success.main,
     marginTop: theme.spacing(2),
     "&:hover": {
       color: theme.palette.success.dark,
     },
-  }
+  },
 }));
 
 function Leftbar(props) {
@@ -84,18 +82,17 @@ function Leftbar(props) {
   };
   return (
     <Container className={classes.container}>
-
-      <Link to='/' style={{textDecoration:'none',color:'#555'}}>
+      <Link to="/" style={{ textDecoration: "none", color: "#555" }}>
         <div className={classes.item}>
           <Home className={classes.icon} />
           Home
         </div>
       </Link>
 
-      <Link to='/portfolios' style={{textDecoration:'none',color:'#555'}}>
+      <Link to="/portfolios" style={{ textDecoration: "none", color: "#555" }}>
         <div className={classes.item}>
-            <List className={classes.icon} />
-            Portfolios
+          <List className={classes.icon} />
+          Portfolios
         </div>
       </Link>
 
@@ -109,23 +106,26 @@ function Leftbar(props) {
       </div>
       {!currentUser && (
         <div className={classes.buttons}>
-            <Button  
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                history.push("/register");
-              }}
-              className={classes.signButton}
-              >Sign Up</Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              history.push("/register");
+            }}
+            className={classes.signButton}
+          >
+            Sign Up
+          </Button>
 
-            <Button  
-              variant="outlined"
-              onClick={() => {
-                history.push("/signin");
-              }}
-              className={classes.registerButton}
-            >Sign in</Button>
-
+          <Button
+            variant="outlined"
+            onClick={() => {
+              history.push("/signin");
+            }}
+            className={classes.registerButton}
+          >
+            Sign in
+          </Button>
         </div>
       )}
       {currentUser && (

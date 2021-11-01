@@ -5,7 +5,7 @@ import Right from "../Components/Right";
 import Feed from "../Components/Feed";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthSerive from "../services/auth-serive";
+import AuthService from "../services/auth-service";
 
 const styles = makeStyles((theme) => ({
   container: {
@@ -26,11 +26,15 @@ export default function Home(props) {
         </Grid>
 
         <Grid item sm={7}>
-          <Feed stock/>
+          <Feed stock />
         </Grid>
 
         <Grid item sm={3}>
-          <Right stock currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <Right
+            stock
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
         </Grid>
       </Grid>
     </div>

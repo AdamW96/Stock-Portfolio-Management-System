@@ -1,9 +1,10 @@
-import {  Button, Container, IconButton, makeStyles, Paper, Tooltip, Typography } from '@material-ui/core'
+import { Button, Container, makeStyles, Paper, Tooltip, Typography } from '@material-ui/core'
 import { useState } from 'react';
 import SearchBar from './SearchBar';
 import Performance from './Performance';
-import {gainers,losers} from './Fakedata';
+import { gainers, losers } from './Fakedata';
 import LineChart from './LineChart';
+import Comments from './Comments';
 
 import ListRoundedIcon from '@material-ui/icons/ListRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -11,17 +12,17 @@ import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
-  container:{
-    paddingTop:theme.spacing(12),
+  container: {
+    paddingTop: theme.spacing(12),
     // borderRight:'1px solid #ece7e7',
-    height:'100vh',
+    height: '100vh',
   },
-  search:{
-    position:'relative',
-    height:'8%'
+  search: {
+    position: 'relative',
+    height: '8%'
   },
   headText: {
     fontFamily: "Bungee",
@@ -31,27 +32,27 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     fontFamily: "Bungee",
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(1),
     // color:"#555"
   },
-  portList:{
-    display:'flex',
-    marginBottom:theme.spacing(5),
+  portList: {
+    display: 'flex',
+    marginBottom: theme.spacing(5),
 
     // justifyContent:'space-between',
     // borderBottom:'6px solid #555',
 
   },
-  portButton:{
+  portButton: {
     //up right down left
-    padding:'0px 5px 0px 5px',
-    width:'fit-content',
-    borderBottom:'3px solid #555',
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'space-between',
+    padding: '0px 5px 0px 5px',
+    width: 'fit-content',
+    borderBottom: '3px solid #555',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     // borderBottom:'6px solid #555',
-    borderRadius:'4px',
+    borderRadius: '4px',
     marginLeft: theme.spacing(2),
     '&:hover': {
       boxShadow: theme.shadows[3],
@@ -59,48 +60,48 @@ const useStyles = makeStyles(theme => ({
     },
 
   },
-  portText:{
+  portText: {
     fontFamily: "Bungee",
     marginLeft: theme.spacing(0.5),
-    fontSize:theme.spacing(1),
+    fontSize: theme.spacing(1),
   },
 
-  icon:{
-    backgroundColor:'#eef1f2',
-    padding:'0 3px 0px 0px',
-    borderRadius:'4px',
+  icon: {
+    backgroundColor: '#eef1f2',
+    padding: '0 3px 0px 0px',
+    borderRadius: '4px',
   },
-  addButton:{
+  addButton: {
     marginLeft: 'auto',
 
   },
-  portContent:{
+  portContent: {
     padding: theme.spacing(2),
-    width:'100%'
+    width: '100%'
   },
-  portContentInfo:{
-    display:'flex',
-    flexDirection:'column',
-    justifyContent:'center',
-    alignItems:'center',
+  portContentInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: theme.spacing(2),
   }
 }))
 
-const FeedHomepage =({})=>{
+const FeedHomepage = ({ }) => {
   const classes = useStyles();
   return (
     <>
-    <Container className={classes.container}>
-      
-      <div className={classes.search} >
-        <SearchBar data={gainers} />
-      </div>
+      <Container className={classes.container}>
 
-      <Performance data={gainers} gainers />
-      <Performance data={losers}  /> 
+        <div className={classes.search} >
+          <SearchBar data={gainers} />
+        </div>
 
-    </Container>
+        <Performance data={gainers} gainers />
+        <Performance data={losers} />
+
+      </Container>
     </>
   )
 }
@@ -111,71 +112,71 @@ const FeedProtofolios = () => {
   let isEmpty = true;
   return (
     <>
-    <Container className={classes.container}>
-      <Container >
-        <Typography className={classes.headText} gutterBottom>Total Gain/Loss</Typography>
-        <Typography variant='h5' className={classes.text} gutterBottom>+$63.2</Typography>
-      </Container>
-
-      <Container >
-        <Typography className={classes.headText} gutterBottom>My Portfolios</Typography>
-
-        <div className={classes.portList}>
-          <Paper className={classes.portButton} variant='outlined'>
-        
-            <ListRoundedIcon className={classes.icon} fontSize='small' />
-            <Typography className={classes.portText}>Portfolio1</Typography>
-
-          </Paper>
-
-          <Paper className={classes.portButton} variant='outlined'>
-          
-            <ListRoundedIcon className={classes.icon} fontSize='small' />
-            <Typography className={classes.portText}>Portfolio2</Typography>
-
-          </Paper>
-          <Paper className={classes.portButton} variant='outlined'>
-            
-            <ListRoundedIcon className={classes.icon} fontSize='small' />
-            <Typography className={classes.portText}>Portfolio3</Typography>
-
-          </Paper>
-
-
-
-           <Button className={classes.addButton} color='primary' >
-              <AddRoundedIcon fontSize='small'/>
-              <Typography className={classes.portText}>New</Typography>
-          </Button>
-
-      </div>
-
-
-      <Paper variant='outlined' className={classes.portContent}>
-        <Typography className="portContentHeader" variant='subtitle2'>
-          Portfolio1
-          <Tooltip title='Rename'>
-              <CreateOutlinedIcon className={classes.addButton} />
-          </Tooltip>
-          <Tooltip title='Delete'>
-              <DeleteOutlinedIcon className={classes.addButton} />
-          </Tooltip>
-
-          <Tooltip title='Add To Portifolio'>
-              <AutorenewIcon className={classes.addButton} />
-          </Tooltip>
-
-
-        </Typography>
-        <Container className={classes.portContentInfo} >
-          <img src='images/empty.png' alt='' style={{width:'27%'}}/>
-          <Typography variant='subtitle2'>Nothing in this portfolio</Typography>
-          <Button  color='primary' >
-              <AddRoundedIcon fontSize='small'/>
-              <Typography className={classes.portText}>Add investments</Typography>
-          </Button>
+      <Container className={classes.container}>
+        <Container >
+          <Typography className={classes.headText} gutterBottom>Total Gain/Loss</Typography>
+          <Typography variant='h5' className={classes.text} gutterBottom>+$63.2</Typography>
         </Container>
-      </Paper>
+
+        <Container >
+          <Typography className={classes.headText} gutterBottom>My Portfolios</Typography>
+
+          <div className={classes.portList}>
+            <Paper className={classes.portButton} variant='outlined'>
+
+              <ListRoundedIcon className={classes.icon} fontSize='small' />
+              <Typography className={classes.portText}>Portfolio1</Typography>
+
+            </Paper>
+
+            <Paper className={classes.portButton} variant='outlined'>
+
+              <ListRoundedIcon className={classes.icon} fontSize='small' />
+              <Typography className={classes.portText}>Portfolio2</Typography>
+
+            </Paper>
+            <Paper className={classes.portButton} variant='outlined'>
+
+              <ListRoundedIcon className={classes.icon} fontSize='small' />
+              <Typography className={classes.portText}>Portfolio3</Typography>
+
+            </Paper>
+
+
+
+            <Button className={classes.addButton} color='primary' >
+              <AddRoundedIcon fontSize='small' />
+              <Typography className={classes.portText}>New</Typography>
+            </Button>
+
+          </div>
+
+
+          <Paper variant='outlined' className={classes.portContent}>
+            <Typography className="portContentHeader" variant='subtitle2'>
+              Portfolio1
+              <Tooltip title='Rename'>
+                <CreateOutlinedIcon className={classes.addButton} />
+              </Tooltip>
+              <Tooltip title='Delete'>
+                <DeleteOutlinedIcon className={classes.addButton} />
+              </Tooltip>
+
+              <Tooltip title='Add To Portifolio'>
+                <AutorenewIcon className={classes.addButton} />
+              </Tooltip>
+
+
+            </Typography>
+            <Container className={classes.portContentInfo} >
+              <img src='images/empty.png' alt='' style={{ width: '27%' }} />
+              <Typography variant='subtitle2'>Nothing in this portfolio</Typography>
+              <Button color='primary' >
+                <AddRoundedIcon fontSize='small' />
+                <Typography className={classes.portText}>Add investments</Typography>
+              </Button>
+            </Container>
+          </Paper>
 
 
 
@@ -184,13 +185,13 @@ const FeedProtofolios = () => {
 
 
 
-        {/* <img src='images/empty.png' alt='' /> */}
+          {/* <img src='images/empty.png' alt='' /> */}
 
 
+
+        </Container>
 
       </Container>
-
-    </Container>
     </>
   )
 
@@ -201,19 +202,20 @@ const FeedStock = () => {
   const classes = useStyles();
   return (
     <>
-    <Container className={classes.container}>
-      <div className="header">
-       <Typography className={classes.headText} gutterBottom>OCBA</Typography>
-      <Typography className={classes.text} gutterBottom>Oversea-Chinese Banking Corp. Limited</Typography>
-      </div>
+      <Container className={classes.container}>
+        <div className="header">
+          <Typography className={classes.headText} >OCBA</Typography>
+          <Typography className={classes.text} gutterBottom>Oversea-Chinese Banking Corp. Limited</Typography>
+        </div>
 
-      <LineChart />
+        <LineChart />
 
-      <div className={classes.commentsBlcok} style={{marginTop:'2rem'}}>
-      <Typography className={classes.headText} gutterBottom>Comments</Typography>
-      </div>
+        <div className={classes.commentsBlcok} >
+          <Typography className={classes.headText} >Comments</Typography>
+          <Comments />
+        </div>
 
-    </Container>
+      </Container>
     </>
   )
 
@@ -221,14 +223,14 @@ const FeedStock = () => {
 
 
 
-export default function Feed({stock,portfolio,homepage}) {
+export default function Feed({ stock, portfolio, homepage }) {
   return (
     <>
-    {stock ? <FeedStock /> :'' }
-    {portfolio ? <FeedProtofolios /> :'' }
-    {homepage ? <FeedHomepage />:''}
+      {stock ? <FeedStock /> : ''}
+      {portfolio ? <FeedProtofolios /> : ''}
+      {homepage ? <FeedHomepage /> : ''}
     </>
-    
+
   )
 }
 

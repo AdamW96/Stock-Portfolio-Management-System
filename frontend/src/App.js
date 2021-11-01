@@ -4,18 +4,17 @@ import Signin from "./Pages/Signin";
 import MyPortfolios from "./Pages/MyPortfolios";
 import Stock  from "./Pages/Stock";
 import { Switch, Route } from "react-router-dom";
-import AuthSerive from "./services/auth-serive";
-import React, { useState } from "react";
+// import AuthSerive from "./services/auth-serive";
+import React from "react";
 
 
 
 function App() {
-  let [currentUser, setCurrentUser] = useState(AuthSerive.getCurrentUser());
   return (
     <div>
       <Switch>
         <Route path="/" exact>
-          <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <Home  />
         </Route>
         <Route path="/register" exact>
           <Register />

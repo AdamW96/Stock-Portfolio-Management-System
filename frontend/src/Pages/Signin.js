@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../services/auth-serive";
+// import AuthService from "../services/auth-serive";
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
@@ -98,19 +98,21 @@ export default function Login() {
   };
   const handleSignin = () => {
     console.log(email, password);
-    AuthService.signin(email, password)
-      .then((response) => {
-        console.log(response.data);
-        login();
-        if (response.data.token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        setMessage(err.response.data);
-      });
+    login();
+    history.push("/");
+    // AuthService.signin(email, password)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     login();
+    //     if (response.data.token) {
+    //       localStorage.setItem("user", JSON.stringify(response.data));
+    //     }
+    //     history.push("/");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setMessage(err.response.data);
+    //   });
   };
   // console.log(loginState);
   return (

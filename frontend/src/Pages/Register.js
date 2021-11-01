@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../services/auth-serive";
+// import AuthService from "../services/auth-serive";
 // import { useState } from 'react';
 
 const usestyles = makeStyles((theme) => ({
@@ -104,17 +104,17 @@ export default function Register() {
     setPassword(e.target.value);
   };
   const handleRegister = () => {
-    AuthService.register(firstName, lastName, userName, email, password)
-      .then(() => {
-        window.alert(
-          "Registration succeeds. You are now redirected to the login Page."
-        );
-        history.push("/signin");
-      })
-      .catch((err) => {
-        console.log(err.response);
-        setMessage(err.response.data);
-      });
+    // AuthService.register(firstName, lastName, userName, email, password)
+    //   .then(() => {
+    //     window.alert(
+    //       "Registration succeeds. You are now redirected to the login Page."
+    //     );
+    //     history.push("/signin");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.response);
+    //     setMessage(err.response.data);
+    //   });
   };
   return (
     <div className={classes.login}>

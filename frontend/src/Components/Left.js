@@ -14,7 +14,7 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import AuthService from "../services/auth-service";
+// import AuthService from "../services/auth-service";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -57,21 +57,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "700",
   },
   buttons: {},
-  signButton: {
-    borderRadius: theme.spacing(1),
-    marginTop: theme.spacing(30),
-    width: "100%",
-  },
-  registerButton: {
-    width: "100%",
-    borderRadius: theme.spacing(1),
-    borderColor: theme.palette.success.light,
-    color: theme.palette.success.main,
-    marginTop: theme.spacing(2),
-    "&:hover": {
-      color: theme.palette.success.dark,
-    },
-  },
 }));
 
 function Leftbar() {
@@ -85,25 +70,25 @@ function Leftbar() {
     console.log("you are coming to handlelogout");
     logout();
     // localStorage.removeItem("user");
-    AuthService.logout();
+    // AuthService.logout();
     history.push("/");
   };
   return (
     <Container className={classes.container}>
-      <Link to="/" style={{ textDecoration: "none", color: "#555" }}>
+      <Link to='/' style={{ textDecoration: "none", color: "#555" }}>
         <div className={classes.item}>
           <Home className={classes.icon} />
           Home
         </div>
       </Link>
 
-      <Link to="/portfolios" style={{ textDecoration: "none", color: "#555" }}>
+      <Link to='/portfolios' style={{ textDecoration: "none", color: "#555" }}>
         <div className={classes.item}>
           <List className={classes.icon} />
           Portfolios
         </div>
       </Link>
-      <Link to="/stock" style={{ textDecoration: "none", color: "#555" }}>
+      <Link to='/stock' style={{ textDecoration: "none", color: "#555" }}>
         <div className={classes.item}>
           <List className={classes.icon} />
           Stock Test
@@ -118,42 +103,17 @@ function Leftbar() {
         <Storefront className={classes.icon} />
         Market
       </div>
-
-      {!loginState && (
-        <div className={classes.buttons}>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => {
-              history.push("/register");
-            }}
-            className={classes.signButton}
-          >
-            Sign Up
-          </Button>
-
-          <Button
-            variant="outlined"
-            onClick={() => {
-              history.push("/signin");
-            }}
-            className={classes.registerButton}
-          >
-            Sign in
-          </Button>
-        </div>
-      )}
       {loginState && (
-        <div>
-          <div className={classes.item}>
-            <Person className={classes.icon} />
-            Profile
-          </div>
+        <>
+          {/* <div className={classes.item}>
+              <Person className={classes.icon} />
+              Profile
+            </div> */}
           <div onClick={handleLogout} className={classes.item}>
             <ExitToApp className={classes.icon} />
             Logout
           </div>
-        </div>
+        </>
       )}
     </Container>
   );

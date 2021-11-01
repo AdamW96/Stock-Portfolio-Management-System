@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   recomendCard: {
     padding: theme.spacing(1),
     borderRadius: theme.spacing(2),
-    width:theme.spacing(16),
+    width:theme.spacing(18),
     height:theme.spacing(18),
     '&:hover': {
       boxShadow: theme.shadows[3],
@@ -65,7 +65,7 @@ export default function RecomendCard({data}) {
           <Typography variant='subtitle2' className={classes.buttonRow}>
             <div className={classes.color}>
               <ArrowUpwardIcon fontSize='small' />
-              <Typography variant='subtitle2' >{data.changePercentage}</Typography>
+              <Typography variant='subtitle2' style={{color:'green'}} >{data.changePercentage}</Typography>
             </div>
             <Tooltip title='Add To Portifolio'>
               <AddCircleOutlineIcon className={classes.Addicon} />

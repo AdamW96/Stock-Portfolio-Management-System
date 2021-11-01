@@ -4,7 +4,7 @@ const API_URL = "http://localhost:8080"; //backend API address
 
 class AuthService {
   signin(email, password) {
-    return axios.post(API_URL + "user/signIn", { email, password });
+    return axios.post(API_URL + "user/signIn", { email, pwdMd5: password });
   }
   logout() {
     localStorage.removeItem("user");
@@ -15,7 +15,7 @@ class AuthService {
       lastname: lastName,
       username: userName,
       email,
-      password,
+      pwdMd5: password,
     });
   }
   getCurrentUser() {

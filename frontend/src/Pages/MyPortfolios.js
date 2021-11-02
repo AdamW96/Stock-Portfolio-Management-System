@@ -14,7 +14,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home(props) {
+export default function MyPortfolios(props) {
   const classes = styles();
   let { currentUser, setCurrentUser } = props;
   return (

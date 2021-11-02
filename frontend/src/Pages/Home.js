@@ -6,6 +6,7 @@ import Feed from "../Components/Feed";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // import AuthSerive from "../services/auth-serive";
+import stockService from "../services/stock-service";
 
 const styles = makeStyles((theme) => ({
   container: {
@@ -14,9 +15,18 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
+function saveAllStocks(){
+  stockService.getAllStock().then((response)=>{
+    console.log(response)
+    window.allStocks = response.data.data
+    console.log(window.allStocks)
+  })
+}
+
 export default function Home(props) {
   const classes = styles();
   let { currentUser, setCurrentUser } = props;
+  saveAllStocks();
   return (
     <div>
       <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />

@@ -1,6 +1,7 @@
 import axios from "axios";
+import BACKEND_URL from "./config";
 
-const API_URL = "http://localhost:8080"; //backend API address
+const API_URL = BACKEND_URL; //backend API address
 
 class AuthService {
   signin(email, password) {

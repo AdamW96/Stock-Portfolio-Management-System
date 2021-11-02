@@ -72,7 +72,7 @@ const Comments = () => {
     <>
       {comments.length > 0 && <CommentList comments={comments} />}
       <Comment
-        avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+        avatar={<Avatar src="https://joeschmoe.io/api/v1/Han Solo" alt="Han Solo" />}
         content={
           <Editor
             onChange={handleChange}

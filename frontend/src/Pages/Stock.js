@@ -7,6 +7,7 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // import AuthSerive from "../services/auth-serive";
 
+
 const styles = makeStyles((theme) => ({
   container: {
     paddingLeft: "12.5%",
@@ -14,8 +15,9 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home(props) {
+export default function Stock(props) {
   const classes = styles();
+
   let { currentUser, setCurrentUser } = props;
   return (
     <div>

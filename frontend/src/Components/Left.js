@@ -88,7 +88,7 @@ function Leftbar() {
           Portfolios
         </div>
       </Link>
-      <Link to='/stock' style={{ textDecoration: "none", color: "#555" }}>
+      <Link to='/stock/5' style={{ textDecoration: "none", color: "#555" }}>
         <div className={classes.item}>
           <List className={classes.icon} />
           Stock Test
@@ -99,10 +99,12 @@ function Leftbar() {
         <Bookmark className={classes.icon} />
         Collections
       </div>
+      <Link to='/market' style={{ textDecoration: "none", color: "#555" }}>
       <div className={classes.item}>
         <Storefront className={classes.icon} />
         Market
       </div>
+      </Link>
       {loginState && (
         <>
           {/* <div className={classes.item}>

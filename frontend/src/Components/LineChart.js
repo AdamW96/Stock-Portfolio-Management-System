@@ -28,34 +28,49 @@
 //   )
 // }
 
-
-import React from 'react';
-import { Area } from '@ant-design/charts';
-
+import React, {useEffect,useState} from "react";
+import { Area } from "@ant-design/charts";
+import stockService from "../services/stock-service";
+import { useLocation } from "react-router";
 
 const DemoLine = () => {
-  const data = [
-    { Date: '2019Q2', HistoricailPrice: 2.9 },
-    { Date: '2019Q3', HistoricailPrice: 29.9 },
-    { Date: '2019Q4', HistoricailPrice: 2.9 },
-    { Date: '2020Q1', HistoricailPrice: 29.9 },
-    { Date: '2020Q2E', HistoricailPrice: 17.9 },
-    { Date: '2020Q3E', HistoricailPrice: 29.9 },
-    { Date: '2020Q4E', HistoricailPrice: 7.9 },
-    { Date: '2021Q1E', HistoricailPrice: 29.9 },
-  ];
-
+  // get one stock info
+  let [sourceData,setsourceData] = useState([])
+  const location = useLocation();
+  useEffect(()=>{
+    console.log("coming to linechart effect")
+    let reg = /\b\d+\b$/;
+    let stockId = reg.exec(location.pathname)[0];
+    stockService.getOneStockById(stockId).then((res)=>{
+      console.log(res.data.data)
+      let historyData = res.data.data
+      const showData = historyData.map((ele)=>{
+        let date = new Date(ele.tradeDate);
+        let changeDate = date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate();
+        let newElement = {
+          Date:changeDate,
+          Price:ele.closedPrice
+        }
+        return newElement
+      })
+      console.log(showData)
+      setsourceData(showData)
+  
+    })
+  },[])
+  useEffect(()=>{console.log(sourceData)},[sourceData])
+  // stockService.getOneStockById()
   var config = {
-    data: data,
-    xField: 'Date',
-    yField: 'HistoricailPrice',
+    data: sourceData,
+    xField: "Date",
+    yField: "Price",
     xAxis: {
       range: [0, 1],
       tickCount: 5,
     },
-    color: '#009e4e',
+    color: "#009e4e",
     areaStyle: function areaStyle() {
-      return { fill: 'l(270) 0.3:#ffffff 0.7:#a6dab9 1:#009e4e' };
+      return { fill: "l(270) 0.3:#ffffff 0.7:#a6dab9 1:#009e4e" };
     },
     slider: {
       start: 0.2,
@@ -66,16 +81,15 @@ const DemoLine = () => {
   return <Area {...config} />;
 };
 
-
-function LineChart() {
-
+function LineChart(props) {
   return (
-    <div className="" style={{ height: '12rem', maxWidth:'40rem', marginTop: '1rem' }}>
+    <div
+      className=''
+      style={{ height: "12rem", maxWidth: "40rem", marginTop: "1rem" }}
+    >
       <DemoLine />
     </div>
-
-  )
+  );
 }
 
-export default LineChart
-
+export default LineChart;

@@ -1,5 +1,6 @@
 import {  Button,  Card,  Container,  IconButton, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from '@material-ui/core'
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -38,7 +39,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function Performance({data,gainers}) {
   const classes = useStyles({gainers});
-
+  let history = useHistory()
+  const handleClick = (event)=>{
+    let id = event.currentTarget.id;
+    let name = event.currentTarget.getAttribute("name")
+    window.stockName = name
+    history.push(`/stock/${id}`);
+  }
   return (
     <>
       {/* <Container> */}
@@ -47,10 +54,9 @@ export default function Performance({data,gainers}) {
         <Table className={classes.table} size="small" >
           <TableBody>
             {data.map((stock) => (
-              <TableRow key={stock.symbol} className={classes.rows} >
+              <TableRow key={stock.symbol} className={classes.rows} id={stock.stockId} name={stock.company} onClick={handleClick}>
                 <TableCell style={{width:'60%'}}>
                   <div >
-
                     <Typography variant='subtitle2'>{stock.symbol}</Typography>
                     <Typography variant='caption'>{stock.company}</Typography>
                     {/* <Button>{stock.symbol}</Button>

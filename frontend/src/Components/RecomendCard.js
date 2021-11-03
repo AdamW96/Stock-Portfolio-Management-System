@@ -59,7 +59,7 @@ export default function RecomendCard({data}) {
       {/* <Container> */}
       <Paper className={classes.recomendCard} variant='outlined'>
           <Typography variant='subtitle2' className={classes.symbol}>{data.symbol}</Typography>
-          <Typography style={{font:'300 0.1em roboto'}} >{data.company}</Typography>
+          <Typography style={{font:'300 0.7rem roboto'}} >{data.company}</Typography>
           <Typography variant='subtitle2' >{data.price}</Typography>
 
           <Typography variant='subtitle2' className={classes.buttonRow}>

@@ -15,18 +15,10 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-function saveAllStocks(){
-  stockService.getAllStock().then((response)=>{
-    console.log(response)
-    window.allStocks = response.data.data
-    console.log(window.allStocks)
-  })
-}
 
 export default function Home(props) {
   const classes = styles();
   let { currentUser, setCurrentUser } = props;
-  saveAllStocks();
   return (
     <div>
       <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />

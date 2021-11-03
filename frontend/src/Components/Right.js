@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   backgroundText: {
     padding: '0 7px',
     paddingBottom: '16px',
-    fontSize: '.1rem',
+    fontSize: '1rem',
     fontWeight: 300,
   },
   infoLines: {

@@ -12,7 +12,7 @@ import Performance from "./Performance";
 import { gainers, losers } from "./Fakedata";
 import LineChart from "./LineChart";
 import Comments from "./Comments";
-import StockList from "./StockList"
+import StockList from "./StockList";
 
 import ListRoundedIcon from "@material-ui/icons/ListRounded";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
@@ -94,17 +94,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FeedHomepage = ({}) => {
+  let [show, setShow] = useState(false);
   const classes = useStyles();
+  setTimeout(()=>{
+    setShow(true)
+  },1000)
   return (
     <>
-      <Container className={classes.container}>
-        <div className={classes.search}>
-          <SearchBar data={gainers} />
-        </div>
+      {!show && <div></div>}
+      {show && (
+        <Container className={classes.container}>
+          <div className={classes.search}>
+            <SearchBar data={gainers} />
+          </div>
 
-        <Performance data={gainers} gainers />
-        <Performance data={losers} />
-      </Container>
+          <Performance data={gainers} gainers />
+          <Performance data={losers} />
+        </Container>
+      )}
     </>
   );
 };
@@ -193,7 +200,7 @@ const FeedStock = () => {
         <div className='header'>
           <Typography className={classes.headText}>Company</Typography>
           <Typography className={classes.text} gutterBottom>
-            {`${window.stockName? window.stockName:"No Data"}`}
+            {`${window.stockName ? window.stockName : "No Data"}`}
           </Typography>
         </div>
 
@@ -208,20 +215,18 @@ const FeedStock = () => {
   );
 };
 
-const FeedMarket = ()=>{
+const FeedMarket = () => {
   const classes = useStyles();
   return (
     <>
       <Container className={classes.container}>
-
         <StockList />
-
       </Container>
     </>
   );
-}
+};
 
-export default function Feed({ stock, portfolio, homepage,market }) {
+export default function Feed({ stock, portfolio, homepage, market }) {
   return (
     <>
       {stock ? <FeedStock /> : ""}

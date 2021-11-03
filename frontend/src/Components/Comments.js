@@ -55,7 +55,7 @@ const Comments = () => {
           ...comments,
           {
             author: 'Han Solo',
-            avatar: 'https://joeschmoe.io/api/v1/random',
+            avatar: 'https://joeschmoe.io/api/v1/Han Solo',
             content: <p>{value}</p>,
             datetime: moment().fromNow(),
           },

@@ -39,4 +39,10 @@
     from user_info
     where email =#{email,jdbcType=VARCHAR} and pwd_md5 = #{pwdMd5,jdbcType=VARCHAR}
   </select>
+  <select id="getUidByEmail" parameterType= "string" resultMap="BaseResultMap" >
+    select
+    uid
+    from user_info
+    where email =#{email,jdbcType=VARCHAR}
+  </select>
 </mapper>

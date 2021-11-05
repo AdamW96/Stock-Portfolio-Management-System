@@ -26,6 +26,7 @@ import java.util.List;
 @RestController
 public class HelloController {
 
+
     @Autowired
     private TestTableMapper mapper;
 
@@ -44,8 +45,29 @@ public class HelloController {
     @Autowired
     private StockInfoMapper stockInfo;
 
+    int getUid(HttpServletRequest request){
+        Cookie[] cookies =  request.getCookies();
+        if(cookies != null) {
+
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+                if (name.equals("cookie_email")){
+                    String email = cookie.getValue();
+                    UserInfo user1 = usersMapper.getUidByEmail(email);
+                    if (user1 == null){
+                        return -1;
+                    }
+                    return user1.getUid();
+                }
+            }
+        }
+        return -1;
+    }
+
     @RequestMapping(value = "health", method = RequestMethod.GET)
-    public String health() {
+    public String health(HttpServletRequest request) {
+        int uid = getUid(request);
+        System.out.println("this is uid "+uid +'\n');
         System.out.println("in health");
         return "ok";
     }

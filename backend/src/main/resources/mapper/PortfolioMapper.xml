@@ -20,4 +20,15 @@
     values (#{uid,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
       )
   </insert>
+  <select id="findPortfolio" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from portfolio
+    where p_name =#{name,jdbcType=VARCHAR}
+  </select>
+  <select id="findAllPortfolio" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from portfolio
+  </select>
 </mapper>

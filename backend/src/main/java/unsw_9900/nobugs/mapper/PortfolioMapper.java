@@ -3,6 +3,8 @@ package unsw_9900.nobugs.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import unsw_9900.nobugs.po.Portfolio;
 
+import java.util.List;
+
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
  * <p>
@@ -13,4 +15,8 @@ import unsw_9900.nobugs.po.Portfolio;
 @Mapper
 public interface PortfolioMapper {
     int insert(Portfolio record);
+
+    Portfolio findPortfolio(String name);
+
+    List<Portfolio> findAllPortfolio();
 }

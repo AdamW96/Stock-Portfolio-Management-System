@@ -45,6 +45,9 @@ public class HelloController {
     @Autowired
     private StockInfoMapper stockInfo;
 
+    @Autowired
+    private PortfolioMapper portfolioMapper;
+
     int getUid(HttpServletRequest request){
         Cookie[] cookies =  request.getCookies();
         if(cookies != null) {
@@ -153,5 +156,43 @@ public class HelloController {
             return SvcResponse.error(400, "找不到对应股票");
         }
         return SvcResponse.success(stock);
+    }
+
+    @RequestMapping(value = "/user/portfolio/add", method = RequestMethod.POST)
+    public SvcResponse addPortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.success("尚未登录");
+        }
+        portfolio.setUid(check_signIn);
+        String name = portfolio.getpName();
+        Portfolio p = portfolioMapper.findPortfolio(name);
+        if (p!= null){
+            return SvcResponse.error(400, "portfolio名字重复");
+        }
+        try{
+            portfolioMapper.insert(portfolio);
+        }
+        catch (DuplicateKeyException exception) {
+            throw new DuplicateKeyException("pid 已经被使用");
+        }
+
+        return SvcResponse.success(name);
+    }
+
+    @RequestMapping(value = "/user/portfolio/getAll", method = RequestMethod.GET)
+    public SvcResponse getAllPortfolio(HttpServletRequest request){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.success("尚未登录");
+        }
+
+        List<Portfolio> p = portfolioMapper.findAllPortfolio();
+        if (p.isEmpty()){
+            return SvcResponse.error(400, "没有portfolio");
+        }
+        return SvcResponse.success(p);
     }
 }

@@ -167,7 +167,7 @@ public class HelloController {
         }
         portfolio.setUid(check_signIn);
         String name = portfolio.getpName();
-        Portfolio p = portfolioMapper.findPortfolio(name);
+        Portfolio p = portfolioMapper.findPortfolio(check_signIn,name);
         if (p!= null){
             return SvcResponse.error(400, "portfolio名字重复");
         }
@@ -191,6 +191,21 @@ public class HelloController {
 
         List<Portfolio> p = portfolioMapper.findAllPortfolio();
         if (p.isEmpty()){
+            return SvcResponse.error(400, "没有portfolio");
+        }
+        return SvcResponse.success(p);
+    }
+    @RequestMapping(value = "/user/portfolio/getOne", method = RequestMethod.POST)
+    public SvcResponse getOnePortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){
+
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.success("尚未登录");
+        }
+
+        Portfolio p = portfolioMapper.findPortfolio(check_signIn, portfolio.getpName());
+        if (p == null){
             return SvcResponse.error(400, "没有portfolio");
         }
         return SvcResponse.success(p);

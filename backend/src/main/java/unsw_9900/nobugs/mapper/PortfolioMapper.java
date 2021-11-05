@@ -16,7 +16,8 @@ import java.util.List;
 public interface PortfolioMapper {
     int insert(Portfolio record);
 
-    Portfolio findPortfolio(String name);
+    Portfolio findPortfolio(int uid, String name);
 
     List<Portfolio> findAllPortfolio();
+
 }

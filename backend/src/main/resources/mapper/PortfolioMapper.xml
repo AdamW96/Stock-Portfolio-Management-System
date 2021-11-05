@@ -24,11 +24,12 @@
     select
     <include refid="Base_Column_List" />
     from portfolio
-    where p_name =#{name,jdbcType=VARCHAR}
+    where "uid" == #{uid,jdbcType=INTEGER} and p_name =#{name,jdbcType=VARCHAR}
   </select>
   <select id="findAllPortfolio" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from portfolio
   </select>
+
 </mapper>

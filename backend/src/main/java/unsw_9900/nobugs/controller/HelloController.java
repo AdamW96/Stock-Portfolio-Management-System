@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 import unsw_9900.nobugs.controller.response.SvcResponse;
+import unsw_9900.nobugs.dto.portfolioDto;
 import unsw_9900.nobugs.dto.userDto;
 import unsw_9900.nobugs.mapper.*;
 import unsw_9900.nobugs.po.*;
@@ -181,6 +182,22 @@ public class HelloController {
         return SvcResponse.success(name);
     }
 
+    @RequestMapping(value = "/user/portfolio/rename", method = RequestMethod.POST)
+    public SvcResponse renamePortfolio(HttpServletRequest request, @RequestBody portfolioDto portfolio){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.success("尚未登录");
+        }
+        String newName = portfolio.getNewName();
+        String oldName = portfolio.getOldName();
+        int flag = portfolioMapper.renamePortfolio(check_signIn, newName, oldName);
+        if (flag!= 1){
+            return SvcResponse.error(400, "没有这个portfolio");
+        }
+        return SvcResponse.success("更新成功");
+    }
+
     @RequestMapping(value = "/user/portfolio/getAll", method = RequestMethod.GET)
     public SvcResponse getAllPortfolio(HttpServletRequest request){
         int check_signIn = getUid(request);
@@ -189,7 +206,7 @@ public class HelloController {
             return SvcResponse.success("尚未登录");
         }
 
-        List<Portfolio> p = portfolioMapper.findAllPortfolio();
+        List<Portfolio> p = portfolioMapper.findAllPortfolio(check_signIn);
         if (p.isEmpty()){
             return SvcResponse.error(400, "没有portfolio");
         }
@@ -209,5 +226,22 @@ public class HelloController {
             return SvcResponse.error(400, "没有portfolio");
         }
         return SvcResponse.success(p);
+    }
+
+    @RequestMapping(value = "/user/portfolio/deleteOne", method = RequestMethod.POST)
+    public SvcResponse delOnePortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){
+
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.success("尚未登录");
+        }
+
+        int flag = portfolioMapper.deletePortfolio(check_signIn, portfolio.getpName());
+        //todo 判断是否删除成功
+        if (flag != 1) {
+            return SvcResponse.error(400, "没有这个portfolio");
+        }
+        return SvcResponse.success("删除成功");
     }
 }

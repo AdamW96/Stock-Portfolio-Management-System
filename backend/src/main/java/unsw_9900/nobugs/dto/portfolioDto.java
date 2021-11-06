@@ -9,6 +9,10 @@ public class portfolioDto {
 
     private String description;
 
+    private String newName;
+
+    private String oldName;
+
     public Integer getPid() {
         return pid;
     }
@@ -40,5 +44,11 @@ public class portfolioDto {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getNewName() {
+        return this.newName;
+    }
+
+    public String getOldName() {return this.oldName; }
 }
 

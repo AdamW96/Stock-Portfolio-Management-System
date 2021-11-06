@@ -18,6 +18,9 @@ public interface PortfolioMapper {
 
     Portfolio findPortfolio(int uid, String name);
 
-    List<Portfolio> findAllPortfolio();
+    List<Portfolio> findAllPortfolio(int uid);
 
+    int deletePortfolio(int uid, String name);
+
+    int renamePortfolio(int uid, String newName, String oldName);
 }

@@ -30,6 +30,17 @@
     select
     <include refid="Base_Column_List" />
     from portfolio
+    where "uid" == #{uid,jdbcType=INTEGER}
   </select>
-
+  <delete id="deletePortfolio">
+    delete from portfolio
+    where
+    uid = #{uid,jdbcType=INTEGER} and p_name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <update id="renamePortfolio">
+    update portfolio
+    set p_name = #{newName,jdbcType=VARCHAR}
+    where
+    uid = #{uid,jdbcType=INTEGER} and p_name = #{oldName,jdbcType=VARCHAR}
+  </update>
 </mapper>

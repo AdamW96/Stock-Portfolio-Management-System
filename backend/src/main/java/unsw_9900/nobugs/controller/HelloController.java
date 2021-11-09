@@ -150,14 +150,7 @@ public class HelloController {
         return SvcResponse.success(history);
     }
 
-    @RequestMapping(value = "/stock/all", method = RequestMethod.GET)
-    public SvcResponse getStocks(){
-        List<StockInfo> stock = stockInfo.findAll();
-        if (stock == null){
-            return SvcResponse.error(400, "找不到对应股票");
-        }
-        return SvcResponse.success(stock);
-    }
+
 
     @RequestMapping(value = "/user/portfolio/add", method = RequestMethod.POST)
     public SvcResponse addPortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){

@@ -44,7 +44,7 @@ public class StockController {
     private UserInfoMapper usersMapper;
 
     @Autowired
-    private StockInfoMapper stockInfo;
+    private StockInfoMapper stockInfoMapper;
 
     @Autowired
     private PortfolioMapper portfolioMapper;
@@ -132,5 +132,24 @@ public class StockController {
             return SvcResponse.error(400, "没有这个股票");
         }
         return SvcResponse.success("删除成功");
+    }
+
+    @RequestMapping(value = "/stock/all", method = RequestMethod.GET)
+    public SvcResponse getStocks(){
+        List<StockInfo> stock = stockInfoMapper.findAll();
+        if (stock == null){
+            return SvcResponse.error(400, "找不到对应股票");
+        }
+        return SvcResponse.success(stock);
+    }
+
+    @RequestMapping(value = "/stock/find", method = RequestMethod.POST)
+    public SvcResponse findStock(HttpServletRequest request, @RequestBody StockInfo stockInfo){
+
+        StockInfo find = stockInfoMapper.findOneStock(stockInfo.getName());
+        if (find == null){
+            return SvcResponse.error(400, "没有这个股票");
+        }
+        return SvcResponse.success(find);
     }
 }

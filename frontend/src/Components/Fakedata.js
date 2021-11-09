@@ -14,101 +14,6 @@ const createAbout = (ABOUT, CEO, FOUNDED, HEADQUARTERS, WEBSITE, EMPLOYEES) => {
   return { ABOUT, CEO, FOUNDED, HEADQUARTERS, WEBSITE, EMPLOYEES };
 };
 
-let gainers = [];
-let losers = [];
-function saveAllStocks() {
-  stockService.getAllStock().then((response) => {
-    console.log(response);
-    window.allStocks = response.data.data;
-    console.log(window.allStocks);
-    gainers = [
-      createData(
-        `${window.allStocks[9].symbol}`,
-        `${window.allStocks[9].enname}`,
-        "0.27",
-        "5.88",
-        "5.88%",
-        `${window.allStocks[9].sid}`
-      ),
-      createData(
-        `${window.allStocks[15].symbol}`,
-        `${window.allStocks[15].enname}`,
-        "13.47",
-        "+2.12",
-        "4.68%",
-        `${window.allStocks[15].sid}`
-      ),
-      createData(
-        `${window.allStocks[16].symbol}`,
-        `${window.allStocks[16].enname}`,
-        "0.27",
-        "5.88",
-        "5.88%",
-        `${window.allStocks[16].sid}`
-      ),
-      createData(
-        `${window.allStocks[20].symbol}`,
-        `${window.allStocks[20].enname}`,
-        "13.47",
-        "+2.12",
-        "4.68%",
-        `${window.allStocks[20].sid}`
-      ),
-      createData(
-        `${window.allStocks[50].symbol}`,
-        `${window.allStocks[50].enname}`,
-        "9.72",
-        "+5.88",
-        "4.26%",
-        `${window.allStocks[50].sid}`
-      ),
-    ];
-    losers = [
-      createData(
-        `${window.allStocks[100].symbol}`,
-        `${window.allStocks[100].enname}`,
-        "$0.27",
-        "-8.43",
-        "3.13%",
-        `${window.allStocks[100].sid}`
-      ),
-      createData(
-        `${window.allStocks[105].symbol}`,
-        `${window.allStocks[105].enname}`,
-        "$13.47",
-        "-2.12",
-        "2.68%",
-        `${window.allStocks[105].sid}`
-      ),
-      createData(
-        `${window.allStocks[180].symbol}`,
-        `${window.allStocks[180].enname}`,
-        "$0.27",
-        "-8.43",
-        "3.13%",
-        `${window.allStocks[180].sid}`
-      ),
-      createData(
-        `${window.allStocks[190].symbol}`,
-        `${window.allStocks[190].enname}`,
-        "$13.47",
-        "-2.12",
-        "2.68%",
-        `${window.allStocks[190].sid}`
-      ),
-      createData(
-        `${window.allStocks[200].symbol}`,
-        `${window.allStocks[200].enname}`,
-        "$9.72",
-        "-0.87",
-        "1.89%",
-        `${window.allStocks[200].sid}`
-      ),
-    ];
-  });
-}
-saveAllStocks();
-
 let randoms = [
   createData("NS8U", "Hutchison Port Hldg Trust", "$0.27", "-8.43", "3.13%"),
   createData("J91U", "ESR-REIT", "$13.47", "-2.12", "2.68%"),
@@ -159,4 +64,4 @@ let a = [
   ),
 ];
 
-export { gainers, losers, randoms, randoms2, about };
+export { randoms, randoms2, about };

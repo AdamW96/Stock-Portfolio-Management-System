@@ -3,9 +3,10 @@ import Navigation from "../Components/Navigation";
 import Left from "../Components/Left";
 import Right from "../Components/Right";
 import Feed from "../Components/Feed";
-import { Grid } from "@material-ui/core";
+import { Grid,Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// import AuthSerive from "../services/auth-serive";
+import AuthService from "../services/auth-service";
+import portfolioService from "../services/portfolio-service";
 
 const styles = makeStyles((theme) => ({
   container: {
@@ -17,6 +18,14 @@ const styles = makeStyles((theme) => ({
 export default function MyPortfolios(props) {
   const classes = styles();
   let { currentUser, setCurrentUser } = props;
+
+  const testAPI = () => {
+    console.log(currentUser)
+    portfolioService.getAll(currentUser.cookie).then((response)=>{
+      console.log(response)
+    })
+  }
+
   return (
     <div>
       <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
@@ -27,6 +36,7 @@ export default function MyPortfolios(props) {
 
         <Grid item sm={7}>
           <Feed portfolio />
+          <Button onClick={testAPI}>Test api</Button>
         </Grid>
 
         <Grid item sm={3}>

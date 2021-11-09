@@ -3,8 +3,7 @@ import { AppBar , Button, Badge, IconButton,  makeStyles, Toolbar, Typography, T
 import { Mail } from '@material-ui/icons'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useHistory } from "react-router";
 const styles = makeStyles(theme => ({
   nav: {
@@ -59,12 +58,12 @@ const styles = makeStyles(theme => ({
 }))
 
 
-export default function Navigation() {
+export default function Navigation(props) {
   const classes = styles();
   const history = useHistory();
   const [openMsg, setOpenMsg] = useState(false);
-  const loginState = useSelector(state => state.loginState);
-
+  let {currentUser, setCurrentUser} = props
+  // const loginState = useSelector(state => state.loginState);
   return (
     <AppBar className={classes.nav} >
       <Toolbar className={classes.tool}>
@@ -73,11 +72,8 @@ export default function Navigation() {
             <img src="images/final-logo.png" alt="" style={{ width: '130px' }} />
           </Link>
         </div>
-
-
         <div className={classes.items}>
-
-          {loginState && (
+          {currentUser && (
             <>
               <Tooltip title="Message" >
                 <IconButton className={classes.iconbuttons} onClick={() => setOpenMsg(true)}>
@@ -93,8 +89,7 @@ export default function Navigation() {
                   <Typography className={classes.headText}>Welcome to our finance website.</Typography>
                   {/* <Typography className={classes.headText}>Hope you like it~ </Typography> */}
                   <img src='images/unsw.png' alt='' style={{ height: '17%', borderRadius: '20%' }} />
-
-
+                  
                   <Typography className={classes.text} gutterBottom></Typography>
                   <Typography className={classes.text} gutterBottom>By Group 9900-W16A-NoBugs</Typography>
                   <Typography className={classes.text}>Fei Xu</Typography>
@@ -107,8 +102,7 @@ export default function Navigation() {
               </Modal>
             </>
           )}
-
-          {!loginState && (
+          {!currentUser && (
             <div className={classes.buttons}>
               <Button
                 variant="outlined"
@@ -133,13 +127,7 @@ export default function Navigation() {
 
             </div>
           )}
-
-
-
-
         </div>
-
-
       </Toolbar>
     </AppBar>
   )

@@ -16,8 +16,7 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-// import AuthService from "../services/auth-serive";
-// import { useState } from 'react';
+import AuthService from "../services/auth-service";
 
 const usestyles = makeStyles((theme) => ({
   login: {
@@ -77,7 +76,7 @@ const usestyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register() {
+export default function Register(props) {
   const classes = usestyles();
   const history = useHistory();
   let [firstName, setFirstName] = useState("");
@@ -85,11 +84,15 @@ export default function Register() {
   let [userName, setUserName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [message, setMessage] = useState("");
+  let {setShowAlert} = props
+
+  const showAlertMsg = (type, content)=>{
+    window.alert = true
+    setShowAlert({alertType:type, alertContent:content})
+  }
 
   const handleChangeFirstName = (e) => {
     setFirstName(e.target.value);
-    // console.log(firstName);
   };
   const handleChangeLastName = (e) => {
     setLastName(e.target.value);
@@ -104,17 +107,18 @@ export default function Register() {
     setPassword(e.target.value);
   };
   const handleRegister = () => {
-    // AuthService.register(firstName, lastName, userName, email, password)
-    //   .then(() => {
-    //     window.alert(
-    //       "Registration succeeds. You are now redirected to the login Page."
-    //     );
-    //     history.push("/signin");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response);
-    //     setMessage(err.response.data);
-    //   });
+    AuthService.register(firstName, lastName, userName, email, password)
+      .then((response) => {
+        if(response.data.code === 400) {
+          showAlertMsg('error','Email is already registered, please change a new one')
+          return
+        }
+        showAlertMsg('success','Register successfully, you can sign in now')
+        history.push("/signin");
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
   return (
     <div className={classes.login}>
@@ -131,7 +135,6 @@ export default function Register() {
         </Grid>
 
         <Grid item sm={6} xs={6}>
-          {message && <Alert severity="error">{message}</Alert>}
           <Container>
             <Paper elevation={3} className={classes.signForm}>
               <img src="images/logo.png" alt="" className={classes.logo} />
@@ -182,7 +185,9 @@ export default function Register() {
               <Button
                 variant="contained"
                 color="primary"
-                href="/signin"
+                onClick = {()=>{
+                  history.push('/signin')
+                }}
                 className={classes.registerButton}
               >
                 Sign in

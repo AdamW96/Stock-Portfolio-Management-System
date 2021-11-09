@@ -6,13 +6,13 @@ import {
   Tooltip,
   Typography,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import Performance from "./Performance";
-import { gainers, losers } from "./Fakedata";
 import LineChart from "./LineChart";
 import Comments from "./Comments";
 import StockList from "./StockList";
+import stockService from "../services/stock-service";
 
 import ListRoundedIcon from "@material-ui/icons/ListRounded";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
@@ -94,24 +94,50 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FeedHomepage = ({}) => {
-  let [show, setShow] = useState(false);
+  // let [show, setShow] = useState(false);
+  const createData = (
+    symbol,
+    company,
+    price,
+    change,
+    changePercentage,
+    stockId
+  ) => {
+    return { symbol, company, price, change, changePercentage, stockId };
+  };
+  let [gainers,setGainers] = useState([])
+  let [losers,setLosers] = useState([])
   const classes = useStyles();
-  setTimeout(()=>{
-    setShow(true)
-  },1000)
+  useEffect(()=>{
+    stockService.getAllStock().then((response)=>{
+      const dataList = response.data.data
+      let gainersList = []
+      for(let i=0;i<5;i++) {
+        gainersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
+      }
+      setGainers(gainersList)
+    })
+  },[])
+  useEffect(()=>{
+    stockService.getAllStock().then((response)=>{
+      const dataList = response.data.data
+      let losersList = []
+      for(let i=0;i<5;i++) {
+        losersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
+      }
+      setLosers(losersList)
+    })
+  },[])
+
   return (
     <>
-      {!show && <div></div>}
-      {show && (
-        <Container className={classes.container}>
-          <div className={classes.search}>
-            <SearchBar data={gainers} />
-          </div>
-
-          <Performance data={gainers} gainers />
-          <Performance data={losers} />
-        </Container>
-      )}
+      <Container className={classes.container}>
+        <div className={classes.search}>
+          <SearchBar data={gainers} />
+        </div>
+        <Performance data={gainers} gainers />
+        <Performance data={losers} />
+      </Container>
     </>
   );
 };

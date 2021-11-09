@@ -14,7 +14,7 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-// import AuthService from "../services/auth-service";
+import AuthService from "../services/auth-service";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -59,18 +59,15 @@ const useStyles = makeStyles((theme) => ({
   buttons: {},
 }));
 
-function Leftbar() {
+function Leftbar(props) {
   const classes = useStyles();
   const history = useHistory();
-  const loginState = useSelector((state) => state.loginState);
-  const dispatch = useDispatch();
-  const { logout } = bindActionCreators(actionCreators, dispatch);
+  let { currentUser, setCurrentUser } = props;
 
   const handleLogout = () => {
     console.log("you are coming to handlelogout");
-    logout();
-    // localStorage.removeItem("user");
-    // AuthService.logout();
+    AuthService.logout();
+    setCurrentUser(AuthService.getCurrentUser())
     history.push("/");
   };
   return (
@@ -81,31 +78,28 @@ function Leftbar() {
           Home
         </div>
       </Link>
-
-      <Link to='/portfolios' style={{ textDecoration: "none", color: "#555" }}>
-        <div className={classes.item}>
-          <List className={classes.icon} />
-          Portfolios
-        </div>
-      </Link>
-      <Link to='/stock/5' style={{ textDecoration: "none", color: "#555" }}>
-        <div className={classes.item}>
-          <List className={classes.icon} />
-          Stock Test
-        </div>
-      </Link>
-
-      <div className={classes.item}>
+      {currentUser && (
+        <Link
+          to='/portfolios'
+          style={{ textDecoration: "none", color: "#555" }}
+        >
+          <div className={classes.item}>
+            <List className={classes.icon} />
+            Portfolios
+          </div>
+        </Link>
+      )}
+      {/* <div className={classes.item}>
         <Bookmark className={classes.icon} />
         Collections
-      </div>
+      </div> */}
       <Link to='/market' style={{ textDecoration: "none", color: "#555" }}>
-      <div className={classes.item}>
-        <Storefront className={classes.icon} />
-        Market
-      </div>
+        <div className={classes.item}>
+          <Storefront className={classes.icon} />
+          Market
+        </div>
       </Link>
-      {loginState && (
+      {currentUser && (
         <>
           {/* <div className={classes.item}>
               <Person className={classes.icon} />

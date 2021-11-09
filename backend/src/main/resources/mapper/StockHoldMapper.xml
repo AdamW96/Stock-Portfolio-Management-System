@@ -21,4 +21,20 @@
     values (#{pid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{lot,jdbcType=FLOAT}, 
       #{price,jdbcType=FLOAT}, #{tradeDate,jdbcType=DATE})
   </insert>
+  <select id="findOneStock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_hold
+    where "pid" == #{pid,jdbcType=INTEGER} and "sid" =#{sid,jdbcType=VARCHAR}
+  </select>
+  <select id="findAllStock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_hold
+    where "pid" == #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="delete">
+    delete from stock_hold
+    where "pid" == #{pid,jdbcType=INTEGER} and "sid" =#{sid,jdbcType=VARCHAR}
+  </delete>
 </mapper>

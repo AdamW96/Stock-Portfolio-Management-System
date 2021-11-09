@@ -14,6 +14,8 @@ import java.util.List;
  */
 @Mapper
 public interface UserInfoMapper {
+    UserInfo getUidByEmail(String email);
+
     int insert(UserInfo record);
 
     UserInfo findEmail(String email);

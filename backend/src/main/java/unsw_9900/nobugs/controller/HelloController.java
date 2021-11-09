@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 import unsw_9900.nobugs.controller.response.SvcResponse;
+import unsw_9900.nobugs.dto.portfolioDto;
 import unsw_9900.nobugs.dto.userDto;
 import unsw_9900.nobugs.mapper.*;
 import unsw_9900.nobugs.po.*;
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController
 public class HelloController {
 
+
     @Autowired
     private TestTableMapper mapper;
 
@@ -44,8 +46,32 @@ public class HelloController {
     @Autowired
     private StockInfoMapper stockInfo;
 
+    @Autowired
+    private PortfolioMapper portfolioMapper;
+
+    int getUid(HttpServletRequest request){
+        Cookie[] cookies =  request.getCookies();
+        if(cookies != null) {
+
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+                if (name.equals("cookie_email")){
+                    String email = cookie.getValue();
+                    UserInfo user1 = usersMapper.getUidByEmail(email);
+                    if (user1 == null){
+                        return -1;
+                    }
+                    return user1.getUid();
+                }
+            }
+        }
+        return -1;
+    }
+
     @RequestMapping(value = "health", method = RequestMethod.GET)
-    public String health() {
+    public String health(HttpServletRequest request) {
+        int uid = getUid(request);
+        System.out.println("this is uid "+uid +'\n');
         System.out.println("in health");
         return "ok";
     }
@@ -132,4 +158,89 @@ public class HelloController {
         }
         return SvcResponse.success(stock);
     }
+
+    @RequestMapping(value = "/user/portfolio/add", method = RequestMethod.POST)
+    public SvcResponse addPortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+            return SvcResponse.error(400,"尚未登录");
+        }
+        portfolio.setUid(check_signIn);
+        String name = portfolio.getpName();
+        Portfolio p = portfolioMapper.findPortfolio(check_signIn,name);
+        if (p!= null){
+            return SvcResponse.error(400, "portfolio名字重复");
+        }
+        try{
+            portfolioMapper.insert(portfolio);
+        }
+        catch (DuplicateKeyException exception) {
+            throw new DuplicateKeyException("pid 已经被使用");
+        }
+
+        return SvcResponse.success(portfolio);
+    }
+
+    @RequestMapping(value = "/user/portfolio/rename", method = RequestMethod.POST)
+    public SvcResponse renamePortfolio(HttpServletRequest request, @RequestBody portfolioDto portfolio){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.error(403,"尚未登录");
+        }
+        String newName = portfolio.getNewName();
+        String oldName = portfolio.getOldName();
+        int flag = portfolioMapper.renamePortfolio(check_signIn, newName, oldName);
+        if (flag!= 1){
+            return SvcResponse.error(400, "没有这个portfolio");
+        }
+        return SvcResponse.success("更新成功");
+    }
+
+    @RequestMapping(value = "/user/portfolio/getAll", method = RequestMethod.GET)
+    public SvcResponse getAllPortfolio(HttpServletRequest request){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.error(403,"尚未登录");
+        }
+
+        List<Portfolio> p = portfolioMapper.findAllPortfolio(check_signIn);
+        if (p.isEmpty()){
+            return SvcResponse.error(400, "没有portfolio");
+        }
+        return SvcResponse.success(p);
+    }
+    @RequestMapping(value = "/user/portfolio/getOne", method = RequestMethod.POST)
+    public SvcResponse getOnePortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){
+
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+//            todo 重定向
+            return SvcResponse.error(403,"尚未登录");
+        }
+
+        Portfolio p = portfolioMapper.findPortfolio(check_signIn, portfolio.getpName());
+        if (p == null){
+            return SvcResponse.error(400, "没有portfolio");
+        }
+        return SvcResponse.success(p);
+    }
+
+    @RequestMapping(value = "/user/portfolio/deleteOne", method = RequestMethod.POST)
+    public SvcResponse delOnePortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){
+
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+            return SvcResponse.error(403,"尚未登录");
+        }
+
+        int flag = portfolioMapper.deletePortfolio(check_signIn, portfolio.getpName());
+        if (flag != 1) {
+            return SvcResponse.error(400, "没有这个portfolio");
+        }
+        return SvcResponse.success("删除成功");
+    }
+
+
 }

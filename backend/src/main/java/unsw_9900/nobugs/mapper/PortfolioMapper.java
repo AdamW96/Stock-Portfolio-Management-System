@@ -2,6 +2,7 @@ package unsw_9900.nobugs.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import unsw_9900.nobugs.po.Portfolio;
+import unsw_9900.nobugs.po.StockHold;
 
 import java.util.List;
 
@@ -23,4 +24,5 @@ public interface PortfolioMapper {
     int deletePortfolio(int uid, String name);
 
     int renamePortfolio(int uid, String newName, String oldName);
+
 }

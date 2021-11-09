@@ -163,8 +163,7 @@ public class HelloController {
     public SvcResponse addPortfolio(HttpServletRequest request, @RequestBody Portfolio portfolio){
         int check_signIn = getUid(request);
         if (check_signIn == -1){
-//            todo 重定向
-            return SvcResponse.success("尚未登录");
+            return SvcResponse.error(400,"尚未登录");
         }
         portfolio.setUid(check_signIn);
         String name = portfolio.getpName();
@@ -179,7 +178,7 @@ public class HelloController {
             throw new DuplicateKeyException("pid 已经被使用");
         }
 
-        return SvcResponse.success(name);
+        return SvcResponse.success(portfolio);
     }
 
     @RequestMapping(value = "/user/portfolio/rename", method = RequestMethod.POST)
@@ -187,7 +186,7 @@ public class HelloController {
         int check_signIn = getUid(request);
         if (check_signIn == -1){
 //            todo 重定向
-            return SvcResponse.success("尚未登录");
+            return SvcResponse.error(403,"尚未登录");
         }
         String newName = portfolio.getNewName();
         String oldName = portfolio.getOldName();
@@ -203,7 +202,7 @@ public class HelloController {
         int check_signIn = getUid(request);
         if (check_signIn == -1){
 //            todo 重定向
-            return SvcResponse.success("尚未登录");
+            return SvcResponse.error(403,"尚未登录");
         }
 
         List<Portfolio> p = portfolioMapper.findAllPortfolio(check_signIn);
@@ -218,7 +217,7 @@ public class HelloController {
         int check_signIn = getUid(request);
         if (check_signIn == -1){
 //            todo 重定向
-            return SvcResponse.success("尚未登录");
+            return SvcResponse.error(403,"尚未登录");
         }
 
         Portfolio p = portfolioMapper.findPortfolio(check_signIn, portfolio.getpName());
@@ -233,15 +232,15 @@ public class HelloController {
 
         int check_signIn = getUid(request);
         if (check_signIn == -1){
-//            todo 重定向
-            return SvcResponse.success("尚未登录");
+            return SvcResponse.error(403,"尚未登录");
         }
 
         int flag = portfolioMapper.deletePortfolio(check_signIn, portfolio.getpName());
-        //todo 判断是否删除成功
         if (flag != 1) {
             return SvcResponse.error(400, "没有这个portfolio");
         }
         return SvcResponse.success("删除成功");
     }
+
+
 }

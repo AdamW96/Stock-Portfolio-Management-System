@@ -17,4 +17,6 @@ public interface StockInfoMapper {
     int insert(StockInfo record);
 
     List<StockInfo> findAll();
+
+    StockInfo findOneStock(String name);
 }

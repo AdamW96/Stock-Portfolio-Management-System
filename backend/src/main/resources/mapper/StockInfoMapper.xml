@@ -37,4 +37,10 @@
     <include refid="Base_Column_List" />
     from stock_info
   </select>
+  <select id="findOneStock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_info
+    where "name" = #{name,jdbcType=VARCHAR}
+  </select>
 </mapper>

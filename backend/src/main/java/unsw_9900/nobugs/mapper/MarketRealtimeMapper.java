@@ -1,4 +1,5 @@
 package unsw_9900.nobugs.mapper;
+import org.apache.ibatis.annotations.Param;
 
 import org.apache.ibatis.annotations.Mapper;
 import unsw_9900.nobugs.po.MarketRealtime;
@@ -13,4 +14,7 @@ import unsw_9900.nobugs.po.MarketRealtime;
 @Mapper
 public interface MarketRealtimeMapper {
     int insert(MarketRealtime record);
+
+    MarketRealtime findOneBySidOrderByTradeTimeDesc(@Param("sid")Integer sid);
+
 }

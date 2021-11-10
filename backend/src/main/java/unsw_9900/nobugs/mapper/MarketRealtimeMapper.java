@@ -17,4 +17,5 @@ public interface MarketRealtimeMapper {
 
     MarketRealtime findOneBySidOrderByTradeTimeDesc(@Param("sid")Integer sid);
 
+    MarketRealtime findStock(Integer sid);
 }

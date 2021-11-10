@@ -29,4 +29,10 @@
     where sid=#{sid,jdbcType=INTEGER} order by trade_time desc
     limit 1;
   </select>
+  <select id="findStock" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from market_realtime
+    where sid=#{sid,jdbcType=INTEGER} ;
+  </select>
 </mapper>

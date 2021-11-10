@@ -3,30 +3,42 @@ import Register from "./Pages/Register";
 import Signin from "./Pages/Signin";
 import MyPortfolios from "./Pages/MyPortfolios";
 import Stock from "./Pages/Stock";
+import Market from "./Pages/Market"
 import { Switch, Route } from "react-router-dom";
-// import AuthSerive from "./services/auth-serive";
+import AuthService from "./services/auth-service";
+import AlertMsg from "./Components/AlertMsg";
 import React from "react";
 
 function App() {
+  let [currentUser, setCurrentUser] = React.useState(AuthService.getCurrentUser());
+  const [showAlert, setShowAlert] = React.useState({
+    alertType: 'none',
+    alertContent: '',
+  })
+  console.log("app.js==>",currentUser)
   return (
     <div>
       <Switch>
         <Route path="/" exact>
-          <Home  />
+          <Home  currentUser={currentUser} setCurrentUser={setCurrentUser}/>
         </Route>
         <Route path="/register" exact>
-          <Register />
+          <Register setShowAlert={setShowAlert}/>
         </Route>
         <Route path="/signin" exact>
-          <Signin />
+          <Signin  setShowAlert={setShowAlert} setCurrentUser={setCurrentUser}/>
         </Route>
         <Route path="/portfolios" exact>
-          <MyPortfolios />
+          <MyPortfolios currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
         </Route>
-        <Route path="/stock" exact>
-          <Stock />
+        <Route path="/stock/:id" exact>
+          <Stock currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+        </Route>
+        <Route path="/market" exact>
+          <Market currentUser={currentUser} setCurrentUser={setCurrentUser}/>
         </Route>
       </Switch>
+      <AlertMsg {...showAlert} />
     </div>
   );
 }

@@ -101,7 +101,8 @@ export default function SearchBar({data}) {
             <TableContainer >
               <Table  size="small">
                 <TableBody>
-                  {data.map((stock) => (
+                  {data && (<>
+                    {data.map((stock) => (
                     <TableRow key={stock.symbol} className={classes.rows}>
                       <TableCell style={{width:'10%'}} >
                         <Link to='' style={{textDecoration:'none',color:'#555'}}>
@@ -112,10 +113,10 @@ export default function SearchBar({data}) {
                       </TableCell>
                       <TableCell align="left"><Typography variant='caption'>{stock.company}</Typography></TableCell>
                       <TableCell align="left">{stock.price}</TableCell>
-
-      
                     </TableRow>
                   ))}
+                  </>)}
+                  {!data && (<div></div>)}
                 </TableBody>
               </Table>
             </TableContainer>

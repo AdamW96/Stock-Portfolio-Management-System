@@ -55,7 +55,7 @@ const Comments = () => {
           ...comments,
           {
             author: 'Han Solo',
-            avatar: 'https://joeschmoe.io/api/v1/random',
+            avatar: 'https://joeschmoe.io/api/v1/Han Solo',
             content: <p>{value}</p>,
             datetime: moment().fromNow(),
           },
@@ -72,7 +72,7 @@ const Comments = () => {
     <>
       {comments.length > 0 && <CommentList comments={comments} />}
       <Comment
-        avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+        avatar={<Avatar src="https://joeschmoe.io/api/v1/Han Solo" alt="Han Solo" />}
         content={
           <Editor
             onChange={handleChange}

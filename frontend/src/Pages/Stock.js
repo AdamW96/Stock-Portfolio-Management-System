@@ -5,7 +5,8 @@ import Right from "../Components/Right";
 import Feed from "../Components/Feed";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// import AuthSerive from "../services/auth-serive";
+// import AuthService from "../services/auth-service";
+
 
 const styles = makeStyles((theme) => ({
   container: {
@@ -14,8 +15,9 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home(props) {
+export default function Stock(props) {
   const classes = styles();
+
   let { currentUser, setCurrentUser } = props;
   return (
     <div>

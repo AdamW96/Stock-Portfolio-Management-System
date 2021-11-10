@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-// import AuthService from "../services/auth-serive";
+import AuthService from "../services/auth-service"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -76,15 +76,17 @@ const usestyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = usestyles();
   const history = useHistory();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [message, setMessage] = useState("");
-  const loginState = useSelector((state) => state.loginState);
-  const dispatch = useDispatch();
-  const { login } = bindActionCreators(actionCreators, dispatch);
+  let { setShowAlert,setCurrentUser } = props
+ 
+  const showAlert = (type, content) => {
+    window.alert = true
+    setShowAlert({alertType:type, alertContent:content})
+  }
 
   const handleChangeEmail = (e) => {
     // console.log(email);
@@ -96,21 +98,22 @@ export default function Login() {
   };
   const handleSignin = () => {
     console.log(email, password);
-    login();
-    history.push("/");
-    // AuthService.signin(email, password)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     login();
-    //     if (response.data.token) {
-    //       localStorage.setItem("user", JSON.stringify(response.data));
-    //     }
-    //     history.push("/");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setMessage(err.response.data);
-    //   });
+    AuthService.signin(email, password)
+      .then((response) => {
+        console.log(response)
+        if(response.data.code !== 200) {
+          showAlert('error','Invalid email or password')
+          return
+        }
+        let userData = {cookie:`cookie_email=${email}`, data:response.data.data}
+        localStorage.setItem("user", JSON.stringify(userData));
+        setCurrentUser(JSON.parse(localStorage.getItem("user")))
+        showAlert('success','log in successfully')
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   // console.log(loginState);
   return (
@@ -128,7 +131,6 @@ export default function Login() {
         </Grid>
 
         <Grid item sm={6} xs={6}>
-          {message && <Alert severity="error">{message}</Alert>}
           <Container>
             <Paper elevation={3} className={classes.signForm}>
               <img src="images/logo.png" alt="" className={classes.logo} />
@@ -150,7 +152,6 @@ export default function Login() {
                 onClick={handleSignin}
                 variant="contained"
                 color="primary"
-                href=""
                 className={classes.signButton}
               >
                 next
@@ -159,7 +160,7 @@ export default function Login() {
               <Button
                 variant="contained"
                 color="primary"
-                href=""
+                onClick = {()=>{history.push('/register')}}
                 className={classes.registerButton}
               >
                 Create an account

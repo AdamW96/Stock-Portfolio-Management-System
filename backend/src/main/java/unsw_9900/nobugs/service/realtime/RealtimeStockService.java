@@ -99,10 +99,6 @@ public class RealtimeStockService {
 
     public boolean addRealtimePrice(int sid, Double price, Date tradeTime){
         // TODO 如何判断是新的 price
-        MarketRealtime rt = marketRealtimeMapper.findOneBySidOrderByTradeTimeDesc(sid);
-        if (!rt.getTradeTime().before(tradeTime)){
-            return false;
-        }
         MarketRealtime record = new MarketRealtime();
         record.setSid(sid);
         record.setPrice(price);
@@ -111,7 +107,7 @@ public class RealtimeStockService {
         return true;
     }
 
-    @Scheduled(cron="0 * 9,10,11,13,14,15 * * ?")
+    @Scheduled(cron="0 * 9,10,11,13,14,15 ? * 2,3,4,5,6")
     public void realtimeStockPriceScheduler() {
 
         List<StockInfo> stockInfoList = stockInfoMapper.findAll();

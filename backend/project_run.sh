@@ -9,7 +9,9 @@ mvn package || { echo "java build failed"; exit 1; }
 cp ./target/9900-project-test.jar ./share_data/
 
 cd ./share_data/
-pip3 install -r requirements.txt
+pip3 install cython
+pip3 install argparse
+pip3 install tushare
 python3 py_stock.py || { echo "!!! py stock sync data failed"; exit 1; }
 
 echo "=== start java project ==="

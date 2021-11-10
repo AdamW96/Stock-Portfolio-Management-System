@@ -9,7 +9,8 @@ mvn package || { echo "java build failed"; exit 1; }
 cp ./target/9900-project-test.jar ./share_data/
 
 cd ./share_data/
-python py_stock.py || { echo "!!! py stock sync data failed"; exit 1; }
+pip3 install -r requirements.txt
+python3 py_stock.py || { echo "!!! py stock sync data failed"; exit 1; }
 
 echo "=== start java project ==="
 java -jar 9900-project-test.jar

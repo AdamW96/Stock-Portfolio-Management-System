@@ -1,4 +1,4 @@
 .DS_Store
 node_modules
-frontend/src/services/auth-service.js
 .vscode
+backend/9900-test-db.sqlite

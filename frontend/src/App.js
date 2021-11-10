@@ -4,6 +4,7 @@ import Signin from "./Pages/Signin";
 import MyPortfolios from "./Pages/MyPortfolios";
 import Stock from "./Pages/Stock";
 import Market from "./Pages/Market"
+import SinglePortfolio from './Pages/SinglePortfolio'
 import { Switch, Route } from "react-router-dom";
 import AuthService from "./services/auth-service";
 import AlertMsg from "./Components/AlertMsg";
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/portfolios" exact>
           <MyPortfolios currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
+        </Route>
+        <Route path="/portfolio/:id" exact>
+          <SinglePortfolio currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
         </Route>
         <Route path="/stock/:id" exact>
           <Stock currentUser={currentUser} setCurrentUser={setCurrentUser}/>

@@ -16,6 +16,18 @@ class PortfolioService {
     const cookie = userData?userData.cookie:null
     return axios.post(API_URL + "/user/portfolio/add",data, { headers: {"Authorization":cookie} });
   }
+  reName(data) {
+    axios.defaults.withCredentials = true
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const cookie = userData?userData.cookie:null
+    return axios.post(API_URL + "/user/portfolio/rename",data, { headers: {"Authorization":cookie} });
+  }
+  deletePort(data) {
+    axios.defaults.withCredentials = true
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const cookie = userData?userData.cookie:null
+    return axios.post(API_URL + "/user/portfolio/deleteOne",data, { headers: {"Authorization":cookie} });
+  }
 }
 
 export default new PortfolioService();

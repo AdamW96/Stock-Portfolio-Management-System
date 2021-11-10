@@ -3,11 +3,11 @@ import Navigation from "../Components/Navigation";
 import Left from "../Components/Left";
 import Right from "../Components/Right";
 import Feed from "../Components/Feed";
-import { Grid,Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../services/auth-service";
-import portfolioService from "../services/portfolio-service";
-import PortfoliosList from "../Components/PortfoliosList";
+import Portfolio from "../Components/Portfolio"
+// import AuthService from "../services/auth-service";
+
 
 const styles = makeStyles((theme) => ({
   container: {
@@ -16,9 +16,10 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function MyPortfolios(props) {
+export default function Stock(props) {
   const classes = styles();
-  let { currentUser, setCurrentUser, setShowAlert } = props;
+
+  let { currentUser, setCurrentUser } = props;
   return (
     <div>
       <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
@@ -27,11 +28,11 @@ export default function MyPortfolios(props) {
           <Left currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
         <Grid item sm={7}>
-          <PortfoliosList currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
+        <Portfolio />
         </Grid>
         <Grid item sm={3}>
           <Right
-            portfolio
+            stock
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
           />

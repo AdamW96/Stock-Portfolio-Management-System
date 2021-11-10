@@ -7,6 +7,7 @@ import { Grid,Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AuthService from "../services/auth-service";
 import portfolioService from "../services/portfolio-service";
+import Portfolios from "../Components/Portfolios";
 
 const styles = makeStyles((theme) => ({
   container: {
@@ -17,15 +18,7 @@ const styles = makeStyles((theme) => ({
 
 export default function MyPortfolios(props) {
   const classes = styles();
-  let { currentUser, setCurrentUser } = props;
-
-  const testAPI = () => {
-    console.log(currentUser)
-    portfolioService.getAll(currentUser.cookie).then((response)=>{
-      console.log(response)
-    })
-  }
-
+  let { currentUser, setCurrentUser, setShowAlert } = props;
   return (
     <div>
       <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
@@ -33,12 +26,9 @@ export default function MyPortfolios(props) {
         <Grid item sm={2}>
           <Left currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
-
         <Grid item sm={7}>
-          <Feed portfolio />
-          <Button onClick={testAPI}>Test api</Button>
+          <Portfolios currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
         </Grid>
-
         <Grid item sm={3}>
           <Right
             portfolio

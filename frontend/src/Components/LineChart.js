@@ -38,7 +38,6 @@ const DemoLine = () => {
   let [sourceData,setsourceData] = useState([])
   const location = useLocation();
   useEffect(()=>{
-    console.log("coming to linechart effect")
     let reg = /\b\d+\b$/;
     let stockId = reg.exec(location.pathname)[0];
     stockService.getOneStockById(stockId).then((res)=>{

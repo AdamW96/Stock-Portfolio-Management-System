@@ -15,6 +15,7 @@ function App() {
     alertType: 'none',
     alertContent: '',
   })
+  console.log("app.js==>",currentUser)
   return (
     <div>
       <Switch>
@@ -28,7 +29,7 @@ function App() {
           <Signin  setShowAlert={setShowAlert} setCurrentUser={setCurrentUser}/>
         </Route>
         <Route path="/portfolios" exact>
-          <MyPortfolios currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+          <MyPortfolios currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
         </Route>
         <Route path="/stock/:id" exact>
           <Stock currentUser={currentUser} setCurrentUser={setCurrentUser}/>

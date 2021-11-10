@@ -84,6 +84,7 @@ export default function Login(props) {
   let { setShowAlert,setCurrentUser } = props
  
   const showAlert = (type, content) => {
+    window.alert = true
     setShowAlert({alertType:type, alertContent:content})
   }
 
@@ -101,14 +102,12 @@ export default function Login(props) {
       .then((response) => {
         console.log(response)
         if(response.data.code !== 200) {
-          window.alert = true
           showAlert('error','Invalid email or password')
           return
         }
-        let cookie = {cookie:`cookie_email=${email}`}
-        localStorage.setItem("user", JSON.stringify(cookie));
+        let userData = {cookie:`cookie_email=${email}`, data:response.data.data}
+        localStorage.setItem("user", JSON.stringify(userData));
         setCurrentUser(JSON.parse(localStorage.getItem("user")))
-        window.alert = true
         showAlert('success','log in successfully')
         history.push("/");
       })

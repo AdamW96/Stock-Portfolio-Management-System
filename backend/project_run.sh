@@ -2,6 +2,8 @@
 if [ "$1" = "raw" ];then
 echo "run in raw mode"
 
+mkdir share_data
+
 echo "=== recreate db ==="
 python3 merge.py || { echo "recreate db failed"; exit 1; }
 

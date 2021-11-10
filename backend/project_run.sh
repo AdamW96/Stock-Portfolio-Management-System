@@ -1,4 +1,28 @@
 
+if [ "$1" = "raw" ];then
+echo "run in raw mode"
+
+mkdir share_data
+
+echo "=== recreate db ==="
+python3 merge.py || { echo "recreate db failed"; exit 1; }
+
+cp ./py_history/py_stock.py ./share_data/
+cp ./py_history/requirements.txt ./share_data/
+cp ./9900-test-db.sqlite ./share_data
+
+mvn package || { echo "java build failed"; exit 1; }
+cp ./target/9900-project-test.jar ./share_data/
+
+cd ./share_data/
+python3 py_stock.py || { echo "!!! py stock sync data failed"; exit 1; }
+
+echo "=== start java project ==="
+java -jar 9900-project-test.jar
+
+exit 0
+fi
+
 if [ "$1" = "local" ];then
 echo "run in local mode"
 else

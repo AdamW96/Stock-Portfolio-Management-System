@@ -115,3 +115,5 @@ buildNumber.properties
 
 share_data/
 
+*.tmp
+*.sqlite

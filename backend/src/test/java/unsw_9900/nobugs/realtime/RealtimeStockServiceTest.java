@@ -33,7 +33,7 @@ public class RealtimeStockServiceTest {
 
     @Test
     public void scheduleRealtimeStockPriceTest() {
-        service.realtimeStockPriceScheduler();
+//        service.realtimeStockPriceScheduler();
     }
 
     @Test

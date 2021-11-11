@@ -111,4 +111,24 @@ public class realTimeController {
         }
         return SvcResponse.success(gain);
     }
+
+    @RequestMapping(value = "/stock/best", method = RequestMethod.POST)
+    public SvcResponse bestStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
+
+        MarketRealtime find = marketRealtimeMapper.findBestStock();
+        if (find == null){
+            return SvcResponse.error(400, "没有股票");
+        }
+        return SvcResponse.success(find);
+    }
+
+    @RequestMapping(value = "/stock/worst", method = RequestMethod.POST)
+    public SvcResponse worstStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
+
+        MarketRealtime find = marketRealtimeMapper.findWorstStock();
+        if (find == null){
+            return SvcResponse.error(400, "没有股票");
+        }
+        return SvcResponse.success(find);
+    }
 }

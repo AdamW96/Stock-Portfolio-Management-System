@@ -21,4 +21,6 @@ public interface MarketHistoryMapper {
     List<MarketHistory> selectBySid(@Param("sid") Integer sid);
 
     List<StockInfo> findAll();
+
+    MarketHistory selectBySidDesc(Integer sid);
 }

@@ -1,57 +1,70 @@
-import Home from "./Pages/Home";
-import Register from "./Pages/Register";
-import Signin from "./Pages/Signin";
-import MyPortfolios from "./Pages/MyPortfolios";
-import Stock from "./Pages/Stock";
-import Market from "./Pages/Market"
+import Home from './Pages/Home'
+import Register from './Pages/Register'
+import Signin from './Pages/Signin'
+import MyPortfolios from './Pages/MyPortfolios'
+import Stock from './Pages/Stock'
+import Market from './Pages/Market'
 import SinglePortfolio from './Pages/SinglePortfolio'
-import { Switch, Route } from "react-router-dom";
-import AuthService from "./services/auth-service";
+import { Switch, Route } from 'react-router-dom'
+import AuthService from './services/auth-service'
 import stockService from './services/stock-service'
-import AlertMsg from "./Components/AlertMsg";
-import React from "react";
+import AlertMsg from './Components/AlertMsg'
+import React from 'react'
 
 function App() {
-  let [currentUser, setCurrentUser] = React.useState(AuthService.getCurrentUser());
-  const [allStocks, setAllStocks] = React.useState(null)
+  let [currentUser, setCurrentUser] = React.useState(
+    AuthService.getCurrentUser()
+  )
+  const [allStocks, setAllStocks] = React.useState([])
   const [showAlert, setShowAlert] = React.useState({
     alertType: 'none',
     alertContent: '',
   })
-  console.log("app.js==>",currentUser)
-  React.useEffect(()=>{
-    stockService.getAllStock().then(response=> {
-      setAllStocks(response)
+  console.log('app.js==>', currentUser)
+  React.useEffect(() => {
+    stockService.getAllStock().then((response) => {
+      if (response.data.code === 200) {
+        setAllStocks(response.data.data)
+      }
     })
-  },[])
+  }, [])
   return (
     <div>
       <Switch>
-        <Route path="/" exact>
-          <Home  currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+        <Route path='/' exact>
+          <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
-        <Route path="/register" exact>
-          <Register setShowAlert={setShowAlert}/>
+        <Route path='/register' exact>
+          <Register setShowAlert={setShowAlert} />
         </Route>
-        <Route path="/signin" exact>
-          <Signin  setShowAlert={setShowAlert} setCurrentUser={setCurrentUser}/>
+        <Route path='/signin' exact>
+          <Signin setShowAlert={setShowAlert} setCurrentUser={setCurrentUser} />
         </Route>
-        <Route path="/portfolios" exact>
-          <MyPortfolios currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
+        <Route path='/portfolios' exact>
+          <MyPortfolios
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            setShowAlert={setShowAlert}
+          />
         </Route>
-        <Route path="/portfolio/:id" exact>
-          <SinglePortfolio currentUser={currentUser} setShowAlert={setShowAlert} allStocks={allStocks}/>
+        <Route path='/portfolio/:id' exact>
+          <SinglePortfolio
+            currentUser={currentUser}
+            setShowAlert={setShowAlert}
+            allStocks={allStocks}
+            setCurrentUser={setCurrentUser}
+          />
         </Route>
-        <Route path="/stock/:id" exact>
-          <Stock currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+        <Route path='/stock/:id' exact>
+          <Stock currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
-        <Route path="/market" exact>
-          <Market currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+        <Route path='/market' exact>
+          <Market currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
       </Switch>
       <AlertMsg {...showAlert} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

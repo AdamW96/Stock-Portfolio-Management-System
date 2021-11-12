@@ -32,7 +32,26 @@ class PortfolioService {
     axios.defaults.withCredentials = true
     const userData = JSON.parse(localStorage.getItem('user'))
     const cookie = userData?userData.cookie:null
-    return axios.post(API_URL + "/portfolio/totalGain",{pid:pid}, { headers: {"Authorization":cookie} });
+    return axios.post(API_URL + "/user/portfolio/totalGain",{pid:pid}, { headers: {"Authorization":cookie} });
+  }
+
+  getAllStocks(pid) {
+    axios.defaults.withCredentials = true
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const cookie = userData?userData.cookie:null
+    return axios.post(API_URL + "/user/portfolio/getAllStock",{pid:pid}, { headers: {"Authorization":cookie} });
+  }
+  buyOneStock(data) {
+    axios.defaults.withCredentials = true
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const cookie = userData?userData.cookie:null
+    return axios.post(API_URL + "/user/portfolio/buyStock",data, { headers: {"Authorization":cookie} });
+  }
+  sellOneStock(data) {
+    axios.defaults.withCredentials = true
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const cookie = userData?userData.cookie:null
+    return axios.post(API_URL + "/user/portfolio/sellStock",data, { headers: {"Authorization":cookie} });
   }
 }
 

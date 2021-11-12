@@ -8,6 +8,7 @@ import unsw_9900.nobugs.dto.portfolioDto;
 import unsw_9900.nobugs.dto.userDto;
 import unsw_9900.nobugs.mapper.*;
 import unsw_9900.nobugs.po.*;
+import unsw_9900.nobugs.po.stockGainDto;
 import unsw_9900.nobugs.service.TestTableService;
 
 import javax.annotation.Resource;
@@ -81,6 +82,52 @@ public class realTimeController {
             return SvcResponse.error(400, "没有这个股票");
         }
         return SvcResponse.success(find);
+    }
+
+    @RequestMapping(value = "/realTime/stockTrend", method = RequestMethod.POST)
+    public SvcResponse stockTrend(HttpServletRequest request, @RequestBody MarketRealtime marketRealtime){
+
+        MarketRealtime find = marketRealtimeMapper.findOneBySidOrderByTradeTimeDesc(marketRealtime.getSid());
+        if (find == null){
+            return SvcResponse.error(400, "没有这个股票");
+        }
+        MarketHistory stock = marketHistoryMapper.selectBySidDesc(marketRealtime.getSid());
+        double rate = (find.getPrice() - stock.getClosedPrice()) / stock.getClosedPrice();
+        stockGainDto  trend = new stockGainDto();
+        trend.setSid(marketRealtime.getSid());
+        trend.setOldPrice(stock.getClosedPrice());
+        trend.setNewPrice(find.getPrice());
+        trend.setRate(rate);
+        return SvcResponse.success(trend);
+    }
+
+    @RequestMapping(value = "/user/portfolio/oneStockGain", method = RequestMethod.POST)
+    public SvcResponse oneStockGain(HttpServletRequest request, @RequestBody StockHold stockHold){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+            return SvcResponse.error(403,"尚未登录");
+        }
+
+        StockHold find = stockHoldMapper.findOneStock(stockHold.getPid(), stockHold.getSid());
+        if (find == null){
+            return SvcResponse.error(400, "找不到股票");
+        }
+
+        MarketRealtime stock = marketRealtimeMapper.findOneBySidOrderByTradeTimeDesc(stockHold.getSid());
+
+        double gain = find.getLot() * (stock.getPrice() - find.getPrice());
+        double rate = 0;
+        if (find.getPrice() != 0){
+            rate =  (stock.getPrice() - find.getPrice())/ find.getPrice();
+        }
+        stockGainDto stockGain = new stockGainDto();
+        stockGain.setSid(stock.getSid());
+        stockGain.setOldPrice(find.getPrice());
+        stockGain.setNewPrice(stock.getPrice());
+        stockGain.setLot(find.getLot());
+        stockGain.setRate(rate);
+
+        return SvcResponse.success(stockGain);
     }
 
     @RequestMapping(value = "/user/portfolio/totalGain", method = RequestMethod.POST)

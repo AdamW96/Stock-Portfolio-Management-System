@@ -32,7 +32,7 @@ export default function Stock(props) {
         </Grid>
         <Grid item sm={3}>
           <Right
-            stock
+            portfolio
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
           />

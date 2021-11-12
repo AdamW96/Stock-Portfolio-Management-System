@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useLocation } from 'react-router'
 import {
   Grid,
   Container,
@@ -9,6 +10,7 @@ import {
   Box,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import portfolioService from '../services/portfolio-service'
 // import AuthService from "../services/auth-service";
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,21 +28,33 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  tabPanel:{
+    padding:theme.spacing(2)
+  }
 }))
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
-  };
+  }
 }
 
-export default function Portfolio() {
+export default function Portfolio(props) {
   const classes = useStyles()
+  const location = useLocation()
   const [portGain, setPortGain] = useState(null)
   const [tabValue, setTabValue] = useState(0)
-  
-  const handleChangeTab= (event, newValue) => {
+  const [fetchData, setFetchData] = useState(false)
+  const { allStocks } = props
+  React.useEffect(()=>{
+    const pid = location.pathname.split('/')[2]
+    portfolioService.portGain(pid).then(response=>{
+      console.log(response)
+    })
+  },[fetchData])
+
+  const handleChangeTab = (event, newValue) => {
     setTabValue(newValue)
   }
 
@@ -49,9 +63,7 @@ export default function Portfolio() {
       <Container className={classes.container}>
         <Grid container>
           <Grid item xs={12}>
-            <Typography className={classes.headText}>
-              Gain of current portfolio:
-            </Typography>
+            <Typography className={classes.headText}>Gain:</Typography>
             <Typography className={classes.headText}>{portGain}</Typography>
           </Grid>
           <Grid item xs={12}>
@@ -67,15 +79,22 @@ export default function Portfolio() {
                   <Tab label='Item Three' {...a11yProps(2)} />
                 </Tabs>
               </AppBar>
-              <TabPanel1 value={value} index={0}>
-                Item One
-              </TabPanel1>
-              <TabPanel2 value={value} index={1}>
-                Item Two
-              </TabPanel2>
-              <TabPanel3 value={value} index={2}>
-                Item Three
-              </TabPanel3>
+              {/* show all stocks you have bought */}
+              {tabValue === 0 && (
+                <Grid container className={classes.tabPanel}>
+                  <Typography> this is one</Typography>
+                </Grid>
+              )}
+              {tabValue === 1 && (
+                <Grid container className={classes.tabPanel}>
+                  <Typography> this is two</Typography>
+                </Grid>
+              )}
+              {tabValue === 2 && (
+                <Grid container className={classes.tabPanel}>
+                  <Typography> this is three</Typography>
+                </Grid>
+              )}
             </div>
           </Grid>
         </Grid>

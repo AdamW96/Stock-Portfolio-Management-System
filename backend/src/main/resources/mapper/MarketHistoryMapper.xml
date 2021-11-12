@@ -35,5 +35,12 @@
     where sid=#{sid,jdbcType=INTEGER}
   </select>
 
+  <select id="selectBySidDesc" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_history
+    where sid=#{sid,jdbcType=INTEGER} order by trade_date desc
+    limit 1;
+  </select>
 
 </mapper>

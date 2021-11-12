@@ -35,4 +35,18 @@
     from market_realtime
     where sid=#{sid,jdbcType=INTEGER} ;
   </select>
+  <select id="findBestStock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from market_realtime
+    order by price desc
+    limit 1;
+  </select>
+  <select id="findWorstStock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from market_realtime
+    order by price
+    limit 1;
+  </select>
 </mapper>

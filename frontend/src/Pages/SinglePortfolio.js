@@ -19,7 +19,7 @@ const styles = makeStyles((theme) => ({
 export default function Stock(props) {
   const classes = styles();
 
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, allStocks } = props;
   return (
     <div>
       <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
@@ -28,7 +28,7 @@ export default function Stock(props) {
           <Left currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
         <Grid item sm={7}>
-        <Portfolio />
+        <Portfolio allStocks={allStocks}/>
         </Grid>
         <Grid item sm={3}>
           <Right

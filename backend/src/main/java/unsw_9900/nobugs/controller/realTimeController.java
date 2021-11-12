@@ -83,7 +83,7 @@ public class realTimeController {
         return SvcResponse.success(find);
     }
 
-    @RequestMapping(value = "/portfolio/totalGain", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/portfolio/totalGain", method = RequestMethod.POST)
     public SvcResponse totalGain(HttpServletRequest request, @RequestBody Portfolio portfolio){
         int check_signIn = getUid(request);
         if (check_signIn == -1){
@@ -91,7 +91,7 @@ public class realTimeController {
         }
 
         List<StockHold> find = stockHoldMapper.findAllStock(portfolio.getPid());
-        if (find == null){
+        if (find.isEmpty()){
             return SvcResponse.error(400, "尚未买股票");
         }
 

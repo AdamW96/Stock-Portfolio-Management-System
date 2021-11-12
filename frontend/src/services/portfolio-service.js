@@ -53,6 +53,19 @@ class PortfolioService {
     const cookie = userData?userData.cookie:null
     return axios.post(API_URL + "/user/portfolio/sellStock",data, { headers: {"Authorization":cookie} });
   }
+  getOneRealTimeData(sid) {
+    axios.defaults.withCredentials = true
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const cookie = userData?userData.cookie:null
+    return axios.post(API_URL + "/realTime/stockTrend",{sid:sid}, { headers: {"Authorization":cookie} });
+  }
+
+  getOneProfit(pid,sid) {
+    axios.defaults.withCredentials = true
+    const userData = JSON.parse(localStorage.getItem('user'))
+    const cookie = userData?userData.cookie:null
+    return axios.post(API_URL + "/user/portfolio/oneStockGain",{pid,sid}, { headers: {"Authorization":cookie} });
+  }
 }
 
 export default new PortfolioService();

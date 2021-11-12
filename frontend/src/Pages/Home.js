@@ -10,8 +10,8 @@ import stockService from "../services/stock-service";
 
 const styles = makeStyles((theme) => ({
   container: {
-    paddingLeft: "12.5%",
-    paddingRight: "12.5%",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
   },
 }));
 

@@ -11,8 +11,8 @@ import Portfolio from "../Components/Portfolio"
 
 const styles = makeStyles((theme) => ({
   container: {
-    paddingLeft: "12.5%",
-    paddingRight: "12.5%",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
   },
 }));
 
@@ -27,16 +27,16 @@ export default function Stock(props) {
         <Grid item sm={2}>
           <Left currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
-        <Grid item sm={7}>
+        <Grid item sm={10}>
         <Portfolio allStocks={allStocks} setShowAlert={setShowAlert}/>
         </Grid>
-        <Grid item sm={3}>
+        {/* <Grid item sm={3}>
           <Right
             portfolio
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

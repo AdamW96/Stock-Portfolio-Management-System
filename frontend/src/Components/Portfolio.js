@@ -61,6 +61,12 @@ const useStyles = makeStyles((theme) => ({
   buyNewButton: {
     marginRight: theme.spacing(2),
   },
+  positiveRate: {
+    color: '#00873c',
+  },
+  negativeRate: {
+    color: '#eb0f29',
+  },
 }))
 
 function getModalStyle() {
@@ -105,6 +111,8 @@ export default function Portfolio(props) {
   const [buyLot, setBuyLot] = useState('')
   const [buyDate, setBuyDate] = useState('')
   const [stocks, setStocks] = useState([])
+  const [realTimeStocks, setRealTimeStocks] = useState([])
+  const [profitStocks, setProfitStocks] = useState([])
   const { allStocks, setShowAlert } = props
   const pid = location.pathname.split('/')[2]
   const showAlertMsg = (type, content) => {
@@ -114,7 +122,6 @@ export default function Portfolio(props) {
 
   const setUsedStockList = (list) => {
     const result = []
-    console.log('coming to display', allStocks)
     list.forEach((ele, index) => {
       for (let i = 0; i < allStocks.length; i++) {
         if (ele.sid === allStocks[i].sid) {
@@ -130,7 +137,6 @@ export default function Portfolio(props) {
 
   React.useEffect(() => {
     portfolioService.portGain(pid).then((response) => {
-      console.log(response)
       if (response.data.code === 200) {
         const number = response.data.data.toFixed(2)
         setPortGain(number)
@@ -138,7 +144,6 @@ export default function Portfolio(props) {
     })
 
     portfolioService.getAllStocks(pid).then((response) => {
-      console.log(response)
       if (response.data.code === 200) {
         setStocks(setUsedStockList(response.data.data))
       }
@@ -147,7 +152,50 @@ export default function Portfolio(props) {
 
   React.useEffect(() => {
     console.log('this is stocks', stocks)
+    const realStocksList = []
+    const profitLists = []
+    for (let i = 0; i < stocks.length; i++) {
+      portfolioService.getOneRealTimeData(stocks[i].sid).then((response) => {
+        if (response.data.code === 200) {
+          realStocksList.push(response.data.data)
+          if (realStocksList.length === stocks.length) {
+            for (let j = 0; j < realStocksList.length; j++) {
+              for (let m = 0; m < allStocks.length; m++) {
+                if (realStocksList[j].sid === allStocks[m].sid) {
+                  realStocksList[j].enname = allStocks[m].enname
+                  realStocksList[j].tsCode = allStocks[m].tsCode
+                  break
+                }
+              }
+            }
+            setRealTimeStocks(realStocksList)
+          }
+        }
+      })
+
+      portfolioService.getOneProfit(pid, stocks[i].sid).then((response) => {
+        if (response.data.code === 200) {
+          profitLists.push(response.data.data)
+          if (profitLists.length === stocks.length) {
+            for (let j = 0; j < profitLists.length; j++) {
+              for (let m = 0; m < allStocks.length; m++) {
+                if (profitLists[j].sid === allStocks[m].sid) {
+                  profitLists[j].enname = allStocks[m].enname
+                  profitLists[j].tsCode = allStocks[m].tsCode
+                  break
+                }
+              }
+            }
+            setProfitStocks(profitLists)
+          }
+        }
+      })
+    }
   }, [stocks])
+
+  React.useEffect(() => {
+    console.log(profitStocks)
+  }, [profitStocks])
 
   const handleOpenBuy = () => {
     setOpenBuy(true)
@@ -174,7 +222,6 @@ export default function Portfolio(props) {
   }
 
   function handleBuyDate(e) {
-    console.log(e.target.value)
     setBuyDate(e.target.value)
   }
 
@@ -241,7 +288,7 @@ export default function Portfolio(props) {
 
   function DisPlayStocks(stocksList) {
     return (
-      <Grid className={classes.stockHolder} spacing={2}>
+      <Grid container className={classes.stockHolder} spacing={2}>
         {stocksList.map((ele, index) => {
           return (
             <Grid container spacing={2} className={classes.singleStock}>
@@ -261,7 +308,7 @@ export default function Portfolio(props) {
                 <Typography>{`${ele.tsCode}`}</Typography>
               </Grid>
               <Grid item xs={3}>
-                <Typography>{`Bought Price: $${ele.price}`}</Typography>
+                <Typography>{`Bought: $${ele.price}`}</Typography>
               </Grid>
               <Grid item xs={3}>
                 <Typography>{`Lot: ${ele.lot}`}</Typography>
@@ -270,6 +317,95 @@ export default function Portfolio(props) {
                 <Typography>{`Trade Date: ${changeTimeFormate(
                   ele.tradeDate
                 )}`}</Typography>
+              </Grid>
+            </Grid>
+          )
+        })}
+      </Grid>
+    )
+  }
+
+  function DisPlayRealTimeStocks(stocksList) {
+    for (let i = 0; i < stocksList.length; i++) {
+      stocksList[i].rate = (
+        ((stocksList[i].newPrice - stocksList[i].oldPrice) /
+          stocksList[i].oldPrice) *
+        100
+      ).toFixed(2)
+    }
+    return (
+      <Grid className={classes.stockHolder} spacing={2}>
+        {stocksList.map((ele, index) => {
+          return (
+            <Grid container spacing={2} className={classes.singleStock}>
+              <Grid item xs={12}>
+                <Typography>{`${ele.enname}`}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography>{`${ele.tsCode}`}</Typography>
+              </Grid>
+              {/* <Grid item xs={4}>
+                <Typography>{`oldPrice: $${ele.oldPrice}`}</Typography>
+              </Grid> */}
+              <Grid item xs={4}>
+                <Typography>{`Price: $${ele.newPrice}`}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                {ele.rate >= 0 && (
+                  <Typography
+                    className={classes.positiveRate}
+                  >{`${ele.rate}%`}</Typography>
+                )}
+                {ele.rate < 0 && (
+                  <Typography
+                    className={classes.negativeRate}
+                  >{`${ele.rate}%`}</Typography>
+                )}
+              </Grid>
+            </Grid>
+          )
+        })}
+      </Grid>
+    )
+  }
+
+  function DisPlayProfitStocks(stockList) {
+    console.log('come to display profit')
+    for (let i = 0; i < stockList.length; i++) {
+      stockList[i].profit = (
+        (stockList[i].newPrice - stockList[i].oldPrice) *
+        stockList[i].lot
+      ).toFixed(2)
+    }
+
+    return (
+      <Grid className={classes.stockHolder} spacing={2}>
+        {stockList.map((ele, index) => {
+          return (
+            <Grid container spacing={2} className={classes.singleStock}>
+              <Grid item xs={12}>
+                <Typography>{`${ele.enname}`}</Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <Typography>{`${ele.tsCode}`}</Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <Typography>{`Bought: $${ele.oldPrice}`}</Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <Typography>{`Now: $${ele.newPrice}`}</Typography>
+              </Grid>
+              <Grid item xs={3}>
+                {ele.profit >= 0 && (
+                  <Typography
+                    className={classes.positiveRate}
+                  >{`Profit: $ ${ele.profit}`}</Typography>
+                )}
+                {ele.profit < 0 && (
+                  <Typography
+                    className={classes.negativeRate}
+                  >{`Profit: $ ${ele.profit}`}</Typography>
+                )}
               </Grid>
             </Grid>
           )
@@ -330,28 +466,51 @@ export default function Portfolio(props) {
                   </Typography>
                   {stocks.length === 0 && (
                     <Grid item xs={12}>
-                      <></>
+                      <Typography variant='h5' className={classes.subTitle}>
+                        No stock, buy one!
+                      </Typography>
                     </Grid>
                   )}
                   {stocks.length !== 0 && DisPlayStocks(stocks)}
                 </Grid>
               )}
               {tabValue === 1 && (
+                // show all stocks you have bought, real time data
                 <Grid container className={classes.tabPanel}>
-                  <Typography variant='h5' className={classes.subTitle}>
-                    Show the real time data
-                  </Typography>
-                  {stocks.length === 0 && (
+                  <Grid item xs={12}>
+                    <Typography variant='h5' className={classes.subTitle}>
+                      Show the real time data
+                    </Typography>
+                  </Grid>
+
+                  {realTimeStocks.length === 0 && (
                     <Grid item xs={12}>
-                      <></>
+                      <Typography variant='h5' className={classes.subTitle}>
+                        No stock, buy one!
+                      </Typography>
                     </Grid>
                   )}
-                  {stocks.length !== 0 && DisPlayStocks(stocks)}
+                  {realTimeStocks.length !== 0 &&
+                    DisPlayRealTimeStocks(realTimeStocks)}
                 </Grid>
               )}
               {tabValue === 2 && (
+                // show all stocks you have bought, profits
                 <Grid container className={classes.tabPanel}>
-                  <Typography> this is three</Typography>
+                  <Grid item xs={12}>
+                    <Typography variant='h5' className={classes.subTitle}>
+                      Show your profits
+                    </Typography>
+                  </Grid>
+                  {profitStocks.length === 0 && (
+                    <Grid item xs={12}>
+                      <Typography variant='h5' className={classes.subTitle}>
+                        No stock, buy one!
+                      </Typography>
+                    </Grid>
+                  )}
+                  {profitStocks.length !== 0 &&
+                    DisPlayProfitStocks(profitStocks)}
                 </Grid>
               )}
             </div>
@@ -400,7 +559,6 @@ export default function Portfolio(props) {
                 id='date'
                 label='Trade date'
                 type='date'
-                defaultValue='2021-10-20'
                 onChange={handleBuyDate}
                 InputLabelProps={{
                   shrink: true,

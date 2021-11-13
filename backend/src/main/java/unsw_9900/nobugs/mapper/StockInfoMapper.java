@@ -19,4 +19,6 @@ public interface StockInfoMapper {
     List<StockInfo> findAll();
 
     StockInfo findOneStock(String name);
+
+    List<StockInfo> PartialfindStock(String s);
 }

@@ -10,6 +10,13 @@ class stockService  {
     getOneStockById(sid) {
         return axios.get(API_URL+`/stock/${sid}`)
     }
+    stockSearchByName(enname) {
+        return axios.post(API_URL+`/stock/partialFind`,{ "enname": enname} )
+    }
+    getStockCommentsById(sid){
+        return axios.post(API_URL+`/stock/comment/findBySid`,{ "sid": sid} )
+    }
+
 }
 
 export default new stockService()

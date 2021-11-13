@@ -41,7 +41,7 @@ const DemoLine = () => {
     let reg = /\b\d+\b$/;
     let stockId = reg.exec(location.pathname)[0];
     stockService.getOneStockById(stockId).then((res)=>{
-      console.log(res.data.data)
+      // console.log(res.data.data)
       let historyData = res.data.data
       const showData = historyData.map((ele)=>{
         let date = new Date(ele.tradeDate);
@@ -52,12 +52,12 @@ const DemoLine = () => {
         }
         return newElement
       })
-      console.log(showData)
+      // console.log(showData)
       setsourceData(showData)
   
     })
   },[])
-  useEffect(()=>{console.log(sourceData)},[sourceData])
+  // useEffect(()=>{console.log(sourceData)},[sourceData])
   // stockService.getOneStockById()
   var config = {
     data: sourceData,

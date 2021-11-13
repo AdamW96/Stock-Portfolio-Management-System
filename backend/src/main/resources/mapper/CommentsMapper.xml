@@ -41,4 +41,16 @@
     where
     mid = #{mid,jdbcType=INTEGER}
   </delete>
+  <select id="findAllBySid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from comments
+    where sid  =#{sid,jdbcType=INTEGER}
+  </select>
+  <update id="update">
+    update comments
+    set msg = #{msg,jdbcType=LONGVARCHAR}, update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where
+    mid = #{mid,jdbcType=INTEGER}
+  </update>
 </mapper>

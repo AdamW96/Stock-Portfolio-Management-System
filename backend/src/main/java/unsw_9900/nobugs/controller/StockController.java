@@ -153,6 +153,18 @@ public class StockController {
         return SvcResponse.success(find);
     }
 
+    @RequestMapping(value = "/stock/comment/findBySid", method = RequestMethod.POST)
+    public SvcResponse findBySid(HttpServletRequest request, @RequestBody Comments comments){
+
+        List<Comments> find = commentsMapper.findAllBySid(comments.getSid());
+
+        if (find.isEmpty()){
+            return SvcResponse.error(400, "没有评论");
+        }
+        return SvcResponse.success(find);
+    }
+
+
     @RequestMapping(value = "/stock/partialFind", method = RequestMethod.POST)
     public SvcResponse partialFind( @RequestBody StockInfo stockInfo){
 

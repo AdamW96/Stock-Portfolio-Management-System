@@ -103,4 +103,29 @@ public class CommentController {
         }
         return SvcResponse.success("删除成功");
     }
+
+
+
+    @RequestMapping(value = "/user/comment/change", method = RequestMethod.POST)
+    public SvcResponse changeComment(HttpServletRequest request, @RequestBody Comments comments){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+            return SvcResponse.error(400,"尚未登录");
+        }
+        Comments find = commentsMapper.findByMid(comments.getMid());
+
+        if (find == null){
+            return SvcResponse.error(400, "没有这个mid");
+        }
+        if (check_signIn != find.getUid()){
+            return SvcResponse.error(400, "用户id不匹配");
+        }
+
+        int flag = commentsMapper.update(comments.getMid(), comments.getMsg(), comments.getUpdateTime());
+        if (flag != 1){
+            return SvcResponse.error(400, "更新comments失败");
+        }
+        return SvcResponse.success("更新comments成功");
+    }
+
 }

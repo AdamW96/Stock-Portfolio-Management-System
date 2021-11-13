@@ -47,6 +47,6 @@
     select
     <include refid="Base_Column_List" />
     from stock_info
-    where "name" like #{s,jdbcType=VARCHAR}
+    where "enname" like #{s,jdbcType=VARCHAR}
   </select>
 </mapper>

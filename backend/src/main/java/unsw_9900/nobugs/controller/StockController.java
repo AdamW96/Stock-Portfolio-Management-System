@@ -156,7 +156,7 @@ public class StockController {
     @RequestMapping(value = "/stock/partialFind", method = RequestMethod.POST)
     public SvcResponse partialFind( @RequestBody StockInfo stockInfo){
 
-        List<StockInfo> find = stockInfoMapper.PartialfindStock(stockInfo.getName()+"%");
+        List<StockInfo> find = stockInfoMapper.PartialfindStock(stockInfo.getEnname()+"%");
         if (find == null){
             return SvcResponse.error(400, "没有这个股票");
         }

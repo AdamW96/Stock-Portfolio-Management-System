@@ -153,5 +153,13 @@ public class StockController {
         return SvcResponse.success(find);
     }
 
+    @RequestMapping(value = "/stock/partialFind", method = RequestMethod.POST)
+    public SvcResponse partialFind( @RequestBody StockInfo stockInfo){
 
+        List<StockInfo> find = stockInfoMapper.PartialfindStock(stockInfo.getName()+"%");
+        if (find == null){
+            return SvcResponse.error(400, "没有这个股票");
+        }
+        return SvcResponse.success(find);
+    }
 }

@@ -43,4 +43,10 @@
     from stock_info
     where "name" = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="PartialfindStock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_info
+    where "name" like #{s,jdbcType=VARCHAR}
+  </select>
 </mapper>

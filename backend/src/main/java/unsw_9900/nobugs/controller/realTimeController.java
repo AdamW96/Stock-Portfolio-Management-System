@@ -153,10 +153,34 @@ public class realTimeController {
 
             MarketHistory newStock2 = marketHistoryMapper.selectBySidDesc(sid);
             double profit2 = oldStock.getLot() * (newStock2.getClosedPrice() - oldStock.getPrice());
-
-//            todo 比较日期时间
             gain += profit1;
         }
+        return SvcResponse.success(gain);
+    }
+
+    @RequestMapping(value = "/user/totalGain", method = RequestMethod.POST)
+    public SvcResponse userTotalGain(HttpServletRequest request, @RequestBody UserInfo userInfo){
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+            return SvcResponse.error(403,"尚未登录");
+        }
+
+        List<Portfolio> portfolios = portfolioMapper.findAllPortfolio(check_signIn);
+        if (portfolios.isEmpty()){
+            return SvcResponse.error(400, "尚未买股票");
+        }
+        double gain = 0;
+        for (Portfolio p: portfolios){
+            List<StockHold> stocks = stockHoldMapper.findAllStock(p.getPid());
+            for (StockHold sub: stocks){
+                int sid = sub.getSid();
+                StockHold oldStock = stockHoldMapper.findOneStock(p.getPid(), sid);
+                MarketRealtime newStock1 = marketRealtimeMapper.findOneBySidOrderByTradeTimeDesc(sid);
+                double profit1 = oldStock.getLot() * (newStock1.getPrice() - oldStock.getPrice());
+                gain += profit1;
+            }
+        }
+
         return SvcResponse.success(gain);
     }
 

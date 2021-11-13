@@ -109,7 +109,7 @@ export default function Register(props) {
   const handleRegister = () => {
     AuthService.register(firstName, lastName, userName, email, password)
       .then((response) => {
-        if(response.data.code === 400) {
+        if(response.data.code !== 200) {
           showAlertMsg('error','Email is already registered, please change a new one')
           return
         }

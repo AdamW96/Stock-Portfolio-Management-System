@@ -29,4 +29,16 @@
     <include refid="Base_Column_List" />
     from comments
   </select>
+  <select id="findByMid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from comments
+    where mid  =#{mid,jdbcType=INTEGER}
+  </select>
+  <delete id="delete">
+    delete
+    from comments
+    where
+    mid = #{mid,jdbcType=INTEGER}
+  </delete>
 </mapper>

@@ -15,4 +15,8 @@ public interface CommentsMapper {
     int insert(Comments record);
 
     List<Comments> selectAll();
+
+    Comments findByMid(Integer mid);
+
+    int delete(Integer mid);
 }

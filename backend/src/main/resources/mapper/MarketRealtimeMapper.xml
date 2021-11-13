@@ -9,9 +9,20 @@
     <result column="trade_time" jdbcType="TIMESTAMP" property="tradeTime" />
     <result column="price" jdbcType="FLOAT" property="price" />
   </resultMap>
+  <resultMap id="RankResultMap" type="unsw_9900.nobugs.dto.stockRankDto">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="trade_time" jdbcType="TIMESTAMP" property="tradeTime" />
+    <result column="current_price" jdbcType="FLOAT" property="currentPrice" />
+    <result column="closed_price" jdbcType="FLOAT" property="closedPrice" />
+    <result column="rate" jdbcType="FLOAT" property="rate" />
+  </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     hrid, sid, trade_time, price
+  </sql>
+  <sql id="Rank_Column_List">
+
+    sid, trade_time, current_price, closed_price, rate
   </sql>
   <insert id="insert" keyColumn="hrid" keyProperty="hrid" parameterType="unsw_9900.nobugs.po.MarketRealtime" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -35,12 +46,25 @@
     from market_realtime
     where sid=#{sid,jdbcType=INTEGER} ;
   </select>
-  <select id="findBestStock" resultMap="BaseResultMap">
+  <select id="findBestStock" resultMap="RankResultMap">
     select
-    <include refid="Base_Column_List"/>
-    from market_realtime
-    order by price desc
-    limit 1;
+    <include refid="Rank_Column_List"/>
+    from
+    (
+    select
+    foo1.sid,
+    foo2.trade_time,
+    foo1.closed_price,
+    foo2.price as current_price,
+    ( foo2.price - foo1.closed_price) / foo1.closed_price  as rate
+    from
+    (select sid, max(trade_date), closed_price from market_history group by sid)
+    as foo1
+    join
+    (select sid, max(trade_time) as trade_time, price from market_realtime group by sid)
+    as foo2
+    on foo1.sid = foo2.sid order by rate desc limit 1
+    )
   </select>
   <select id="findWorstStock" resultMap="BaseResultMap">
     select

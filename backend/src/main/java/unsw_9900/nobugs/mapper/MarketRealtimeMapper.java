@@ -2,6 +2,7 @@ package unsw_9900.nobugs.mapper;
 import org.apache.ibatis.annotations.Param;
 
 import org.apache.ibatis.annotations.Mapper;
+import unsw_9900.nobugs.dto.stockRankDto;
 import unsw_9900.nobugs.po.MarketRealtime;
 
 /**
@@ -19,7 +20,7 @@ public interface MarketRealtimeMapper {
 
     MarketRealtime findStock(Integer sid);
 
-    MarketRealtime findBestStock();
+    stockRankDto findBestStock();
 
     MarketRealtime findWorstStock();
 }

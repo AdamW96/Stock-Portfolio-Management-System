@@ -5,6 +5,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 import unsw_9900.nobugs.controller.response.SvcResponse;
 import unsw_9900.nobugs.dto.portfolioDto;
+import unsw_9900.nobugs.dto.stockRankDto;
 import unsw_9900.nobugs.dto.userDto;
 import unsw_9900.nobugs.mapper.*;
 import unsw_9900.nobugs.po.*;
@@ -162,7 +163,7 @@ public class realTimeController {
     @RequestMapping(value = "/stock/best", method = RequestMethod.POST)
     public SvcResponse bestStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
 
-        MarketRealtime find = marketRealtimeMapper.findBestStock();
+        stockRankDto find = marketRealtimeMapper.findBestStock();
         if (find == null){
             return SvcResponse.error(400, "没有股票");
         }

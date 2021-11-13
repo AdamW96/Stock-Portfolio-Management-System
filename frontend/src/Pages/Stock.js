@@ -27,6 +27,7 @@ export default function Stock(props) {
   let info = {enname:'', tsCode:'', name:'',area:'',industry:'',fullname:'',market:''}
   for(let i=0;i<allStocks.length;i++) {
     if(stockId == allStocks[i].sid) {
+      info.sid = allStocks[i].sid
       info.enname = allStocks[i].enname
       info.tsCode = allStocks[i].tsCode
       info.name = allStocks[i].name

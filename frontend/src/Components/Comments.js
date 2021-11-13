@@ -1,7 +1,9 @@
-import { Comment, Avatar, Form, Button, List, Input } from 'antd';
+import { Comment, Avatar, Form, Button, List, Input,Empty } from 'antd';
+
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import "antd/dist/antd.css";
+import stockService from '../services/stock-service';
 const { TextArea } = Input;
 
 const CommentList = ({ comments }) => (
@@ -36,11 +38,23 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
-const Comments = () => {
+const Comments = ({sid}) => {
   const [comments, setComments] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState('');
 
+
+  useEffect(() => {
+    
+    stockService.getStockCommentsById(sid)
+    .then(res=>{
+     if (res.data.data){
+      setComments(res.data.data)
+     }
+    })
+    .catch(err=>console.log(err))
+
+  }, [sid])
 
   const handleSubmit = () => {
     if (!value) {

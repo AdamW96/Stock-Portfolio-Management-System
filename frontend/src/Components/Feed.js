@@ -238,7 +238,7 @@ const FeedStock = (props) => {
 
         <div className={classes.commentsBlcok}>
           <Typography className={classes.headText}>Comments</Typography>
-          <Comments />
+          <Comments sid={info.sid}/>
         </div>
       </Container>
     </>

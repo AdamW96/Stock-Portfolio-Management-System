@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import {
   Container,
   Typography,
@@ -117,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PortfoliosList(props) {
   const classes = useStyles()
+  const history = useHistory()
   const [portNum, setPortNum] = React.useState(1)
   const [portfolios, setPortfolios] = React.useState([])
   const [openAddNew, setOpenAddNew] = React.useState(false)
@@ -228,6 +230,12 @@ export default function PortfoliosList(props) {
     })
   }
 
+  const jumpToSinglePort = (e) => {
+    console.log(e.currentTarget)
+    const pid = e.currentTarget.getAttribute('name')
+    history.push(`/portfolio/${pid}`)
+  }
+
   return (
     <React.Fragment>
       <Container className={classes.container}>
@@ -255,13 +263,13 @@ export default function PortfoliosList(props) {
 
           <Grid container aria-label='secondary mailbox folders'>
             {portfolios.length !== 0 &&
-              portfolios.map((ele, index) => {
+              portfolios.map((ele) => {
                 return (
                   <React.Fragment>
                     <Grid container className = {classes.listItem}>
-                      <Grid item xs={10} className={classes.portfolioBody} name={ele.pid}>
-                          <Typography className={classes.listItemHead}>{ele.pName}</Typography>
-                          <Typography className={classes.listItemDes}>{ele.description}</Typography>
+                      <Grid item xs={10} className={classes.portfolioBody} name={ele.pid} onClick={jumpToSinglePort}>
+                          <Typography variant='h5'>{ele.pName}</Typography>
+                          <Typography variant='h6'>{ele.description}</Typography>
                       </Grid>
                       <Grid item xs={1}>
                         <IconButton name={`${ele.pName}#${ele.pid}`} onClick={handleOpenEditName}>

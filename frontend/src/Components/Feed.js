@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
   },
   text: {
-    fontFamily: "Bungee",
+    // fontFamily: "Bungee",
     marginLeft: theme.spacing(1),
     // color:"#555"
   },
@@ -218,15 +218,19 @@ const FeedProtofolios = () => {
   );
 };
 
-const FeedStock = () => {
+const FeedStock = (props) => {
   const classes = useStyles();
+  const {info} = props
   return (
     <>
       <Container className={classes.container}>
         <div className='header'>
           <Typography className={classes.headText}>Company</Typography>
-          <Typography className={classes.text} gutterBottom>
-            {`${window.stockName ? window.stockName : "No Data"}`}
+          <Typography className={classes.text} variant='h5' gutterBottom>
+            {`${info.enname}`}
+          </Typography>
+          <Typography className={classes.text} variant='h5' gutterBottom>
+            {`${info.tsCode}`}
           </Typography>
         </div>
 
@@ -252,10 +256,10 @@ const FeedMarket = () => {
   );
 };
 
-export default function Feed({ stock, portfolio, homepage, market }) {
+export default function Feed({ stock, portfolio, homepage, market, info }) {
   return (
     <>
-      {stock ? <FeedStock /> : ""}
+      {stock ? <FeedStock info={info}/> : ""}
       {portfolio ? <FeedProtofolios /> : ""}
       {homepage ? <FeedHomepage /> : ""}
       {market ? <FeedMarket /> : ""}

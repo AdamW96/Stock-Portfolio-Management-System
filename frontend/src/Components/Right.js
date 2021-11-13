@@ -111,8 +111,10 @@ const RightPortfolios = () => {
   );
 }
 
-const RightStock = () => {
+const RightStock = (props) => {
   const classes = useStyles();
+  const {info} = props
+  console.log('right info',info)
   return (
     <>
       <Container className={classes.container}>
@@ -120,35 +122,35 @@ const RightStock = () => {
         <Paper variant='outlined'>
           <Typography className={classes.headText} >About</Typography>
 
-          <div  >
+          {/* <div  >
             <Typography className={classes.backgroundText}  >{about.ABOUT}</Typography>
-          </div>
+          </div> */}
 
           <div className={classes.infoLines}>
             <Divider />
             <div className={classes.infoLine}>
-              <Typography variant='subtitle2'>CEO</Typography>
-              <Typography variant='body2'>{about.CEO}</Typography>
+              <Typography variant='subtitle2'>MARKET</Typography>
+              <Typography variant='body2'>{info.market}</Typography>
             </div>
             <Divider />
             <div className={classes.infoLine}>
-              <Typography variant='subtitle2'>FOUNDED</Typography>
-              <Typography variant='body2'>{about.FOUNDED}</Typography>
+              <Typography variant='subtitle2'>AREA</Typography>
+              <Typography variant='body2'>{info.area}</Typography>
             </div>
             <Divider />
             <div className={classes.infoLine}>
-              <Typography variant='subtitle2'>HEADQUARTERS</Typography>
-              <Typography variant='body2'>{about.HEADQUARTERS}</Typography>
+              <Typography variant='subtitle2'>INDUSTRY</Typography>
+              <Typography variant='body2'>{info.industry}</Typography>
             </div>
             <Divider />
             <div className={classes.infoLine}>
-              <Typography variant='subtitle2'> WEBSITE</Typography>
-              <Typography variant='body2'>{about.WEBSITE}</Typography>
+              <Typography variant='subtitle2'>CN NAME</Typography>
+              <Typography variant='body2'>{info.name}</Typography>
             </div>
             <Divider />
             <div className={classes.infoLine}>
-              <Typography variant='subtitle2'>EMPLOYEES</Typography>
-              <Typography variant='body2'>{about.EMPLOYEES}</Typography>
+              <Typography variant='subtitle2'>FULLNAME</Typography>
+              <Typography variant='body2'>{info.fullname}</Typography>
             </div>
           </div>
         </Paper>
@@ -159,13 +161,13 @@ const RightStock = () => {
 }
 
 export default function Right({
-  currentUser, setCurrentUser, stock, portfolio, homepage }) {
-
+  currentUser, setCurrentUser, stock, portfolio, homepage, info }) {
+    console.log(info)
   return (
     <>
       {homepage ? <RightHomepage currentUser={currentUser} setCurrentUser={setCurrentUser} /> : ''}
       {portfolio ? <RightPortfolios /> : ''}
-      {stock ? <RightStock /> : ''}
+      {stock ? <RightStock info={info}/> : ''}
     </>
   );
 }

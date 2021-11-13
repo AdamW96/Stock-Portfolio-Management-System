@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     top: 0,
     color: "#555",
-
     // borderRight: "1px solid #f1f0ed",
   },
 

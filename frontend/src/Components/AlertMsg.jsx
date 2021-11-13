@@ -1,7 +1,7 @@
 import React from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
-// these code are from one team member's another course comp6080, and are wirtten by himself
+// these code are from one team member's another course comp6080, and are all wirtten by himself
 export default function AlertMsg (props) {
   let { alertType, alertContent } = props
   const [open, setOpen] = React.useState(false)

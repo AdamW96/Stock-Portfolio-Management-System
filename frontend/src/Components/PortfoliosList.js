@@ -268,8 +268,8 @@ export default function PortfoliosList(props) {
                   <React.Fragment>
                     <Grid container className = {classes.listItem}>
                       <Grid item xs={10} className={classes.portfolioBody} name={ele.pid} onClick={jumpToSinglePort}>
-                          <Typography className={classes.listItemHead}>{ele.pName}</Typography>
-                          <Typography className={classes.listItemDes}>{ele.description}</Typography>
+                          <Typography variant='h5'>{ele.pName}</Typography>
+                          <Typography variant='h6'>{ele.description}</Typography>
                       </Grid>
                       <Grid item xs={1}>
                         <IconButton name={`${ele.pName}#${ele.pid}`} onClick={handleOpenEditName}>

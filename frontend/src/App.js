@@ -56,7 +56,7 @@ function App() {
           />
         </Route>
         <Route path='/stock/:id' exact>
-          <Stock currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <Stock currentUser={currentUser} setCurrentUser={setCurrentUser} allStocks={allStocks}/>
         </Route>
         <Route path='/market' exact>
           <Market currentUser={currentUser} setCurrentUser={setCurrentUser} />

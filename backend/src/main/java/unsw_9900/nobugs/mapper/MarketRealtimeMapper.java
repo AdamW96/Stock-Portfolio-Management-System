@@ -22,5 +22,5 @@ public interface MarketRealtimeMapper {
 
     stockRankDto findBestStock();
 
-    MarketRealtime findWorstStock();
+    stockRankDto findWorstStock();
 }

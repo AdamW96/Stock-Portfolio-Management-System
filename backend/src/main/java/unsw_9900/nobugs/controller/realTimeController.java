@@ -173,7 +173,7 @@ public class realTimeController {
     @RequestMapping(value = "/stock/worst", method = RequestMethod.POST)
     public SvcResponse worstStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
 
-        MarketRealtime find = marketRealtimeMapper.findWorstStock();
+        stockRankDto find = marketRealtimeMapper.findWorstStock();
         if (find == null){
             return SvcResponse.error(400, "没有股票");
         }

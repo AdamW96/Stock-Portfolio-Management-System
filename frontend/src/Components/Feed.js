@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   headText: {
     fontFamily: "Bungee",
-    fontSize: "1.2rem",
+    fontSize: "1.3rem",
     color: "#FF954A",
     marginLeft: theme.spacing(1),
   },

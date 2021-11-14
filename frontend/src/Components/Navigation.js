@@ -9,11 +9,13 @@ const styles = makeStyles(theme => ({
   nav: {
     backgroundColor: '#f1f0ed',
     // paddingLeft: '1%',
-    paddingRight: '1%'
+    // height:'fit-content',
+    paddingRight: '1%',
+
   },
   tool: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   msgModal: {
     display: 'flex',
@@ -31,13 +33,13 @@ const styles = makeStyles(theme => ({
   },
   headText: {
     fontFamily: "Bungee",
-    fontSize: theme.spacing(4),
+    fontSize: "1.4rem",
     color: "#FF954A",
-    marginLeft: theme.spacing(1),
+    // marginLeft: theme.spacing(1),
   },
   text: {
     fontFamily: "Bungee",
-    fontSize: '.8rem',
+    fontSize: '0.5rem',
     // marginLeft: theme.spacing(2),
   },
   items: {
@@ -68,9 +70,9 @@ export default function Navigation(props) {
   return (
     <AppBar className={classes.nav} >
       <Toolbar className={classes.tool}>
-        <div className="logo">
+        <div >
           <Link to='/' >
-            <img src="images/final-logo.png" alt="" style={{ width: '130px' }} />
+            <img src="https://i.loli.net/2021/11/14/Wuyez4AUfFBY2r5.png" alt="" style={{ height: '40px' }} />
           </Link>
         </div>
         <div className={classes.items}>

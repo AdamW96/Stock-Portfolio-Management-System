@@ -33,21 +33,21 @@ const useStyles = makeStyles((theme) => ({
   item: {
     display: "flex",
     alignItems: "center",
-    fontSize: "1rem",
+    fontSize: ".8rem",
     fontFamily: "Bungee",
-    padding: theme.spacing(1.4),
+    padding: "0.5rem 0.1rem",
+    width:'100%',
     marginBottom: theme.spacing(3),
     "&:hover": {
       backgroundColor: "#f1f0ed",
       transition: "color 0.3s ease-out",
       color: "#FF954A",
       cursor: "pointer",
-      borderRadius: "20px",
+      borderRadius: "0.8rem",
     },
   },
 
   icon: {
-    marginRight: theme.spacing(1),
     fontSize: "1.5rem",
   },
 

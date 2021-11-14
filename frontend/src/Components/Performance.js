@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Bungee",
     fontSize: '1.2rem',
     color: "#FF954A",
-    marginTop:  '.6rem',
+    marginTop:  '1rem',
     // marginLeft: theme.spacing(1),
   },
   color: {

@@ -45,6 +45,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
+
 const Comments = ({ sid }) => {
   const [commentsList, setCommentsList] = useState([]);
   const [submitting, setSubmitting] = useState(false);
@@ -89,7 +90,7 @@ const Comments = ({ sid }) => {
       {
         commentsList.length > 0
           ? <CommentList comments={commentsList} />
-          : <Empty />
+          : <Empty  description='No comments'/>
       }
       {
         userData

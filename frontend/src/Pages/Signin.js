@@ -20,8 +20,8 @@ import { actionCreators } from "../Redux/index";
 const usestyles = makeStyles((theme) => ({
   login: {
     height: "100vh",
-    paddingLeft: "10.5%",
-    paddingRight: "14.5%",
+    paddingLeft: "4.5%",
+    paddingRight: "4.5%",
     display: "flex",
     alignItems: "center",
     backgroundColor: "#f0f2f5",
@@ -38,7 +38,7 @@ const usestyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   welcomeText: {
-    fontSize: "130px",
+    fontSize: "7rem",
     fontWeight: 800,
     color: theme.palette.primary.main,
   },
@@ -49,7 +49,8 @@ const usestyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   logo: {
-    marginBottom: theme.spacing(2),
+    width:'10rem',
+    marginBottom:'2rem'
   },
   userInfo: {
     width: "80%",
@@ -57,17 +58,14 @@ const usestyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(2),
   },
   signButton: {
-    width: "80%",
-    height: theme.spacing(7),
+    width: "60%",
     borderRadius: theme.spacing(1),
-    fontSize: "17px",
-    marginBottom: theme.spacing(2),
+    fontSize: "1.2rem",
   },
   registerButton: {
-    width: "50%",
-    height: theme.spacing(7),
+    width: "60%",
     borderRadius: theme.spacing(1),
-    fontSize: "17px",
+    fontSize: "1.2rem",
     backgroundColor: theme.palette.success.main,
     marginTop: theme.spacing(2),
     "&:hover": {
@@ -133,7 +131,7 @@ export default function Login(props) {
         <Grid item sm={6} xs={6}>
           <Container>
             <Paper elevation={3} className={classes.signForm}>
-              <img src="images/logo.png" alt="" className={classes.logo} />
+              <img src="https://i.loli.net/2021/11/14/Wuyez4AUfFBY2r5.png" alt="" className={classes.logo} />
               <TextField
                 onChange={handleChangeEmail}
                 label="Email"
@@ -156,7 +154,7 @@ export default function Login(props) {
               >
                 next
               </Button>
-              <Link>Forget Password?</Link>
+              {/* <Link>Forget Password?</Link> */}
               <Button
                 variant="contained"
                 color="primary"

@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: theme.spacing(12),
+    paddingTop: theme.spacing(10),
   },
   headText: {
     fontFamily: "Bungee",
@@ -68,7 +68,7 @@ const RightHomepage = ({ currentUser, setCurrentUser }) => {
       {!loginState &&
         <>
     
-        <img src='images/join.png' style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
+        <img src='https://i.loli.net/2021/11/14/RX62b83AW4hSf1Q.png' style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
         <Typography className={classes.headText} style={{
           display:'flex',justifyContent:'flex-end',paddingRight:'1.5rem',marginTop:'2rem',
           }}>Join Us↑↑</Typography>

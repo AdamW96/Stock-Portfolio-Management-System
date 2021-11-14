@@ -133,7 +133,7 @@ export default function SearchBar({ }) {
 
             {
               !result.length
-                ? <Empty />
+                ? <Empty description="Not found"/>
                 : <TableContainer >
                   <Table size="small">
                     <TableBody>

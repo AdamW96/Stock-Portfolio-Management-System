@@ -31,9 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   headText: {
     fontFamily: 'Bungee',
-    fontSize: theme.spacing(4),
+    fontSize: '1.3rem',
     color: '#FF954A',
-    marginLeft: theme.spacing(1),
   },
   text: {
     fontFamily: 'Bungee',
@@ -256,9 +255,10 @@ export default function PortfoliosList(props) {
             className={classes.addButton}
             color='primary'
             onClick={handleOpenAddNew}
+
           >
             <AddRoundedIcon fontSize='small' />
-            <Typography className={classes.portText}>New</Typography>
+            <Typography>New</Typography>
           </Button>
 
           <Grid container aria-label='secondary mailbox folders'>

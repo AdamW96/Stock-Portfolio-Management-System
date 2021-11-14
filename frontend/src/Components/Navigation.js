@@ -8,7 +8,8 @@ import { useHistory } from "react-router";
 const styles = makeStyles(theme => ({
   nav: {
     backgroundColor: '#f1f0ed',
-    padding: '0 12.5%'
+    // paddingLeft: '1%',
+    paddingRight: '1%'
   },
   tool: {
     display: 'flex',
@@ -36,7 +37,7 @@ const styles = makeStyles(theme => ({
   },
   text: {
     fontFamily: "Bungee",
-    fontSize: theme.spacing(1),
+    fontSize: '.8rem',
     // marginLeft: theme.spacing(2),
   },
   items: {
@@ -85,8 +86,8 @@ export default function Navigation(props) {
 
               <Modal open={openMsg} onClose={() => setOpenMsg(false)} className={classes.msgModal}>
                 <Paper className={classes.msgContent} >
-                  <Typography className={classes.headText}>Hellooooooo!</Typography>
-                  <Typography className={classes.headText}>Welcome to our finance website.</Typography>
+                  <Typography className={classes.headText}>COMP9900</Typography>
+                  {/* <Typography className={classes.headText}>Welcome to our finance website.</Typography> */}
                   {/* <Typography className={classes.headText}>Hope you like it~ </Typography> */}
                   <img src='images/unsw.png' alt='' style={{ height: '17%', borderRadius: '20%' }} />
                   
@@ -97,7 +98,7 @@ export default function Navigation(props) {
                   <Typography className={classes.text}>Kawing Wan</Typography>
                   <Typography className={classes.text}>ChengRui Wang</Typography>
                   <Typography className={classes.text} gutterBottom>PengYu Wang</Typography>
-                  <Typography className={classes.headText}>Demo B</Typography>
+                  <Typography className={classes.headText}>Final Demo</Typography>
                 </Paper>
               </Modal>
             </>

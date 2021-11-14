@@ -11,8 +11,8 @@ import Portfolio from "../Components/Portfolio"
 
 const styles = makeStyles((theme) => ({
   container: {
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    // paddingLeft: theme.spacing(1),
+    // paddingRight: theme.spacing(1),
   },
 }));
 

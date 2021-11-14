@@ -22,14 +22,15 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    marginBottom: theme.spacing(3),
+    // marginTop:  '0.5rem',
     // width:"100%"
   },
   text: {
     fontFamily: "Bungee",
-    fontSize: theme.spacing(4),
+    fontSize: '1.2rem',
     color: "#FF954A",
-    marginLeft: theme.spacing(1),
+    marginTop:  '.6rem',
+    // marginLeft: theme.spacing(1),
   },
   color: {
     backgroundColor: (props) => (props.gainers ? "#e1f2e7" : "#fee5e3"),
@@ -96,13 +97,13 @@ export default function Performance({ data, gainers }) {
                       {stock.changePercentage}
                     </div>
                   </TableCell>
-                  <TableCell align='right'>
+                  {/* <TableCell align='right'>
                     <Tooltip title='Add To Portifolio'>
                       <IconButton>
                         <AddCircleOutlineIcon />
                       </IconButton>
                     </Tooltip>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

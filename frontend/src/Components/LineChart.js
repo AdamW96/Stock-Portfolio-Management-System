@@ -84,7 +84,7 @@ function LineChart(props) {
   return (
     <div
       className=''
-      style={{ height: "12rem", maxWidth: "40rem", marginTop: "1rem" }}
+      style={{ height: "12rem", width: "100%", marginTop: "1rem" }}
     >
       <DemoLine />
     </div>

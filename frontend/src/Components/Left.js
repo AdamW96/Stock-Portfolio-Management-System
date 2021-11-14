@@ -33,10 +33,9 @@ const useStyles = makeStyles((theme) => ({
   item: {
     display: "flex",
     alignItems: "center",
-    fontSize: "100%",
-    fontWeight: "500",
+    fontSize: "1rem",
     fontFamily: "Bungee",
-    padding: theme.spacing(2),
+    padding: theme.spacing(1.4),
     marginBottom: theme.spacing(3),
     "&:hover": {
       backgroundColor: "#f1f0ed",
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   icon: {
     marginRight: theme.spacing(1),
-    fontSize: "25px",
+    fontSize: "1.5rem",
   },
 
   text: {
@@ -66,7 +65,9 @@ function Leftbar(props) {
   const handleLogout = () => {
     console.log("you are coming to handlelogout");
     AuthService.logout();
+    localStorage.removeItem('user')
     setCurrentUser(AuthService.getCurrentUser())
+
     history.push("/");
   };
   return (

@@ -7,3 +7,9 @@
   width: 0;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
+
+@media screen and (max-width: 1000px) {
+  html {
+    font-size: 12px;
+  }
+}

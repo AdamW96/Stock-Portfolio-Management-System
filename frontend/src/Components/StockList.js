@@ -12,12 +12,10 @@ import {
 import Pagination from "@material-ui/lab/Pagination";
 
 const useStyles = makeStyles((theme) => ({
-  item: {
-    padding: theme.spacing(1.2),
-  },
+
   paginator: {
-    justifyContent: "center",
-    padding: "10px",
+    padding: "5px",
+    // width:'100%'
   },
 }));
 
@@ -56,6 +54,21 @@ export default function StockList() {
     <React.Fragment>
       {allStocks && (
         <>
+          <Box>
+            <Pagination
+              count={noOfPages}
+              page={page}
+              onChange={handleChange}
+              variant="outlined" 
+              defaultPage={1}
+              color='primary'
+              size='medium'
+              siblingCount={0}
+              showFirstButton
+              showLastButton
+              classes={{ ul: classes.paginator }}
+            />
+          </Box>
           <List dense compoent='span'>
             {allStocks
               .slice((page - 1) * itemsPerPage, page * itemsPerPage)
@@ -82,19 +95,6 @@ export default function StockList() {
                 );
               })}
           </List>
-          <Box>
-            <Pagination
-              count={noOfPages}
-              page={page}
-              onChange={handleChange}
-              defaultPage={1}
-              color='primary'
-              size='large'
-              showFirstButton
-              showLastButton
-              classes={{ ul: classes.paginator }}
-            />
-          </Box>
         </>
       )}
       {!allStocks && (

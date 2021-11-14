@@ -1,4 +1,4 @@
-import { Comment, Avatar, Form, Button, List, Input,Empty } from 'antd';
+import { Comment, Avatar, Form, Button, List, Input, Empty } from 'antd';
 
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -9,16 +9,23 @@ const { TextArea } = Input;
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
-    header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-    itemLayout="horizontal"
-    renderItem={props => <Comment {...props} />}
+    renderItem={item => (
+      <li>
+        <Comment
+          author={item.uid}
+          avatar={"https://joeschmoe.io/api/v1/" + item.uid}
+          content={item.msg}
+          datetime={item.createTime}
+        />
+      </li>
+    )}
     pagination={{
-      size:"small",
+      size: "small",
       onChange: page => {
         console.log(page);
       },
       pageSize: 3,
-      
+
     }}
   />
 );
@@ -29,32 +36,37 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
       <TextArea rows={2} onChange={onChange} value={value} />
     </Form.Item>
     <Form.Item>
-      <Button style={{display:'flex',alignItems:'center'}} htmlType="submit" loading={submitting} onClick={onSubmit} type="primary" >
-        <div style={{fontFamily:'Bungee',fontSize:'0.5rem'}}>
+      <Button style={{ display: 'flex', alignItems: 'center' }} htmlType="submit" loading={submitting} onClick={onSubmit} type="primary" >
+        <div style={{ fontFamily: 'Bungee', fontSize: '0.5rem' }}>
           Add Comment
-         </div>
+        </div>
       </Button>
     </Form.Item>
   </>
 );
 
-const Comments = ({sid}) => {
-  const [comments, setComments] = useState([]);
+const Comments = ({ sid }) => {
+  const [commentsList, setCommentsList] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState('');
 
 
   useEffect(() => {
-    
+
     stockService.getStockCommentsById(sid)
-    .then(res=>{
-     if (res.data.data){
-      setComments(res.data.data)
-     }
-    })
-    .catch(err=>console.log(err))
+      .then(res => {
+        if (res.data.data) {
+          setCommentsList(res.data.data)
+        }
+      })
+      .catch(err => console.log(err))
 
   }, [sid])
+
+
+  const userData = JSON.parse(localStorage.getItem('user'))
+  const cookie = userData ? userData.cookie : null
+  console.log(userData, cookie)
 
   const handleSubmit = () => {
     if (!value) {
@@ -65,16 +77,6 @@ const Comments = ({sid}) => {
     setTimeout(() => {
       setSubmitting(false);
       setValue('');
-      setComments([
-          ...comments,
-          {
-            author: 'Han Solo',
-            avatar: 'https://joeschmoe.io/api/v1/Han Solo',
-            content: <p>{value}</p>,
-            datetime: moment().fromNow(),
-          },
-        ],
-      )
     }, 1000);
   };
 
@@ -84,18 +86,28 @@ const Comments = ({sid}) => {
 
   return (
     <>
-      {comments.length > 0 && <CommentList comments={comments} />}
-      <Comment
-        avatar={<Avatar src="https://joeschmoe.io/api/v1/Han Solo" alt="Han Solo" />}
-        content={
-          <Editor
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-            submitting={submitting}
-            value={value}
-          />
-        }
-      />
+      {
+        commentsList.length > 0
+          ? <CommentList comments={commentsList} />
+          : <Empty />
+      }
+      {
+        userData
+          ? <Comment
+            avatar={<Avatar src={"https://joeschmoe.io/api/v1/" + JSON.parse(localStorage.getItem('user')).data.userName} alt={JSON.parse(localStorage.getItem('user')).data.userName} />}
+            content={<Editor
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+              submitting={submitting}
+              value={value} />
+            } />
+          : null
+
+
+
+
+      }
+
     </>
   );
 

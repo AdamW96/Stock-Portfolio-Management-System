@@ -24,7 +24,7 @@ import AutorenewIcon from "@material-ui/icons/Autorenew";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: theme.spacing(12),
+    paddingTop:theme.spacing(10),
     // borderRight:'1px solid #ece7e7',
     height: "100vh",
   },
@@ -34,13 +34,14 @@ const useStyles = makeStyles((theme) => ({
   },
   headText: {
     fontFamily: "Bungee",
-    fontSize: theme.spacing(4),
+    fontSize: "1.2rem",
     color: "#FF954A",
     marginLeft: theme.spacing(1),
   },
   text: {
     // fontFamily: "Bungee",
     marginLeft: theme.spacing(1),
+    fontSize:'1rem'
     // color:"#555"
   },
   portList: {
@@ -112,7 +113,7 @@ const FeedHomepage = ({}) => {
     stockService.getAllStock().then((response)=>{
       const dataList = response.data.data
       let gainersList = []
-      for(let i=0;i<5;i++) {
+      for(let i=0;i<3;i++) {
         gainersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
       }
       setGainers(gainersList)
@@ -122,7 +123,7 @@ const FeedHomepage = ({}) => {
     stockService.getAllStock().then((response)=>{
       const dataList = response.data.data
       let losersList = []
-      for(let i=0;i<5;i++) {
+      for(let i=0;i<3;i++) {
         losersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
       }
       setLosers(losersList)

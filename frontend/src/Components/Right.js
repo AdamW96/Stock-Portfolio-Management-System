@@ -18,9 +18,10 @@ const useStyles = makeStyles((theme) => ({
   },
   headText: {
     fontFamily: "Bungee",
-    fontSize: theme.spacing(4),
+    fontSize:  '1.2rem',
     color: "#FF954A",
     marginLeft: theme.spacing(1),
+    width:"100%"
   },
   text: {
     fontFamily: "Bungee",
@@ -66,7 +67,11 @@ const RightHomepage = ({ currentUser, setCurrentUser }) => {
 
       {!loginState &&
         <>
-          <Typography className={classes.headText}>Join NBfinance ↑</Typography>
+    
+        <img src='images/join.png' style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
+        <Typography className={classes.headText} style={{
+          display:'flex',justifyContent:'flex-end',paddingRight:'1.5rem',marginTop:'2rem',
+          }}>Join Us↑↑</Typography>
 
         </>
       }

@@ -75,6 +75,9 @@ public class CommentController {
             return SvcResponse.error(400,"尚未登录");
         }
         comments.setUid(check_signIn);
+        Date now = new Date();
+        comments.setCreateTime(now);
+        comments.setUpdateTime(now);
         int flag = commentsMapper.insert(comments);
         if (flag == 0){
             return SvcResponse.error(400, "插入评论失败");
@@ -113,7 +116,7 @@ public class CommentController {
             return SvcResponse.error(400,"尚未登录");
         }
         Comments find = commentsMapper.findByMid(comments.getMid());
-
+        Date now = new Date();
         if (find == null){
             return SvcResponse.error(400, "没有这个mid");
         }
@@ -121,7 +124,7 @@ public class CommentController {
             return SvcResponse.error(400, "用户id不匹配");
         }
 
-        int flag = commentsMapper.update(comments.getMid(), comments.getMsg(), comments.getUpdateTime());
+        int flag = commentsMapper.update(comments.getMid(), comments.getMsg(), now);
         if (flag != 1){
             return SvcResponse.error(400, "更新comments失败");
         }

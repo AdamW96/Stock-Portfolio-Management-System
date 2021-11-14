@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 import unsw_9900.nobugs.controller.response.SvcResponse;
+import unsw_9900.nobugs.dto.commentDto;
 import unsw_9900.nobugs.dto.portfolioDto;
 import unsw_9900.nobugs.dto.userDto;
 import unsw_9900.nobugs.mapper.*;
@@ -156,11 +157,12 @@ public class StockController {
     @RequestMapping(value = "/stock/comment/findBySid", method = RequestMethod.POST)
     public SvcResponse findBySid(HttpServletRequest request, @RequestBody Comments comments){
 
-        List<Comments> find = commentsMapper.findAllBySid(comments.getSid());
+        List<commentDto> find = commentsMapper.findAllBySid(comments.getSid());
 
         if (find.isEmpty()){
             return SvcResponse.error(400, "没有评论");
         }
+
         return SvcResponse.success(find);
     }
 

@@ -11,9 +11,23 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="DtoResultMap" type="unsw_9900.nobugs.dto.commentDto">
+
+    <id column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="user_name" jdbcType="INTEGER" property="userName" />
+    <result column="msg" jdbcType="LONGVARCHAR" property="msg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     mid, sid, "uid", msg, create_time, update_time
+  </sql>
+  <sql id="Dto_Column_List">
+    <!--@mbg.generated-->
+    mid, sid, "uid", user_name,  msg, create_time, update_time
   </sql>
   <insert id="insert" keyColumn="mid" keyProperty="mid" parameterType="unsw_9900.nobugs.po.Comments" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -41,11 +55,17 @@
     where
     mid = #{mid,jdbcType=INTEGER}
   </delete>
-  <select id="findAllBySid" resultMap="BaseResultMap">
+  <select id="findAllBySid" resultMap="DtoResultMap">
     select
-    <include refid="Base_Column_List" />
-    from comments
-    where sid  =#{sid,jdbcType=INTEGER}
+    <include refid="Dto_Column_List" />
+    from
+    (select foo.* , u.user_name
+    from
+    (select * from
+    comments
+    where sid  =#{sid,jdbcType=INTEGER}) as foo
+    join user_Info u
+    on foo.uid = u.uid)
   </select>
   <update id="update">
     update comments
@@ -53,4 +73,5 @@
     where
     mid = #{mid,jdbcType=INTEGER}
   </update>
+
 </mapper>

@@ -1,6 +1,7 @@
 package unsw_9900.nobugs.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import unsw_9900.nobugs.dto.commentDto;
 import unsw_9900.nobugs.po.Comments;
 
 import java.util.Date;
@@ -23,8 +24,7 @@ public interface CommentsMapper {
 
     int delete(Integer mid);
 
-    List<Comments> findAllBySid(Integer sid);
-
+    List<commentDto> findAllBySid(Integer sid);
 
     int update(Integer mid, String msg, Date updateTime);
 }

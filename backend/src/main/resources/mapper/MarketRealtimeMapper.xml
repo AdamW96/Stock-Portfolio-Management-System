@@ -63,7 +63,7 @@
     join
     (select sid, max(trade_time) as trade_time, price from market_realtime group by sid)
     as foo2
-    on foo1.sid = foo2.sid order by rate desc limit 1
+    on foo1.sid = foo2.sid order by rate desc limit 5
     )
   </select>
   <select id="findWorstStock" resultMap="RankResultMap">
@@ -83,7 +83,7 @@
     join
     (select sid, max(trade_time) as trade_time, price from market_realtime group by sid)
     as foo2
-    on foo1.sid = foo2.sid order by rate limit 1
+    on foo1.sid = foo2.sid order by rate limit 5
     )
   </select>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Navigation from "../Components/Navigation";
 import Left from "../Components/Left";
 import Right from "../Components/Right";
@@ -6,7 +6,7 @@ import Feed from "../Components/Feed";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // import AuthService from "../services/auth-service";
-import stockService from "../services/stock-service";
+// import stockService from "../services/stock-service";
 
 
 const styles = makeStyles((theme) => ({

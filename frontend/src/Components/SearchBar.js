@@ -1,8 +1,8 @@
 import { Card, Collapse, InputBase, makeStyles, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core'
 import { useEffect, useState } from 'react';
+import { useHistory } from "react-router";
 import SearchIcon from '@material-ui/icons/Search';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import { Link } from 'react-router-dom';
+// import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import stockService from '../services/stock-service';
 import { Empty } from 'antd';
 const useStyles = makeStyles(theme => ({
@@ -78,8 +78,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function SearchBar({ }) {
+export default function SearchBar() {
   const classes = useStyles();
+  const history = useHistory();
   const [expanded, setExpanded] = useState(false);
   const [search, setSearch] = useState('');
   const [result, setResult] = useState('');
@@ -127,9 +128,9 @@ export default function SearchBar({ }) {
           </div>
 
           <Collapse in={expanded} className={classes.searchResults} >
-            <div className={classes.head}>
+            {/* <div className={classes.head}>
               Symbols
-            </div>
+            </div> */}
 
             {
               !result.length
@@ -139,16 +140,16 @@ export default function SearchBar({ }) {
                     <TableBody>
                       {result && (<>
                         {result.map((stock) => (
-                          <TableRow key={stock.symbol} className={classes.rows}>
+                          <TableRow key={stock.symbol} className={classes.rows} onClick={()=>history.push("/stock/"+stock.sid)}>
                             <TableCell style={{ width: '10%' }} >
-                              <Link to='' style={{ textDecoration: 'none', color: '#555' }}>
+
                                 <div className={classes.symbol} >
                                   <Typography variant='subtitle2'>{stock.symbol}</Typography>
                                 </div>
-                              </Link>
+
                             </TableCell>
                             <TableCell align="left"><Typography variant='caption'>{stock.enname}</Typography></TableCell>
-                            {/* <TableCell align="left">{stock.price}</TableCell> */}
+
                           </TableRow>
                         ))}
                       </>)}
@@ -156,8 +157,6 @@ export default function SearchBar({ }) {
                     </TableBody>
                   </Table>
                 </TableContainer>
-
-
             }
           </Collapse>
         </Card>

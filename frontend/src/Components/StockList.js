@@ -77,13 +77,14 @@ export default function StockList() {
                 let stockCode = ele.tsCode;
                 let stockExchange = ele.exchange;
                 return (
-                  <>
+                  <div key={ele.enname}>
                     <ListItem
                       id={`${ele.sid}`}
                       name={`${ele.enname}`}
                       button
                       className={classes.item}
                       onClick={handleClick}
+                      
                     >
                       <ListItemText
                         primary={`${stockName}`}
@@ -91,7 +92,7 @@ export default function StockList() {
                       />
                     </ListItem>
                     <Divider />
-                  </>
+                  </div>
                 );
               })}
           </List>

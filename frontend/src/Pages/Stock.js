@@ -6,15 +6,12 @@ import Right from "../Components/Right";
 import Feed from "../Components/Feed";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Info, InfoRounded } from "@material-ui/icons";
+// import { Info, InfoRounded } from "@material-ui/icons";
 // import AuthService from "../services/auth-service";
 
 
 const styles = makeStyles((theme) => ({
-  container: {
-    // paddingLeft: theme.spacing(1),
-    // paddingRight: theme.spacing(1),
-  },
+
 }));
 
 export default function Stock(props) {

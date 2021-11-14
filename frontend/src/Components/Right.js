@@ -1,16 +1,11 @@
 import {
   Container,
   Divider,
-  IconButton,
   makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import AutorenewIcon from '@material-ui/icons/Autorenew';
-import RecomendCard from "./RecomendCard";
-import { randoms, randoms2, about } from './Fakedata';
-import { useSelector } from "react-redux";
 import rankService from "../services/rank-service";
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -59,28 +54,19 @@ const useStyles = makeStyles((theme) => ({
 
 
 const RightHomepage = ({ currentUser, setCurrentUser }) => {
-  const loginState = useSelector(state => state.loginState);
 
   const classes = useStyles();
   return (
     <Container className={classes.container}>
 
-      {!loginState &&
-        <>
+
     
         <img src='images/join.png' style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
         <Typography className={classes.headText} style={{
           display:'flex',justifyContent:'flex-end',paddingRight:'1.5rem',marginTop:'2rem',
           }}>Join Us↑↑</Typography>
 
-        </>
-      }
-      {loginState &&
-        <>
-          <Typography className={classes.headText}>Your Rank</Typography>
-          <Typography variant='caption' className={classes.text}> You Daily Gain have defeated 73% users</Typography>
-        </>
-      }
+        
     </Container>
   );
 }

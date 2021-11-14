@@ -4,17 +4,11 @@ import {
   Button,
   Container,
   Grid,
-  Link,
   Paper,
   TextField,
   Typography,
-  CssBaseline,
-  Avatar,
-  Checkbox,
-  FormControlLabel,
-  Box,
 } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
+// import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import AuthService from "../services/auth-service";
 

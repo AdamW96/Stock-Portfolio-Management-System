@@ -3,11 +3,8 @@ import { useHistory } from 'react-router'
 import {
   Container,
   Typography,
-  Paper,
   Button,
-  Tooltip,
   Grid,
-  Box,
   Modal,
   Backdrop,
   Fade,
@@ -15,12 +12,12 @@ import {
   IconButton,
   makeStyles,
 } from '@material-ui/core'
-import ListRoundedIcon from '@material-ui/icons/ListRounded'
+// import ListRoundedIcon from '@material-ui/icons/ListRounded'
 import AddRoundedIcon from '@material-ui/icons/AddRounded'
 import DeleteIcon from '@material-ui/icons/Delete'
-import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined'
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
-import AutorenewIcon from '@material-ui/icons/Autorenew'
+// import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined'
+// import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
+// import AutorenewIcon from '@material-ui/icons/Autorenew'
 import portfolioService from '../services/portfolio-service'
 import CreateIcon from '@material-ui/icons/Create';
 import allGainService from '../services/allGain-service'
@@ -248,7 +245,7 @@ export default function PortfoliosList(props) {
           </Typography>
           {
             allGain
-            ?  <Typography style={{fontSize:'2rem',fontFamily:"Bungee",marginLeft:"1rem"}} gutterBottom>
+            ?  <Typography style={{fontSize:'3rem',fontFamily:"Bungee",marginLeft:"1rem"}} gutterBottom>
             $ {allGain}
             </Typography>
             : <Typography className={classes.text} gutterBottom>
@@ -277,7 +274,7 @@ export default function PortfoliosList(props) {
             {portfolios.length !== 0 &&
               portfolios.map((ele) => {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={ele.pName}>
                     <Grid container className = {classes.listItem}>
                       <Grid item xs={10} className={classes.portfolioBody} name={ele.pid} onClick={jumpToSinglePort}>
                           <Typography variant='h5'>{ele.pName}</Typography>

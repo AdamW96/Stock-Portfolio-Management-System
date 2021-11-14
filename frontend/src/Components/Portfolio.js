@@ -8,7 +8,6 @@ import {
   Tabs,
   Tab,
   Button,
-  Box,
   TextField,
   Modal,
 } from '@material-ui/core'
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   headText: {
     fontFamily: 'Bungee',
-    fontSize: theme.spacing(4),
+    fontSize: '2.5rem',
     color: '#FF954A',
     marginLeft: theme.spacing(1),
   },
@@ -291,7 +290,7 @@ export default function Portfolio(props) {
       <Grid container className={classes.stockHolder} spacing={2}>
         {stocksList.map((ele, index) => {
           return (
-            <Grid container spacing={2} className={classes.singleStock}>
+            <Grid container spacing={2} className={classes.singleStock} key={ele.enname}>
               <Grid item xs={6}>
                 <Typography>{`${ele.enname}`}</Typography>
               </Grid>
@@ -334,7 +333,7 @@ export default function Portfolio(props) {
       ).toFixed(2)
     }
     return (
-      <Grid className={classes.stockHolder} spacing={2}>
+      <Grid className={classes.stockHolder} spacing={2} container>
         {stocksList.map((ele, index) => {
           return (
             <Grid container spacing={2} className={classes.singleStock}>
@@ -379,10 +378,10 @@ export default function Portfolio(props) {
     }
 
     return (
-      <Grid className={classes.stockHolder} spacing={2}>
+      <Grid className={classes.stockHolder} spacing={2} container> 
         {stockList.map((ele, index) => {
           return (
-            <Grid container spacing={2} className={classes.singleStock}>
+            <Grid container spacing={2} className={classes.singleStock} key={ele.enname}>
               <Grid item xs={12}>
                 <Typography>{`${ele.enname}`}</Typography>
               </Grid>
@@ -421,7 +420,8 @@ export default function Portfolio(props) {
           <Grid item xs={6}>
             <Typography className={classes.headText}>Gain:</Typography>
             <Typography
-              className={classes.headText}
+             style={{    fontFamily: 'Bungee',
+             fontSize: '3rem', marginLeft:'2rem'}}
             >{`$${portGain}`}</Typography>
           </Grid>
           <Grid item xs={12}>

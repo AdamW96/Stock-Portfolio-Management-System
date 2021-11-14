@@ -1,13 +1,10 @@
 import { Comment, Avatar, Form, Button, List, Input, Empty } from 'antd';
 import {
-  Grid,
-  Typography,
   TextField,
   Modal,
   makeStyles,
   Paper
 } from '@material-ui/core'
-import moment from 'moment';
 import { useEffect, useState } from 'react';
 import "antd/dist/antd.css";
 import stockService from '../services/stock-service';

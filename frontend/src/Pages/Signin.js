@@ -4,18 +4,14 @@ import {
   Button,
   Container,
   Grid,
-  Link,
+
   Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
+// import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import AuthService from "../services/auth-service"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators } from "../Redux/index";
 
 const usestyles = makeStyles((theme) => ({
   login: {

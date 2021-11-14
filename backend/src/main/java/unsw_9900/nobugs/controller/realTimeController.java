@@ -16,8 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Copyright (C) 2020 - 2021 ruiwang14.com, All Rights Reserved.
@@ -202,5 +201,46 @@ public class realTimeController {
             return SvcResponse.error(400, "没有股票");
         }
         return SvcResponse.success(find);
+    }
+
+    @RequestMapping(value = "/user/rank", method = RequestMethod.POST)
+    public SvcResponse userRank(HttpServletRequest request, @RequestBody UserInfo userInfo){
+
+        int check_signIn = getUid(request);
+        if (check_signIn == -1){
+            return SvcResponse.error(403,"尚未登录");
+        }
+        List<UserInfo> users = usersMapper.findAll();
+        double[] gains = new double[users.size()];
+        if (users.isEmpty()){
+            return SvcResponse.error(400, "尚未买股票");
+        }
+        double gain_for_this_user = 0;
+        for (int i=0; i< users.size(); i++){
+            List<Portfolio> portfolios = portfolioMapper.findAllPortfolio(users.get(i).getUid());
+            double gain = 0;
+            for (Portfolio p: portfolios){
+                List<StockHold> stocks = stockHoldMapper.findAllStock(p.getPid());
+                for (StockHold sub: stocks){
+                    int sid = sub.getSid();
+                    StockHold oldStock = stockHoldMapper.findOneStock(p.getPid(), sid);
+                    MarketRealtime newStock1 = marketRealtimeMapper.findOneBySidOrderByTradeTimeDesc(sid);
+                    double profit1 = oldStock.getLot() * (newStock1.getPrice() - oldStock.getPrice());
+                    gain += profit1;
+                }
+            }
+            gains[i] = gain;
+            if (users.get(i).getUid() == check_signIn) { //这个用户
+                gain_for_this_user = gain;
+            }
+        }
+        Arrays.sort(gains);
+        int rank = 0;
+        for (;rank < gains.length; rank++){
+            if (gains[rank] == gain_for_this_user){
+                break;
+            }
+        }
+        return SvcResponse.success(gains.length - rank);
     }
 }

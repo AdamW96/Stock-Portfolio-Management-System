@@ -23,7 +23,8 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
 import AutorenewIcon from '@material-ui/icons/Autorenew'
 import portfolioService from '../services/portfolio-service'
 import CreateIcon from '@material-ui/icons/Create';
-
+import allGainService from '../services/allGain-service'
+import { Empty } from 'antd'
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(12),
@@ -36,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontFamily: 'Bungee',
-    marginLeft: theme.spacing(1),
+    marginLeft: '0.5rem',
+    fontSize:'1rem',
+    marginBottom:'2rem'
   },
   listItem: {
     border: '1px solid #5d5d5d',
@@ -128,7 +131,7 @@ export default function PortfoliosList(props) {
   const [newName, setNewName] = React.useState('')
   const [getPorts, setGetPorts] = React.useState(false)
   const { currentUser, setCurrentUser, setShowAlert } = props
-
+  const [allGain,setAllGain] = React.useState(0)
   const showAlert = (type, content) => {
     window.alert = true
     setShowAlert({ alertType: type, alertContent: content })
@@ -167,6 +170,7 @@ export default function PortfoliosList(props) {
         setPortfolios(response.data.data)
       }
     })
+    allGainService.getAllGain().then(res=>setAllGain(res.data.data))
   }, [getPorts])
 
   const handleNewPortName = (e) => {
@@ -242,9 +246,17 @@ export default function PortfoliosList(props) {
           <Typography className={classes.headText} gutterBottom>
             Total Gain/Loss
           </Typography>
-          <Typography variant='h5' className={classes.text} gutterBottom>
-            +$63.2
-          </Typography>
+          {
+            allGain
+            ?  <Typography style={{fontSize:'2rem',fontFamily:"Bungee",marginLeft:"1rem"}} gutterBottom>
+            $ {allGain}
+            </Typography>
+            : <Typography className={classes.text} gutterBottom>
+            Make your stock profolios now ⬇️
+            </Typography>
+
+          }
+
         </Container>
         <Container>
           <Typography className={classes.headText} gutterBottom>
@@ -286,7 +298,7 @@ export default function PortfoliosList(props) {
                 )
               })}
             {portfolios.length === 0 && (
-              <div className={classes.headText}>No Portfolio</div>
+              <Empty description='⬆️  Create your first Portfolio'/>
             )}
           </Grid>
         </Container>

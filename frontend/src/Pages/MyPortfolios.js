@@ -26,16 +26,16 @@ export default function MyPortfolios(props) {
         <Grid item sm={2}>
           <Left currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
-        <Grid item sm={10}>
+        <Grid item sm={7}>
           <PortfoliosList currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
         </Grid>
-        {/* <Grid item sm={3}>
+        <Grid item sm={3}>
           <Right
             portfolio
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
           />
-        </Grid> */}
+        </Grid>
       </Grid>
     </div>
   );

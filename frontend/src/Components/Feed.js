@@ -118,7 +118,17 @@ const FeedHomepage = ({}) => {
       }
       setGainers(gainersList)
     })
+
+    // stockService.getBestStock().then(res=>{
+    //   let gainersList = []
+    //   res.data.data.forEach((stock)=>{
+    //     gainersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
+    //   })
+    // })
   },[])
+
+
+  
   useEffect(()=>{
     stockService.getAllStock().then((response)=>{
       const dataList = response.data.data

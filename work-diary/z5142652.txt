@@ -1,0 +1,26 @@
+week1
+Discuss the project information with my teammates.
+
+week2
+We choose to do the Stock project. Analyse the competitors' products, such as yahoo fiance, google finance, and the ant finance. Discuss functionalities and user stories of this project.
+
+week3
+Design the structure of the backend program. Choose to use Java SpringBoot and Sqlite3 to build the system. Use Dock to deploy. Draw the UML diagram. Create database tables.
+
+week4
+Write tools based on shell and Dock to do the CI process, including build jar packages, build docker images, deploy to docker repository, run docker in local, sharing database and java log file with docker and hosted machine (for debug purposes).
+
+week5
+Use python to collect data from tushare.com and persist into database, including history price, stock information. We only choose to store 1 years' history data (nearly 200MB for 4500 stocks a year).
+
+week7
+Use python to do the data consistency check. Every time we run this check, it will refresh the history price. Package this into a docker image. Update the CI process.
+
+week8
+Use Java to write a schedular to collect realtime stock price from neteasy.com. Refresh the realtime data every minute in workdays' market opening time.
+
+week9
+Continue to write the realtime stock price schedular. Debug. Add a deploy script to support run project in Vlab.
+
+week10
+Functional tests, integration tests, product tests for the final demo with my teammates.

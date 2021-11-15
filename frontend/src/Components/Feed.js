@@ -4,6 +4,7 @@ import {
   makeStyles,
   Paper,
   Tooltip,
+  Grid,
   Typography,
 } from '@material-ui/core'
 import { useState, useEffect } from 'react'
@@ -19,6 +20,7 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded'
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
 import AutorenewIcon from '@material-ui/icons/Autorenew'
+import portfolioService from '../services/portfolio-service'
 
 // import { Link } from 'react-router-dom';
 
@@ -238,17 +240,37 @@ const FeedProtofolios = () => {
 const FeedStock = (props) => {
   const classes = useStyles()
   const { info } = props
+  const [openPrice, setOpenPrice] = useState(0)
+  const [currentPrice, setCurrentPrice] = useState(0)
+  useEffect(()=>{
+    portfolioService.getOneRealTimeData(info.sid).then(response=>{
+      if(response.data.code===200) {
+        setOpenPrice(response.data.data.oldPrice)
+        setCurrentPrice(response.data.data.newPrice)
+      }
+      console.log('get stock info',response)
+    })
+  },[])
   return (
     <>
       <Container className={classes.container}>
         <div className='header'>
-          <Typography className={classes.headText}>Company</Typography>
-          <Typography className={classes.text} variant='h5' gutterBottom>
-            {`${info.enname}`}
-          </Typography>
-          <Typography className={classes.text} variant='h5' gutterBottom>
-            {`${info.tsCode}`}
-          </Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={8}>
+              <Typography className={classes.headText}>Company</Typography>
+              <Typography className={classes.text} variant='h5' gutterBottom>
+                {`${info.enname}`}
+              </Typography>
+              <Typography className={classes.text} variant='h5' gutterBottom>
+                {`${info.tsCode}`}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography className={classes.headText}>Today price</Typography>
+              <Typography className={classes.text}>{`Open price: ${openPrice}`}</Typography>
+              <Typography className={classes.text}>{`Current price: ${currentPrice}`}</Typography>
+            </Grid>
+          </Grid>
         </div>
 
         <LineChart />

@@ -107,7 +107,7 @@ public class RealtimeStockService {
         return true;
     }
 
-    @Scheduled(cron="0 * 9,10,11,13,14,15 ? * 2,3,4,5,6")
+    @Scheduled(cron="0 * * ? * *")
     public void realtimeStockPriceScheduler() {
 
         List<StockInfo> stockInfoList = stockInfoMapper.findAll();

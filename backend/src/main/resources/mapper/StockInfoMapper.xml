@@ -50,4 +50,10 @@
     where "enname" like #{s,jdbcType=VARCHAR}
     limit 7
   </select>
+  <select id="findOneStockBySid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_info
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
 </mapper>

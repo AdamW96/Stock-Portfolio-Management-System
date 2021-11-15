@@ -14,6 +14,11 @@ public class stockRankDto{
 
     private Double rate;
 
+    private String symbol;
+
+    private String enName;
+
+    private Double priceDif;
 
     public Integer getSid() {
         return sid;
@@ -52,6 +57,22 @@ public class stockRankDto{
     public void setRate(Double rate) {
         this.rate = rate;
     }
+
+    public Double getPriceDif() {
+        return this.priceDif;
+    }
+
+    public void setPriceDif(Double priceDif) {
+        this.priceDif = priceDif;
+    }
+
+    public String getSymbol(){ return this.symbol; }
+
+    public void setSymbol(String symbol) { this.symbol = symbol;}
+
+    public String getEnName(){ return this.enName; }
+
+    public void setEnName(String enName) { this.enName = enName;}
 
 }
 

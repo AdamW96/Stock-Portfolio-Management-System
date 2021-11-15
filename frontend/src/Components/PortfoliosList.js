@@ -166,6 +166,9 @@ export default function PortfoliosList(props) {
       if (response.data.code === 200) {
         setPortfolios(response.data.data)
       }
+      else {
+        setPortfolios([])
+      }
     })
     allGainService.getAllGain().then(res=>setAllGain(res.data.data))
   }, [getPorts])
@@ -246,7 +249,7 @@ export default function PortfoliosList(props) {
           {
             allGain
             ?  <Typography style={{fontSize:'3rem',fontFamily:"Bungee",marginLeft:"1rem"}} gutterBottom>
-            $ {allGain}
+            $ {allGain.toFixed(2)}
             </Typography>
             : <Typography className={classes.text} gutterBottom>
             Make your stock profolios now ⬇️

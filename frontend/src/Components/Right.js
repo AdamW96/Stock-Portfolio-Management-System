@@ -150,7 +150,6 @@ const RightStock = (props) => {
 
 export default function Right({
   currentUser, setCurrentUser, stock, portfolio, homepage, info }) {
-    console.log(info)
   return (
     <>
       {homepage ? <RightHomepage currentUser={currentUser} setCurrentUser={setCurrentUser} /> : ''}

@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Performance({ data, gainers }) {
   const classes = useStyles({ gainers })
   let history = useHistory()
-  console.log('coming to perfermance', data)
   const handleClick = (event) => {
     let id = event.currentTarget.id
     let name = event.currentTarget.getAttribute('name')

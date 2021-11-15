@@ -91,10 +91,8 @@ export default function Login(props) {
     setPassword(e.target.value);
   };
   const handleSignin = () => {
-    console.log(email, password);
     AuthService.signin(email, password)
       .then((response) => {
-        console.log(response)
         if(response.data.code !== 200) {
           showAlert('error','Invalid email or password')
           return

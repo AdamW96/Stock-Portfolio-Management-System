@@ -19,7 +19,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 // import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
 // import AutorenewIcon from '@material-ui/icons/Autorenew'
 import portfolioService from '../services/portfolio-service'
-import CreateIcon from '@material-ui/icons/Create';
+import CreateIcon from '@material-ui/icons/Create'
 import allGainService from '../services/allGain-service'
 import { Empty } from 'antd'
 const useStyles = makeStyles((theme) => ({
@@ -35,19 +35,19 @@ const useStyles = makeStyles((theme) => ({
   text: {
     fontFamily: 'Bungee',
     marginLeft: '0.5rem',
-    fontSize:'1rem',
-    marginBottom:'2rem'
+    fontSize: '1rem',
+    marginBottom: '2rem',
   },
   listItem: {
     border: '1px solid #5d5d5d',
     borderRadius: 5,
     marginBottom: theme.spacing(1),
-    padding:theme.spacing(1)
+    padding: theme.spacing(1),
   },
-  listItemHead:{
+  listItemHead: {
     fontSize: theme.spacing(3),
   },
-  listItemDes:{
+  listItemDes: {
     fontSize: theme.spacing(1),
   },
   modal: {
@@ -66,9 +66,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   portfolioBody: {
-    '&:hover':{
-      cursor:'pointer'
-    }
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  positive:{
+    color:'green'
+  },
+  negative:{
+    color:'red'
   }
   // portList: {
   //   display: 'flex',
@@ -128,7 +134,7 @@ export default function PortfoliosList(props) {
   const [newName, setNewName] = React.useState('')
   const [getPorts, setGetPorts] = React.useState(false)
   const { currentUser, setCurrentUser, setShowAlert } = props
-  const [allGain,setAllGain] = React.useState(0)
+  const [allGain, setAllGain] = React.useState(0)
   const showAlert = (type, content) => {
     window.alert = true
     setShowAlert({ alertType: type, alertContent: content })
@@ -160,18 +166,33 @@ export default function PortfoliosList(props) {
   }
 
   React.useEffect(() => {
-    console.log(currentUser)
     portfolioService.getAll().then((response) => {
-      console.log(response.data)
       if (response.data.code === 200) {
-        setPortfolios(response.data.data)
-      }
-      else {
+        let rawPorts = response.data.data
+        let finalPorts = []
+        for (let i = 0; i < rawPorts.length; i++) {
+          portfolioService.portGain(rawPorts[i].pid).then((response) => {
+            if (response.data.code === 200) {
+              rawPorts[i].gain = response.data.data.toFixed(2)
+            } else {
+              rawPorts[i].gain = 0
+            }
+            finalPorts.push(rawPorts[i])
+            if (finalPorts.length === rawPorts.length) {
+              setPortfolios(finalPorts)
+            }
+          })
+        }
+      } else {
         setPortfolios([])
       }
     })
-    allGainService.getAllGain().then(res=>setAllGain(res.data.data))
+    allGainService.getAllGain().then((res) => setAllGain(res.data.data))
   }, [getPorts])
+
+  React.useEffect(()=>{
+    console.log(portfolios)
+  },[portfolios])
 
   const handleNewPortName = (e) => {
     setNewPortName(e.target.value)
@@ -180,13 +201,13 @@ export default function PortfoliosList(props) {
   const handleNewPortDes = (e) => {
     setNewPortDes(e.target.value)
   }
-  const handleNewName = (e)=>{
+  const handleNewName = (e) => {
     setNewName(e.target.value)
   }
 
   const submitNewPort = () => {
-    if(newPortName.length === 0) {
-      showAlert('error', 'You can\'t use empty name')
+    if (newPortName.length === 0) {
+      showAlert('error', "You can't use empty name")
       return
     }
     const data = { pName: newPortName, description: newPortDes }
@@ -203,31 +224,31 @@ export default function PortfoliosList(props) {
   }
 
   const submitRename = () => {
-    if(window.oldName === newName) {
-      showAlert('error','You can\'t change a same name')
-      return 
+    if (window.oldName === newName) {
+      showAlert('error', "You can't change a same name")
+      return
     }
-    const data = {newName,oldName:window.oldName}
-    portfolioService.reName(data).then(response=>{
+    const data = { newName, oldName: window.oldName }
+    portfolioService.reName(data).then((response) => {
       console.log(response)
-      if(response.data.code !== 200) {
-        showAlert('error','Something wrong')
+      if (response.data.code !== 200) {
+        showAlert('error', 'Something wrong')
         return
       }
-      showAlert('success','Change name successfully')
+      showAlert('success', 'Change name successfully')
       setGetPorts((preState) => !preState)
       handleCloseEditName()
     })
   }
 
   const submitDelete = () => {
-    const data = {pName:window.oldName}
-    portfolioService.deletePort(data).then(response=>{
-      if(response.data.code !== 200) {
-        showAlert('error','Something wrong')
+    const data = { pName: window.oldName }
+    portfolioService.deletePort(data).then((response) => {
+      if (response.data.code !== 200) {
+        showAlert('error', 'Something wrong')
         return
       }
-      showAlert('success','Delete successfully')
+      showAlert('success', 'Delete successfully')
       setGetPorts((preState) => !preState)
       handleCloseDelete()
     })
@@ -246,17 +267,22 @@ export default function PortfoliosList(props) {
           <Typography className={classes.headText} gutterBottom>
             Total Gain/Loss
           </Typography>
-          {
-            allGain
-            ?  <Typography style={{fontSize:'3rem',fontFamily:"Bungee",marginLeft:"1rem"}} gutterBottom>
-            $ {allGain.toFixed(2)}
+          {allGain ? (
+            <Typography
+              style={{
+                fontSize: '3rem',
+                fontFamily: 'Bungee',
+                marginLeft: '1rem',
+              }}
+              gutterBottom
+            >
+              $ {allGain.toFixed(2)}
             </Typography>
-            : <Typography className={classes.text} gutterBottom>
-            Make your stock profolios now ⬇️
+          ) : (
+            <Typography className={classes.text} gutterBottom>
+              Make your stock profolios now ⬇️
             </Typography>
-
-          }
-
+          )}
         </Container>
         <Container>
           <Typography className={classes.headText} gutterBottom>
@@ -267,7 +293,6 @@ export default function PortfoliosList(props) {
             className={classes.addButton}
             color='primary'
             onClick={handleOpenAddNew}
-
           >
             <AddRoundedIcon fontSize='small' />
             <Typography>New</Typography>
@@ -278,32 +303,53 @@ export default function PortfoliosList(props) {
               portfolios.map((ele) => {
                 return (
                   <React.Fragment key={ele.pName}>
-                    <Grid container className = {classes.listItem}>
-                      <Grid item xs={10} className={classes.portfolioBody} name={ele.pid} onClick={jumpToSinglePort}>
-                          <Typography variant='h5'>{ele.pName}</Typography>
-                          <Typography variant='h6'>{ele.description}</Typography>
+                    <Grid container className={classes.listItem}>
+                      <Grid
+                        item
+                        xs={8}
+                        className={classes.portfolioBody}
+                        name={ele.pid}
+                        onClick={jumpToSinglePort}
+                      >
+                        <Typography variant='h5'>{ele.pName}</Typography>
+                        <Typography variant='h6'>{ele.description}</Typography>
+                      </Grid>
+                      <Grid item xs={2}>
+                        <Typography variant='h5'>Gain:</Typography>
+                        {ele.gain >= 0 && (
+                          <Typography variant='h5' className={classes.positive}>{ele.gain}</Typography>
+                        )}
+                        {ele.gain < 0 && (
+                          <Typography variant='h5' className={classes.negative}>{ele.gain}</Typography>
+                        )}
                       </Grid>
                       <Grid item xs={1}>
-                        <IconButton name={`${ele.pName}#${ele.pid}`} onClick={handleOpenEditName}>
+                        <IconButton
+                          name={`${ele.pName}#${ele.pid}`}
+                          onClick={handleOpenEditName}
+                        >
                           <CreateIcon />
                         </IconButton>
                       </Grid>
                       <Grid item xs={1}>
-                        <IconButton name={`${ele.pName}#${ele.pid}`} onClick={handleOpenDelete}>
+                        <IconButton
+                          name={`${ele.pName}#${ele.pid}`}
+                          onClick={handleOpenDelete}
+                        >
                           <DeleteIcon />
                         </IconButton>
                       </Grid>
-                      </Grid>
+                    </Grid>
                   </React.Fragment>
                 )
               })}
             {portfolios.length === 0 && (
-              <Empty description='⬆️  Create your first Portfolio'/>
+              <Empty description='⬆️  Create your first Portfolio' />
             )}
           </Grid>
         </Container>
       </Container>
-      
+
       <Modal
         aria-labelledby='transition-modal-title'
         aria-describedby='transition-modal-description'
@@ -348,7 +394,7 @@ export default function PortfoliosList(props) {
           </div>
         </Fade>
       </Modal>
-      
+
       <Modal
         aria-labelledby='transition-modal-title'
         aria-describedby='transition-modal-description'
@@ -376,7 +422,11 @@ export default function PortfoliosList(props) {
               />
             </div>
             <div className='modalButton'>
-              <Button name={window.currentPid} color='primary' onClick={submitRename}>
+              <Button
+                name={window.currentPid}
+                color='primary'
+                onClick={submitRename}
+              >
                 Submit
               </Button>
               <Button color='secondary' onClick={handleCloseEditName}>
@@ -386,7 +436,7 @@ export default function PortfoliosList(props) {
           </div>
         </Fade>
       </Modal>
-      
+
       <Modal
         aria-labelledby='transition-modal-title'
         aria-describedby='transition-modal-description'

@@ -20,7 +20,6 @@ function App() {
     alertType: 'none',
     alertContent: '',
   })
-  console.log('app.js==>', currentUser)
   React.useEffect(() => {
     stockService.getAllStock().then((response) => {
       if (response.data.code === 200) {

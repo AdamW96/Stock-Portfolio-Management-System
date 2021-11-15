@@ -47,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
   portList: {
     display: "flex",
     marginBottom: theme.spacing(5),
-
-    // justifyContent:'space-between',
-    // borderBottom:'6px solid #555',
   },
   portButton: {
     //up right down left

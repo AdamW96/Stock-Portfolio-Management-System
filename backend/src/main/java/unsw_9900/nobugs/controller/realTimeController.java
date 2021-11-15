@@ -187,8 +187,16 @@ public class realTimeController {
     public SvcResponse bestStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
 
         List<stockRankDto> find = marketRealtimeMapper.findBestStock();
-        if (find == null){
+        if (find.isEmpty()){
             return SvcResponse.error(400, "没有股票");
+        }
+        for (stockRankDto stock : find){
+            int sid = stock.getSid();
+            double dif = stock.getCurrentPrice() - stock.getClosedPrice();
+            StockInfo stockInfo = stockInfoMapper.findOneStockBySid(sid);
+            stock.setSymbol(stockInfo.getSymbol());
+            stock.setEnName(stockInfo.getEnname());
+            stock.setPriceDif(dif);
         }
         return SvcResponse.success(find);
     }
@@ -197,8 +205,16 @@ public class realTimeController {
     public SvcResponse worstStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
 
         List<stockRankDto> find = marketRealtimeMapper.findWorstStock();
-        if (find == null){
+        if (find.isEmpty()){
             return SvcResponse.error(400, "没有股票");
+        }
+        for (stockRankDto stock : find){
+            int sid = stock.getSid();
+            double dif = stock.getCurrentPrice() - stock.getClosedPrice();
+            StockInfo stockInfo = stockInfoMapper.findOneStockBySid(sid);
+            stock.setSymbol(stockInfo.getSymbol());
+            stock.setEnName(stockInfo.getEnname());
+            stock.setPriceDif(dif);
         }
         return SvcResponse.success(find);
     }

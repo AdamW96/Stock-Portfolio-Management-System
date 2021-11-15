@@ -72,7 +72,7 @@ export default function Navigation(props) {
       <Toolbar className={classes.tool}>
         <div >
           <Link to='/' >
-            <img src="https://i.loli.net/2021/11/14/Wuyez4AUfFBY2r5.png" alt="" style={{ height: '40px' }} />
+            <img src="images/final-logo.png" alt="" style={{ height: '40px' }} />
           </Link>
         </div>
         <div className={classes.items}>
@@ -88,7 +88,8 @@ export default function Navigation(props) {
 
               <Modal open={openMsg} onClose={() => setOpenMsg(false)} className={classes.msgModal}>
                 <Paper className={classes.msgContent} >
-                  <Typography className={classes.headText}>COMP9900</Typography>
+                  <Typography classNam
+                  e={classes.headText}>COMP9900</Typography>
                   {/* <Typography className={classes.headText}>Welcome to our finance website.</Typography> */}
                   {/* <Typography className={classes.headText}>Hope you like it~ </Typography> */}
                   <img src='images/unsw.png' alt='' style={{ height: '17%', borderRadius: '20%' }} />

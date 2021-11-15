@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Navigation from "../Components/Navigation";
 import Left from "../Components/Left";
 import Right from "../Components/Right";
-import Feed from "../Components/Feed";
+// import Feed from "../Components/Feed";
 import { Grid,Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from "../services/auth-service";
-import portfolioService from "../services/portfolio-service";
+// import AuthService from "../services/auth-service";
+// import portfolioService from "../services/portfolio-service";
 import PortfoliosList from "../Components/PortfoliosList";
 
 const styles = makeStyles((theme) => ({
@@ -26,16 +26,16 @@ export default function MyPortfolios(props) {
         <Grid item sm={2}>
           <Left currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Grid>
-        <Grid item sm={10}>
+        <Grid item sm={7}>
           <PortfoliosList currentUser={currentUser} setCurrentUser={setCurrentUser} setShowAlert={setShowAlert}/>
         </Grid>
-        {/* <Grid item sm={3}>
+        <Grid item sm={3}>
           <Right
             portfolio
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
           />
-        </Grid> */}
+        </Grid>
       </Grid>
     </div>
   );

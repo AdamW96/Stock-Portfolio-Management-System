@@ -1,17 +1,12 @@
 import {
   Container,
   Divider,
-  IconButton,
   makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
-import { useState } from "react";
-import AutorenewIcon from '@material-ui/icons/Autorenew';
-import RecomendCard from "./RecomendCard";
-import { randoms, randoms2, about } from './Fakedata';
-import { useSelector } from "react-redux";
-
+import { useEffect, useState } from "react";
+import rankService from "../services/rank-service";
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(10),
@@ -25,12 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontFamily: "Bungee",
-    marginLeft: theme.spacing(1),
+    // marginLeft: '1rem',
   },
   subtitle: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'space-around',
   },
   recomends: {
     display: 'flex',
@@ -59,56 +54,44 @@ const useStyles = makeStyles((theme) => ({
 
 
 const RightHomepage = ({ currentUser, setCurrentUser }) => {
-  const loginState = useSelector(state => state.loginState);
 
   const classes = useStyles();
   return (
     <Container className={classes.container}>
 
-      {!loginState &&
-        <>
+
     
-        <img src='https://i.loli.net/2021/11/14/RX62b83AW4hSf1Q.png' style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
+        <img src='images/join.png' style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
         <Typography className={classes.headText} style={{
           display:'flex',justifyContent:'flex-end',paddingRight:'1.5rem',marginTop:'2rem',
           }}>Join Us↑↑</Typography>
 
-        </>
-      }
-      {loginState &&
-        <>
-          <Typography className={classes.headText}>Your Rank</Typography>
-          <Typography variant='caption' className={classes.text}> You Daily Gain have defeated 73% users</Typography>
-        </>
-      }
+        
     </Container>
   );
 }
 
 const RightPortfolios = () => {
   const classes = useStyles();
-  const [random, setRandom] = useState(false);
-  let recomendsData = random ? randoms : randoms2;
+  const [rank,setRank] = useState('')
+  useEffect(()=>{
+    rankService.getRank().then(res=>setRank(res.data.data))
+  },[rank])
+
+  
   return (
     <>
       <Container className={classes.container}>
+      <Paper variant='outlined'>
         {/* <Paper variant='outlined'> */}
-        <Typography className={classes.headText} >Discover more</Typography>
-
+      
         <div className={classes.subtitle}>
-          <Typography variant='caption' className={classes.text}>You may be interested in</Typography>
-          <IconButton color='primary' onClick={() => setRandom(!random)}>
-            <AutorenewIcon fontSize='small' />
-          </IconButton>
-
+          <Typography  className={classes.headText}>Congratulations!</Typography>
+          <Typography  className={classes.text}>Your yesterday's Rank is:</Typography>
+          {rank? <Typography  style={{fontFamily:'Bungee',fontSize:'4rem'}}>Rank {rank}</Typography> :<div></div>}
         </div>
+      </Paper>
 
-
-        <div className={classes.recomends}>
-          {recomendsData.map((stock) => (
-            <RecomendCard key={stock.symbol} data={stock} />
-          ))}
-        </div>
 
       </Container>
 

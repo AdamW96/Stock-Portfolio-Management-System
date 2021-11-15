@@ -8,8 +8,6 @@
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
-@media screen and (max-width: 1000px) {
-  html {
-    font-size: 10px;
-  }
+html {
+  font-size: 10px;
 }

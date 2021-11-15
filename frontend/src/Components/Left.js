@@ -1,24 +1,15 @@
-import { Button, Container, Typography } from "@material-ui/core";
+import {  Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Home,
-  Person,
   List,
-  PhotoCamera,
-  PlayCircleOutline,
-  TabletMac,
-  Bookmark,
   Storefront,
-  Settings,
   ExitToApp,
 } from "@material-ui/icons";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import AuthService from "../services/auth-service";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators } from "../Redux/index";
+
 
 const useStyles = makeStyles((theme) => ({
   container: {

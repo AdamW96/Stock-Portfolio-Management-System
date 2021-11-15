@@ -16,7 +16,12 @@ class stockService  {
     getStockCommentsById(sid){
         return axios.post(API_URL+`/stock/comment/findBySid`,{ "sid": sid} )
     }
-
+    getBestStock() {
+        return axios.post(API_URL+`/stock/best`,{} )
+    }
+    getWorstStock() {
+        return axios.post(API_URL+`/stock/worst`,{} )
+    }
 }
 
 export default new stockService()

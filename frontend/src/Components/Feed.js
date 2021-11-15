@@ -47,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
   portList: {
     display: "flex",
     marginBottom: theme.spacing(5),
-
-    // justifyContent:'space-between',
-    // borderBottom:'6px solid #555',
   },
   portButton: {
     //up right down left
@@ -118,7 +115,17 @@ const FeedHomepage = ({}) => {
       }
       setGainers(gainersList)
     })
+
+    // stockService.getBestStock().then(res=>{
+    //   let gainersList = []
+    //   res.data.data.forEach((stock)=>{
+    //     gainersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
+    //   })
+    // })
   },[])
+
+
+  
   useEffect(()=>{
     stockService.getAllStock().then((response)=>{
       const dataList = response.data.data

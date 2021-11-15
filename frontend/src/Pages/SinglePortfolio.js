@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Navigation from "../Components/Navigation";
 import Left from "../Components/Left";
-import Right from "../Components/Right";
-import Feed from "../Components/Feed";
+// import Right from "../Components/Right";
+// import Feed from "../Components/Feed";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Portfolio from "../Components/Portfolio"

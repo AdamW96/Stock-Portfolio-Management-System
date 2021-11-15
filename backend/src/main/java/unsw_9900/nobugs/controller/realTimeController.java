@@ -186,7 +186,7 @@ public class realTimeController {
     @RequestMapping(value = "/stock/best", method = RequestMethod.POST)
     public SvcResponse bestStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
 
-        stockRankDto find = marketRealtimeMapper.findBestStock();
+        List<stockRankDto> find = marketRealtimeMapper.findBestStock();
         if (find == null){
             return SvcResponse.error(400, "没有股票");
         }
@@ -196,7 +196,7 @@ public class realTimeController {
     @RequestMapping(value = "/stock/worst", method = RequestMethod.POST)
     public SvcResponse worstStock(HttpServletRequest request, @RequestBody UserInfo userInfo){
 
-        stockRankDto find = marketRealtimeMapper.findWorstStock();
+        List<stockRankDto> find = marketRealtimeMapper.findWorstStock();
         if (find == null){
             return SvcResponse.error(400, "没有股票");
         }

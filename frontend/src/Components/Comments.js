@@ -37,7 +37,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </Form.Item>
     <Form.Item>
       <Button style={{ display: 'flex', alignItems: 'center' }} htmlType="submit" loading={submitting} onClick={onSubmit} type="primary" >
-        <div style={{ fontFamily: 'Bungee', fontSize: '0.5rem' }}>
+        <div style={{ fontFamily: 'Bungee', fontSize: '1.3rem' }}>
           Add Comment
         </div>
       </Button>
@@ -101,6 +101,8 @@ const Comments = ({ sid }) => {
       .then(res => {
         if (res.data.data) {
           setCommentsList(res.data.data)
+        } else{
+          setCommentsList([])
         }
       })
       .catch(err => console.log(err))
@@ -135,7 +137,7 @@ const Comments = ({ sid }) => {
   }
 
 
-  
+  console.log('ccccc',commentsList)
   return (
     <>
 

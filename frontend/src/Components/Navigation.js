@@ -65,6 +65,7 @@ export default function Navigation(props) {
   const classes = styles();
   const history = useHistory();
   const [openMsg, setOpenMsg] = useState(false);
+  const path = process.env.REACT_APP_PUBLIC_FOLDER;
   let {currentUser, setCurrentUser} = props
   // const loginState = useSelector(state => state.loginState);
   return (
@@ -72,7 +73,7 @@ export default function Navigation(props) {
       <Toolbar className={classes.tool}>
         <div >
           <Link to='/' >
-            <img src="images/final-logo.png" alt="" style={{ height: '40px' }} />
+            <img src={path+'final-logo.png'} alt="" style={{ height: '40px' }} />
           </Link>
         </div>
         <div className={classes.items}>
@@ -88,11 +89,10 @@ export default function Navigation(props) {
 
               <Modal open={openMsg} onClose={() => setOpenMsg(false)} className={classes.msgModal}>
                 <Paper className={classes.msgContent} >
-                  <Typography classNam
-                  e={classes.headText}>COMP9900</Typography>
+                  <Typography className={classes.headText}>COMP9900</Typography>
                   {/* <Typography className={classes.headText}>Welcome to our finance website.</Typography> */}
                   {/* <Typography className={classes.headText}>Hope you like it~ </Typography> */}
-                  <img src='images/unsw.png' alt='' style={{ height: '17%', borderRadius: '20%' }} />
+                  <img src={path+`unsw.png`} alt='' style={{ height: '17%', borderRadius: '20%' }} />
                   
                   <Typography className={classes.text} gutterBottom></Typography>
                   <Typography className={classes.text} gutterBottom>By Group 9900-W16A-NoBugs</Typography>

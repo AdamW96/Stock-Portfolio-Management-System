@@ -18,8 +18,8 @@ const styles = makeStyles(theme => ({
     alignItems: 'center',
   },
   msgContent: {
-    paddingLeft:"2%",
-    paddingRight:"2%",
+    paddingLeft: "2%",
+    paddingRight: "2%",
     height: '20%',
     width: '40%',
     display: 'flex',
@@ -62,7 +62,7 @@ const Comments = ({ sid }) => {
     console.log(editMid)
   }
   const handleDelete = (mid) => {
-    commentService.deleteCommit(mid).then( res=>{console.log(res);setSubmitting(!submitting)})
+    commentService.deleteCommit(mid).then(res => { console.log(res); setSubmitting(!submitting) })
   }
   const actions = (uid, userData, mid) => {
     if (userData) {
@@ -100,14 +100,17 @@ const Comments = ({ sid }) => {
     stockService.getStockCommentsById(sid)
       .then(res => {
         if (res.data.data) {
-          setCommentsList(res.data.data)
-        } else{
+          //倒叙，最新评论显示在前
+          setCommentsList(res.data.data.sort((a, b)=>{
+            return b["mid"] -a["mid"];
+          }))
+        } else {
           setCommentsList([])
         }
       })
       .catch(err => console.log(err))
 
-  }, [submitting,sid])
+  }, [submitting, sid])
 
 
   const handleSubmit = () => {
@@ -117,27 +120,25 @@ const Comments = ({ sid }) => {
     setSubmitting(true);
     commentService.pushComment(sid, value).then(res => console.log(res.data.data.mid))
 
-      setSubmitting(!submitting);
-      setValue('');
+    setSubmitting(!submitting);
+    setValue('');
   };
 
   const handleChange = e => {
     setValue(e.target.value);
   };
 
-  
-  const submitEdit=(editMid)=>{
-    if (!editValue){
-      return 
+
+  const submitEdit = (editMid) => {
+    if (!editValue) {
+      return
     }
 
-    commentService.editCommit(editMid,editValue).then( res=>{console.log(res);setSubmitting(!submitting)})
+    commentService.editCommit(editMid, editValue).then(res => { console.log(res); setSubmitting(!submitting) })
 
     setOpenModel(false)
   }
 
-
-  console.log('ccccc',commentsList)
   return (
     <>
 
@@ -153,9 +154,9 @@ const Comments = ({ sid }) => {
             required
             placeholder='Input'
             fullWidth
-            onChange={(e)=>seteditValue(e.target.value)}
+            onChange={(e) => seteditValue(e.target.value)}
           />
-          <Button type="primary" onClick={()=>submitEdit(editMid)}>
+          <Button type="primary" onClick={() => submitEdit(editMid)}>
             <div style={{ fontFamily: 'Bungee', fontSize: '0.5rem' }}>
               Edit
             </div>

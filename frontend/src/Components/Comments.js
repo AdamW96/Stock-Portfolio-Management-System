@@ -164,11 +164,6 @@ const Comments = ({ sid }) => {
         </Paper>
       </Modal>
       {
-        commentsList.length > 0
-          ? <CommentList comments={commentsList} userData={userData} />
-          : <Empty description='No comments' />
-      }
-      {
         userData
           ? <Comment
             avatar={<Avatar src={"https://joeschmoe.io/api/v1/" + JSON.parse(localStorage.getItem('user')).data.uid} alt={JSON.parse(localStorage.getItem('user')).data.uid} />}
@@ -179,11 +174,13 @@ const Comments = ({ sid }) => {
               value={value} />
             } />
           : null
-
-
-
-
       }
+      {
+        commentsList.length > 0
+          ? <CommentList comments={commentsList} userData={userData} />
+          : <Empty description='No comments' />
+      }
+
 
     </>
   );

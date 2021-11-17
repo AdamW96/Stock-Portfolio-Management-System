@@ -4,92 +4,94 @@ import {
   makeStyles,
   Paper,
   Tooltip,
+  Grid,
   Typography,
-} from "@material-ui/core";
-import { useState, useEffect } from "react";
-import SearchBar from "./SearchBar";
-import Performance from "./Performance";
-import LineChart from "./LineChart";
-import Comments from "./Comments";
-import StockList from "./StockList";
-import stockService from "../services/stock-service";
+} from '@material-ui/core'
+import { useState, useEffect } from 'react'
+import SearchBar from './SearchBar'
+import Performance from './Performance'
+import LineChart from './LineChart'
+import Comments from './Comments'
+import StockList from './StockList'
+import stockService from '../services/stock-service'
 
-import ListRoundedIcon from "@material-ui/icons/ListRounded";
-import AddRoundedIcon from "@material-ui/icons/AddRounded";
-import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import AutorenewIcon from "@material-ui/icons/Autorenew";
+import ListRoundedIcon from '@material-ui/icons/ListRounded'
+import AddRoundedIcon from '@material-ui/icons/AddRounded'
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined'
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
+import AutorenewIcon from '@material-ui/icons/Autorenew'
+import portfolioService from '../services/portfolio-service'
 
 // import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop:theme.spacing(10),
+    paddingTop: theme.spacing(10),
     // borderRight:'1px solid #ece7e7',
-    height: "100vh",
+    height: '100vh',
   },
   search: {
-    position: "relative",
-    height: "8%",
+    position: 'relative',
+    height: '8%',
   },
   headText: {
-    fontFamily: "Bungee",
-    fontSize: "1.3rem",
-    color: "#FF954A",
+    fontFamily: 'Bungee',
+    fontSize: '1.3rem',
+    color: '#FF954A',
     marginLeft: theme.spacing(1),
   },
   text: {
     // fontFamily: "Bungee",
     marginLeft: theme.spacing(1),
-    fontSize:'1rem'
+    fontSize: '1rem',
     // color:"#555"
   },
   portList: {
-    display: "flex",
+    display: 'flex',
     marginBottom: theme.spacing(5),
   },
   portButton: {
     //up right down left
-    padding: "0px 5px 0px 5px",
-    width: "fit-content",
-    borderBottom: "3px solid #555",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+    padding: '0px 5px 0px 5px',
+    width: 'fit-content',
+    borderBottom: '3px solid #555',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     // borderBottom:'6px solid #555',
-    borderRadius: "4px",
+    borderRadius: '4px',
     marginLeft: theme.spacing(2),
-    "&:hover": {
+    '&:hover': {
       boxShadow: theme.shadows[3],
-      cursor: "pointer",
+      cursor: 'pointer',
     },
   },
   portText: {
-    fontFamily: "Bungee",
+    fontFamily: 'Bungee',
     marginLeft: theme.spacing(0.5),
     fontSize: theme.spacing(1),
   },
 
   icon: {
-    backgroundColor: "#eef1f2",
-    padding: "0 3px 0px 0px",
-    borderRadius: "4px",
+    backgroundColor: '#eef1f2',
+    padding: '0 3px 0px 0px',
+    borderRadius: '4px',
   },
   addButton: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
   },
   portContent: {
     padding: theme.spacing(2),
-    width: "100%",
+    width: '100%',
   },
   portContentInfo: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: theme.spacing(2),
   },
-}));
+}))
 
 const FeedHomepage = ({}) => {
   // let [show, setShow] = useState(false);
@@ -101,41 +103,50 @@ const FeedHomepage = ({}) => {
     changePercentage,
     stockId
   ) => {
-    return { symbol, company, price, change, changePercentage, stockId };
-  };
-  let [gainers,setGainers] = useState([])
-  let [losers,setLosers] = useState([])
-  const classes = useStyles();
-  useEffect(()=>{
-    stockService.getAllStock().then((response)=>{
+    return { symbol, company, price, change, changePercentage, stockId }
+  }
+  let [gainers, setGainers] = useState([])
+  let [losers, setLosers] = useState([])
+  const classes = useStyles()
+  useEffect(() => {
+    stockService.getBestStock().then((response) => {
       const dataList = response.data.data
       let gainersList = []
-      for(let i=0;i<3;i++) {
-        gainersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
+      for (let i = 0; i < 3; i++) {
+        gainersList.push(
+          createData(
+            dataList[i].symbol,
+            dataList[i].enName,
+            dataList[i].currentPrice,
+            dataList[i].priceDif.toFixed(2),
+            (dataList[i].rate * 100).toFixed(2),
+            dataList[i].sid
+          )
+        )
       }
       setGainers(gainersList)
     })
+  }, [])
 
-    // stockService.getBestStock().then(res=>{
-    //   let gainersList = []
-    //   res.data.data.forEach((stock)=>{
-    //     gainersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
-    //   })
-    // })
-  },[])
-
-
-  
-  useEffect(()=>{
-    stockService.getAllStock().then((response)=>{
+  useEffect(() => {
+    stockService.getWorstStock().then((response) => {
       const dataList = response.data.data
       let losersList = []
-      for(let i=0;i<3;i++) {
-        losersList.push(createData(dataList[i].symbol, dataList[i].enname, 0,0,0, dataList[i].sid))
+      for (let i = 0; i < 3; i++) {
+        losersList.push(
+          createData(
+            dataList[i].symbol,
+            dataList[i].enName,
+            dataList[i].currentPrice,
+            dataList[i].priceDif.toFixed(2),
+            (dataList[i].rate * 100).toFixed(2),
+            dataList[i].sid
+          )
+        )
       }
       setLosers(losersList)
     })
-  },[])
+  }, [])
 
   return (
     <>
@@ -147,13 +158,13 @@ const FeedHomepage = ({}) => {
         <Performance data={losers} />
       </Container>
     </>
-  );
-};
+  )
+}
 
 const FeedProtofolios = () => {
-  const classes = useStyles();
-  const [portNum, setPortNum] = useState(1);
-  let isEmpty = true;
+  const classes = useStyles()
+  const [portNum, setPortNum] = useState(1)
+  let isEmpty = true
   return (
     <>
       <Container className={classes.container}>
@@ -206,7 +217,7 @@ const FeedProtofolios = () => {
               </Tooltip>
             </Typography>
             <Container className={classes.portContentInfo}>
-              <img src='images/empty.png' alt='' style={{ width: "27%" }} />
+              <img src='images/empty.png' alt='' style={{ width: '27%' }} />
               <Typography variant='subtitle2'>
                 Nothing in this portfolio
               </Typography>
@@ -223,54 +234,74 @@ const FeedProtofolios = () => {
         </Container>
       </Container>
     </>
-  );
-};
+  )
+}
 
 const FeedStock = (props) => {
-  const classes = useStyles();
-  const {info} = props
+  const classes = useStyles()
+  const { info } = props
+  const [openPrice, setOpenPrice] = useState(0)
+  const [currentPrice, setCurrentPrice] = useState(0)
+  useEffect(()=>{
+    portfolioService.getOneRealTimeData(info.sid).then(response=>{
+      if(response.data.code===200) {
+        setOpenPrice(response.data.data.oldPrice)
+        setCurrentPrice(response.data.data.newPrice)
+      }
+      console.log('get stock info',response)
+    })
+  },[])
   return (
     <>
       <Container className={classes.container}>
         <div className='header'>
-          <Typography className={classes.headText}>Company</Typography>
-          <Typography className={classes.text} variant='h5' gutterBottom>
-            {`${info.enname}`}
-          </Typography>
-          <Typography className={classes.text} variant='h5' gutterBottom>
-            {`${info.tsCode}`}
-          </Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={8}>
+              <Typography className={classes.headText}>Company</Typography>
+              <Typography className={classes.text} variant='h5' gutterBottom>
+                {`${info.enname}`}
+              </Typography>
+              <Typography className={classes.text} variant='h5' gutterBottom>
+                {`${info.tsCode}`}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography className={classes.headText}>Today price</Typography>
+              <Typography className={classes.text}>{`Open price: ${openPrice}`}</Typography>
+              <Typography className={classes.text}>{`Current price: ${currentPrice}`}</Typography>
+            </Grid>
+          </Grid>
         </div>
 
         <LineChart />
 
         <div className={classes.commentsBlcok}>
           <Typography className={classes.headText}>Comments</Typography>
-          <Comments sid={info.sid}/>
+          <Comments sid={info.sid} />
         </div>
       </Container>
     </>
-  );
-};
+  )
+}
 
 const FeedMarket = () => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <>
       <Container className={classes.container}>
         <StockList />
       </Container>
     </>
-  );
-};
+  )
+}
 
 export default function Feed({ stock, portfolio, homepage, market, info }) {
   return (
     <>
-      {stock ? <FeedStock info={info}/> : ""}
-      {portfolio ? <FeedProtofolios /> : ""}
-      {homepage ? <FeedHomepage /> : ""}
-      {market ? <FeedMarket /> : ""}
+      {stock ? <FeedStock info={info} /> : ''}
+      {portfolio ? <FeedProtofolios /> : ''}
+      {homepage ? <FeedHomepage /> : ''}
+      {market ? <FeedMarket /> : ''}
     </>
-  );
+  )
 }

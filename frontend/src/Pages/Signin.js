@@ -75,6 +75,7 @@ export default function Login(props) {
   const history = useHistory();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  const path = process.env.REACT_APP_PUBLIC_FOLDER;
   let { setShowAlert,setCurrentUser } = props
  
   const showAlert = (type, content) => {
@@ -91,10 +92,8 @@ export default function Login(props) {
     setPassword(e.target.value);
   };
   const handleSignin = () => {
-    console.log(email, password);
     AuthService.signin(email, password)
       .then((response) => {
-        console.log(response)
         if(response.data.code !== 200) {
           showAlert('error','Invalid email or password')
           return
@@ -127,7 +126,7 @@ export default function Login(props) {
         <Grid item sm={6} xs={6}>
           <Container>
             <Paper elevation={3} className={classes.signForm}>
-              <img src="https://i.loli.net/2021/11/14/Wuyez4AUfFBY2r5.png" alt="" className={classes.logo} />
+              <img src={path+'final-logo.png'} alt="" className={classes.logo} />
               <TextField
                 onChange={handleChangeEmail}
                 label="Email"

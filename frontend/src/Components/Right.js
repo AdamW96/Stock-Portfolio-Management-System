@@ -54,14 +54,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 const RightHomepage = ({ currentUser, setCurrentUser }) => {
-
+  const path = process.env.REACT_APP_PUBLIC_FOLDER;
   const classes = useStyles();
   return (
     <Container className={classes.container}>
 
 
     
-        <img src='images/join.png' style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
+        <img src={path+'join.png'} style={{width:"100%",height:'60vh',borderRadius:'1rem'}} alt="" />
         <Typography className={classes.headText} style={{
           display:'flex',justifyContent:'flex-end',paddingRight:'1.5rem',marginTop:'2rem',
           }}>Join Us↑↑</Typography>
@@ -72,6 +72,7 @@ const RightHomepage = ({ currentUser, setCurrentUser }) => {
 }
 
 const RightPortfolios = () => {
+  
   const classes = useStyles();
   const [rank,setRank] = useState('')
   useEffect(()=>{
@@ -150,7 +151,6 @@ const RightStock = (props) => {
 
 export default function Right({
   currentUser, setCurrentUser, stock, portfolio, homepage, info }) {
-    console.log(info)
   return (
     <>
       {homepage ? <RightHomepage currentUser={currentUser} setCurrentUser={setCurrentUser} /> : ''}

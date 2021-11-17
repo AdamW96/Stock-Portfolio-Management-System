@@ -150,7 +150,6 @@ export default function Portfolio(props) {
   }, [fetchData])
 
   React.useEffect(() => {
-    console.log('this is stocks', stocks)
     const realStocksList = []
     const profitLists = []
     for (let i = 0; i < stocks.length; i++) {
@@ -158,6 +157,7 @@ export default function Portfolio(props) {
         if (response.data.code === 200) {
           realStocksList.push(response.data.data)
           if (realStocksList.length === stocks.length) {
+            console.log('real time stocks===>',realStocksList)
             for (let j = 0; j < realStocksList.length; j++) {
               for (let m = 0; m < allStocks.length; m++) {
                 if (realStocksList[j].sid === allStocks[m].sid) {

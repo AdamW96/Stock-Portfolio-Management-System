@@ -70,6 +70,7 @@ const usestyles = makeStyles((theme) => ({
 }));
 
 export default function Register(props) {
+  const path = process.env.REACT_APP_PUBLIC_FOLDER;
   const classes = usestyles();
   const history = useHistory();
   let [firstName, setFirstName] = useState("");
@@ -130,7 +131,7 @@ export default function Register(props) {
         <Grid item sm={6} xs={6}>
           <Container>
             <Paper elevation={3} className={classes.signForm}>
-              <img src="https://i.loli.net/2021/11/14/Wuyez4AUfFBY2r5.png" alt="" className={classes.logo} />
+              <img src={path+"final-logo.png" } alt="" className={classes.logo} />
               <TextField
                 onChange={handleChangeFirstName}
                 label="First Name"

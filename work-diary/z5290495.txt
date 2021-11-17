@@ -6,3 +6,24 @@ We have decided everyone's work in our group, and discuss functionalities and us
 
 week3
 I finished the interface diagram of the proposal and our group finish the whole proposal this week
+
+week4
+I have started code this week, and design the sign in and sign up part, help team members to build the frontend page
+
+week5
+I have finish the logical of sign in and sign up, finish the frontend signin and signup page
+
+week6
+In week6, I have finish the market part, show all the stocks name and symbol number in the frontend, debug with backend member
+
+week7
+This week, I help my team member finish the single stock page, users can check stock's information and history price in the single stock page
+
+week8
+In week8, I started coding the portfolio page, user can check gain and loss in this page, and buy or sell stocks in this page
+
+week9
+This week I helped my group members finish the portfolio functions, user can check real time data changed in this page
+
+week10
+Helped group members debug the system and prepare the finial demo

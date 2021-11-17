@@ -1,6 +1,29 @@
 Week1
-
-There wasn't much work in the first week. I discussed with the team about the frameworks and technologies to be used.  I also learned some tutorials on using Jira.
+There wasn't much work in the first week. I discussed with the team the frameworks and technologies to be used.  I also learned some tutorials on using Jira.
 
 Week2
 I create a new sprint on Jira and create a new task. I discussed my front-end technologies with my team and begin to learn some new UI design tools.
+
+Week3
+I create the react application and install the required dependencies. After discussion, I decided to divide the layout into the navbar, left bar, feed, and right bar.
+
+Week4
+We named the application as NB Finance and I design the logo for the team. I also build the navigation bar and the left bar.
+
+Week5
+I build the signing and signup page. And add some animations to the left bar. I find it difficult to build the search bar, so far I just made it static.
+
+Week6
+After adding more CSS and Javascript, the Search bar is dynamic now.
+
+Week7
+I start building the stock information page and try to learn Restful API.
+
+Week8 
+I choose Ant Design to build the historical price line chart, It made a beautiful interface. I find when linking to the backend it will occur a CORS error, after discussion we decide to add "access-control-allow-origin" to the HTTP Response header in the backend.
+
+Week9
+The comments part take me a bit long time to build, after fixing several bugs I finish this unit. Users can post comments and edit/ delete their comments.
+
+Week10
+Our frontend team tries to run on vlab and change some CSS styles such as font size, font-family. We meet some bugs but finally overcome them and finish all functionalities

@@ -1,5 +1,6 @@
 
 # /usr/src/app is share_data dir
+mkdir /usr/src/app
 cp py_stock.py /usr/src/app/py_stock.py
 
 if [ -f "/usr/src/app/9900-test-db.sqlite" ];then

@@ -5,16 +5,16 @@ echo "run in raw mode"
 mkdir share_data
 
 echo "=== recreate db ==="
-if [ -f "./9900-test-db.sqlite" ];then
+if [ -f "./share_data/9900-test-db.sqlite" ];then
   echo "use shared_data db"
   else
   echo "use initialized db"
   python3 merge.py || { echo "recreate db failed"; exit 1; }
+  cp ./9900-test-db.sqlite ./share_data
 fi
 
 cp ./py_history/py_stock.py ./share_data/
 cp ./py_history/requirements.txt ./share_data/
-cp ./9900-test-db.sqlite ./share_data
 
 mvn package || { echo "java build failed"; exit 1; }
 cp ./target/9900-project-test.jar ./share_data/

@@ -112,17 +112,17 @@ python3 merge.py
 ### Frontend
 
 To start frontend on the vlab, you can follow the instructions below:
-#####Enter the directory
+##### Enter the directory
 ```
 $cd capstone-project-9900-w16a-nobugs/frontend
 ```
 
-#####install dependencies
+##### install dependencies
 ```
 $yarn
 ```
 
-#####Start the development server
+##### Start the development server
 ```
 $yarn start
 ```

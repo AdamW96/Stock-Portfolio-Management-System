@@ -127,5 +127,5 @@ $yarn
 $yarn start
 ```
 
-After run the `yarn start`,  open [http://locahost:3000] to view it in the browser.
+After run the `yarn start`,  open [http://localhost:3000] to view it in the browser.
 

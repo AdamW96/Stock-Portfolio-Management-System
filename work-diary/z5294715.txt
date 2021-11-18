@@ -14,6 +14,13 @@ Week 5
 Demostration A is finished. We successfully showed all the functionalities that we supposed to achieve in Sprint 1. We did the retrospective meeting for Sprint 1. There are some minor parts about the functionalities in Sprint 1 need to be adjusted. Also, we are going to start Sprint 2. 
 
 Week 7
+We handed in the Retrospective A. There are some problems about obtaining real time market data from others api. We can only get the historical data. Users cannot refresh the current price. There will be demo B in next week. 
+
 Week 8
+We finished demo B. We did the retrospective meeting for Sprint 2. The functionalities are able worked but the problem of real time market data is not yet solved. We need to handin the retrospective B next week. As the data is not yet ready, the main part of our system cannot be built. The progress of our project need to be faster. 
+
 Week 9
+We handed in the Retrospective B. Both frontend and backend are ready. The market real time data is worked but it takes so long which need to be adjusted. We were building the connection betweem frontend and backend which we need to be fast. We will start doing the project report and planing for the final demo.
+
 Week 10
+The final demo is done. Apart from some network problem, the demo is pretty smooth, certainly, it can be better. We will finish the project report. The coding of our system and the report need to be handed in at the same day which is a bit rush.

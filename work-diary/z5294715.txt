@@ -4,5 +4,16 @@ As some classmates asked me to swap the tutorial section for her, only temporal 
 Week 2
 Group and project topic is confirmed. We divided the jobs and the role for each one. We referred to the website with similar system. 8 main functionalities is defined during the meeting. A draft of the proposal will be finished by week 3. Proposed flow chart for the system will be discussed next week. We will discuss more detail on the user stories which are the main part of the proposal.
 
-Week 
+Week 3
 Github Classroom is formed and all teammates joined. The draft of proposal is finished. During the tutorial time, the tutor give some suggestion on the proposal. More details are needed in the proposal. We divided the part of proposal and decided to work in google drive first instead of working in Jira. We handed in the proposal. We will start working in Sprint 1 next week.
+
+Week 4
+The coding part of our project started. We divided into 3 parts: frontend, backend and support. I was assigned on doing the support part which need to help them when they face some difficulties. I need to know the progresses of both frontend and backend. In next week, we will going to present our demonstration A. Since the goals of Sprint 1 are not too hard and just some basic things, the demonstration will work on time.
+
+Week 5
+Demostration A is finished. We successfully showed all the functionalities that we supposed to achieve in Sprint 1. We did the retrospective meeting for Sprint 1. There are some minor parts about the functionalities in Sprint 1 need to be adjusted. Also, we are going to start Sprint 2. 
+
+Week 7
+Week 8
+Week 9
+Week 10

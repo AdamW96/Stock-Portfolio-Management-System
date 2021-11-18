@@ -33,7 +33,7 @@ pip3 install tushare
 you should in `capstone-project-9900-w16a-nobugs/backend` directory to run ：
 
 ```
-./project_run raw
+./project_run.sh raw
 ```
 
 This operation will do：

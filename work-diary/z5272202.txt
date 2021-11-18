@@ -6,3 +6,25 @@ We have decided everyone's work in our group, and discuss functionalities and us
 
 week3
 Discussed the proposal and edited parts of the proposal.
+
+
+Week4
+Add api for portofolios in the backend.
+
+Week5
+add api for stock_hold in the backend. 
+
+Week6
+After api for market history in the backend.
+
+Week7
+add api for stock_info in the backend.
+
+Week8 
+add api for market_realtime in the backend.
+
+Week9
+add api for gain/loss in the backend.
+
+Week10
+add api for comments in the backend.
